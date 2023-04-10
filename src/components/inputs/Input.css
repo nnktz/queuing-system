@@ -1,0 +1,20 @@
+.input {
+  width: 400px;
+  height: 44px;
+  border-radius: 8px;
+}
+
+.auto-layout-pass {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 16px 10px 12px;
+}
+
+.auto-layout-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
