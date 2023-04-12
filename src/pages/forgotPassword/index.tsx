@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import "./ForgotPassword.css";
-import Logo_Alta from "../../images/Logo alta.svg";
+import Logo_Alta from "../../assets/images/Logo alta.svg";
 import Button from "../../components/button";
 import { Form, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
 import InputText from "../../components/inputs/text";
-import Frame from "../../images/Frame.svg";
+import Frame from "../../assets/images/Frame.svg";
 import InputPassword from "../../components/inputs/password";
 
 function ForgotPassword() {

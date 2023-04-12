@@ -1,0 +1,64 @@
+.menu-main {
+  position: relative;
+  width: 200px;
+  height: 810px;
+}
+
+.menubar {
+  position: absolute;
+  left: 0px;
+  top: 150px;
+  width: 100%;
+}
+
+.dropdown-menu {
+  box-shadow: 0px 4px 6px rgba(219, 219, 219, 0.5) !important;
+  border-radius: 16px 0px 0px 16px;
+}
+
+.logo {
+  position: absolute;
+  width: 80px;
+  height: 64px;
+  left: 60px;
+  top: 32px;
+}
+
+.ant-menu-submenu-arrow {
+  display: none;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
+  .ant-menu-submenu-title {
+  padding-inline-end: 0;
+}
+
+:where(
+    .css-dev-only-do-not-override-1vtf12y
+  ).ant-menu-light.ant-menu-root.ant-menu-vertical {
+  border-inline-end: 0;
+}
+
+.frame-269 {
+  position: absolute;
+  width: 200px;
+  height: 46px;
+  left: 0px;
+  top: 732px;
+}
+
+.btn-logout {
+  position: absolute;
+  width: 176px;
+  height: 48px;
+  left: 12px;
+  top: 0px;
+  border: none;
+}
+
+.auto-layout_btn-login {
+  display: flex !important;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}

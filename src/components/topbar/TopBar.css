@@ -1,0 +1,80 @@
+.top-bar {
+  position: absolute;
+  width: 1240px;
+  height: 88px;
+  left: 200px;
+  top: 0px;
+}
+
+.frame-271 {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  right: 260px;
+  top: 28px;
+  border-radius: 32px;
+}
+
+.noti-icon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 6px;
+  top: 6px;
+}
+
+.topbar-info {
+  position: absolute;
+  width: 172px;
+  height: 42px;
+  left: 1004px;
+  top: 24px;
+}
+
+.group-296 {
+  position: absolute;
+  width: 124px;
+  height: 42px;
+  left: 48px;
+  top: 0px;
+}
+
+.small-avatar {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  right: 132px;
+  top: 0px;
+  border-radius: 48px;
+}
+
+.name {
+  position: absolute;
+  height: 24px;
+  right: 0px;
+  top: 18px;
+}
+
+.hello {
+  position: absolute;
+  width: 47px;
+  height: 18px;
+  right: 77px;
+  top: 0px;
+}
+
+.breadcrumb {
+  position: absolute;
+  height: 40px;
+  left: 24px;
+  top: 24px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-breadcrumb a:hover {
+  color: #ff7506;
+  background-color: #f7f7f7;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-breadcrumb a {
+  color: #ff9138;
+}

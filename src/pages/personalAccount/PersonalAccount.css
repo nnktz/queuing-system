@@ -1,0 +1,145 @@
+.personal-account {
+  position: absolute;
+  width: 1112px;
+  height: 397px;
+  left: 224px;
+  top: 168px;
+}
+
+.box {
+  box-shadow: 0px 2px 6px rgba(219, 219, 219, 0.5);
+  border-radius: 12px;
+}
+
+.info {
+  position: absolute;
+  width: 384px;
+  height: 76px;
+}
+
+.info-username {
+  left: 704px;
+  top: 0;
+}
+
+.info-name {
+  left: 296px;
+  top: 0;
+}
+
+.info-phone {
+  left: 296px;
+  top: 0;
+}
+
+.info-password {
+  left: 704px;
+  top: 0;
+}
+
+.info-email {
+  left: 296px;
+  top: 0;
+}
+
+.info-role {
+  left: 704px;
+  top: 0;
+}
+
+.label {
+  position: absolute;
+  height: 24px;
+}
+
+.label-username-name {
+  top: 40px;
+}
+
+.label-phone-password {
+  top: 140px;
+}
+
+.label-email-role {
+  top: 240px;
+}
+
+.fill {
+  position: absolute;
+  width: 384px;
+  height: 44px;
+  border-radius: 6px;
+  border: none;
+}
+
+.fill-username-name {
+  top: 72px;
+}
+
+.fill-phone-password {
+  top: 172px;
+}
+
+.fill-email-role {
+  top: 272px;
+}
+
+.info-avatar {
+  position: absolute;
+  width: 248px;
+  height: 303px;
+  left: 24px;
+  top: 40px;
+}
+
+.name-below-avatar {
+  position: absolute;
+  width: 186px;
+  height: 36px;
+  left: 40px;
+  top: 265px;
+  display: flex;
+  align-items: center;
+}
+
+.box-avatar {
+  position: absolute;
+  width: 248px;
+  height: 251px;
+  left: 24px;
+  top: 0;
+}
+
+.camera {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  left: 148px;
+  top: 201.7px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.camera-icon {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 9px;
+  top: 9px;
+  z-index: 1;
+}
+
+.eclipse-8 {
+  position: absolute;
+  width: 45px;
+  height: 45px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+}
+
+.big-avatar {
+  position: absolute;
+  width: 248px;
+  height: 248px;
+  left: -25px;
+}

@@ -25,8 +25,16 @@ code {
   background: #ffffff;
 }
 
+.bg-orange-500 {
+  background: #ff7506;
+}
+
 .bg-orange-400 {
   background: #ff9138;
+}
+
+.bg-orange-50 {
+  background: #fff2e7;
 }
 
 /* text */
@@ -36,6 +44,10 @@ code {
 
 .orange-400 {
   color: #ff9138;
+}
+
+.orange-50 {
+  background: #fff2e7;
 }
 
 .gray-5 {
@@ -56,6 +68,14 @@ code {
 
 .gray-500 {
   color: #282739 !important;
+}
+
+.gray-400 {
+  color: #535261;
+}
+
+.gray-300 {
+  color: #7e7d88;
 }
 
 /* identical to box height, or 150% */
@@ -96,6 +116,14 @@ code {
   line-height: 21px;
 }
 
+.reg-12-12 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+}
+
 /* bold */
 .bold-16-16 {
   font-family: "Nunito";
@@ -103,6 +131,14 @@ code {
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
+}
+
+.bold-20-20 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
 }
 
 .bold-22-22 {
@@ -113,8 +149,24 @@ code {
   line-height: 33px !important;
 }
 
-/* layout */
+.bold-24-24 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 36px;
+}
 
+/* semi */
+.semi-16-16 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* layout */
 .auto-layout {
   display: flex;
   flex-direction: column;

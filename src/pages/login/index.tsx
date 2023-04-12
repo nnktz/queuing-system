@@ -1,8 +1,8 @@
 import { Form, Typography } from "antd";
 import React, { useState } from "react";
 import "./Login.css";
-import Group_341 from "../../images/Group 341.svg";
-import Logo_Alta from "../../images/Logo alta.svg";
+import Group_341 from "../../assets/images/Group 341.svg";
+import Logo_Alta from "../../assets/images/Logo alta.svg";
 import InputText from "../../components/inputs/text";
 import InputPassword from "../../components/inputs/password";
 import { Link } from "react-router-dom";
