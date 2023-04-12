@@ -3,6 +3,7 @@ import { Suspense, lazy } from "react";
 import { Spin } from "antd";
 
 const Login = lazy(() => import("./pages/login"));
+const ForgotPassword = lazy(() => import("./pages/forgotPassword"));
 
 function App() {
   return (
@@ -15,7 +16,10 @@ function App() {
         }
       >
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/">
+            <Route path="dang-nhap" element={<Login />} />
+            <Route path="quen-mat-khau" element={<ForgotPassword />} />
+          </Route>
         </Routes>
       </Suspense>
     </Router>

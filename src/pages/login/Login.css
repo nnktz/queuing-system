@@ -1,7 +1,22 @@
 .login {
   position: relative;
-  /* width: 1440px; */
   height: 810px;
+}
+
+.big-title {
+  position: absolute;
+  height: 54px;
+  left: 1046px;
+  top: 454px;
+  z-index: 1;
+}
+
+.small-title {
+  position: absolute;
+  height: 54px;
+  left: 1046px;
+  top: 407px;
+  z-index: 1;
 }
 
 .bg {
@@ -9,25 +24,9 @@
   border-radius: 16px;
 }
 
-.big-title {
-  position: absolute;
-  /* width: 361px; */
-  height: 54px;
-  left: 1046px;
-  top: 454px;
-}
-
-.small-title {
-  position: absolute;
-  width: 142px;
-  height: 54px;
-  left: 1046px;
-  top: 407px;
-}
-
 .rectangle {
   position: absolute;
-  width: 848px;
+  width: 925px;
   height: 810px;
   left: 592px;
   top: 0px;
@@ -39,6 +38,7 @@
   height: 614.06px;
   left: 671px;
   top: 112.94px;
+  z-index: 1;
 }
 
 .logo {
@@ -47,6 +47,7 @@
   height: 136px;
   left: 208px;
   top: 82px;
+  z-index: 1;
 }
 
 .username {
@@ -71,6 +72,7 @@
   height: 21px;
   left: 94px;
   top: 471px;
+  text-decoration: none;
 }
 
 .forgot-pass-false {
@@ -79,6 +81,7 @@
   height: 21px;
   left: 246px;
   top: 564px;
+  text-decoration: none;
 }
 
 .btn-login {
