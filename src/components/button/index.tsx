@@ -2,7 +2,7 @@ import { Button as AntButton } from "antd";
 import React from "react";
 
 type ButtonProps = {
-  handleClick: () => void;
+  handleClick?: () => void;
   htmlType?: "submit";
   className?: string;
   children: React.ReactNode;

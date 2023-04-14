@@ -1,0 +1,24 @@
+.dashboard-frame {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+}
+
+.eclipse-10 {
+  opacity: 0.15;
+  border: 1px solid #dadada;
+  border-radius: 50%;
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: 0px;
+  top: 0px;
+}
+
+.dashboard-icon {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: calc(50% - 24px / 2);
+  top: calc(50% - 24px / 2);
+}

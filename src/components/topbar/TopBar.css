@@ -13,6 +13,7 @@
   right: 260px;
   top: 28px;
   border-radius: 32px;
+  z-index: 1;
 }
 
 .noti-icon {
@@ -29,6 +30,7 @@
   height: 42px;
   left: 1004px;
   top: 24px;
+  z-index: 1;
 }
 
 .group-296 {

@@ -1,9 +1,9 @@
-import React from "react";
 import Menubar from "../../components/menubar";
 import "./Layout.css";
 import menuItems from "../../components/menubar/MenuItem";
 import TopBar from "../../components/topbar";
 import { Outlet } from "react-router-dom";
+import OverviewBar from "../../components/overviewbar";
 
 const Layout = () => {
   const currentPath = window.location.pathname;
@@ -11,6 +11,15 @@ const Layout = () => {
 
   switch (currentPath) {
     case "/dashboard":
+      defaultSelectedKey = "dashboard";
+      break;
+    case "/dashboard/ngay":
+      defaultSelectedKey = "dashboard";
+      break;
+    case "/dashboard/tuan":
+      defaultSelectedKey = "dashboard";
+      break;
+    case "/dashboard/thang":
       defaultSelectedKey = "dashboard";
       break;
     case "/thiet-bi":
@@ -44,6 +53,7 @@ const Layout = () => {
       <Menubar menuItems={menuItems} defaultSelectedKey={defaultSelectedKey} />
       <TopBar />
       <Outlet />
+      <OverviewBar />
     </div>
   );
 };

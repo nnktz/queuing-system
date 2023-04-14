@@ -25,6 +25,22 @@ code {
   background: #ffffff;
 }
 
+.bg-green {
+  background: #35c75a;
+}
+
+.bg-yellow {
+  background: #ffd130;
+}
+
+.bg-gray-300 {
+  background: #7e7d88;
+}
+
+.bg-gray-50 {
+  background: #eaeaec;
+}
+
 .bg-orange-500 {
   background: #ff7506;
 }
@@ -35,6 +51,14 @@ code {
 
 .bg-orange-50 {
   background: #fff2e7;
+}
+
+.bg-blue {
+  background: #5185f7;
+}
+
+.bg-fuschia-50 {
+  background: #f178b6;
 }
 
 /* text */
@@ -66,16 +90,28 @@ code {
   color: #ffffff;
 }
 
+.green {
+  color: #35c75a;
+}
+
+.blue {
+  color: #4277ff;
+}
+
 .gray-500 {
   color: #282739 !important;
 }
 
 .gray-400 {
-  color: #535261;
+  color: #535261 !important;
 }
 
 .gray-300 {
   color: #7e7d88;
+}
+
+.gray-200 {
+  color: #a9a9b0;
 }
 
 /* identical to box height, or 150% */
@@ -108,6 +144,14 @@ code {
   line-height: 51px;
 }
 
+.reg-16-16 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
 .reg-14-14 {
   font-family: "Nunito";
   font-style: normal;
@@ -124,21 +168,29 @@ code {
   line-height: 18px;
 }
 
-/* bold */
-.bold-16-16 {
+.reg-8-8 {
   font-family: "Nunito";
   font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 24px;
+  font-weight: 400;
+  font-size: 8px;
+  line-height: 12px;
 }
 
-.bold-20-20 {
+/* bold */
+.bold-30-30 {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 30px;
+  line-height: 45px;
+}
+
+.bold-24-24 {
+  font-family: "Nunito" !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 24px !important;
+  line-height: 36px !important;
 }
 
 .bold-22-22 {
@@ -149,12 +201,28 @@ code {
   line-height: 33px !important;
 }
 
-.bold-24-24 {
+.bold-20-20 {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 700;
-  font-size: 24px;
-  line-height: 36px;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.bold-16-16 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.bold-14-14 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
 }
 
 /* semi */
@@ -199,4 +267,9 @@ code {
   height: 810px;
   left: 592px;
   top: 0px;
+}
+
+.pink-shadow {
+  filter: drop-shadow(2px 2px 15px rgba(70, 64, 67, 0.1));
+  border-radius: 12px;
 }

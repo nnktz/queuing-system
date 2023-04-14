@@ -7,6 +7,9 @@ const ForgotPassword = lazy(() => import("./pages/forgotPassword"));
 const Layout = lazy(() => import("./pages/layout"));
 const PersonalAccount = lazy(() => import("./pages/personalAccount"));
 const DashBoard = lazy(() => import("./pages/dashboard"));
+const Weeks = lazy(() => import("./pages/dashboard/weeks"));
+const Days = lazy(() => import("./pages/dashboard/days"));
+const Months = lazy(() => import("./pages/dashboard/months"));
 
 function App() {
   return (
@@ -24,7 +27,11 @@ function App() {
             <Route path="quen-mat-khau" element={<ForgotPassword />} />
             <Route path="" element={<Layout />}>
               <Route path="tai-khoan-ca-nhan" element={<PersonalAccount />} />
-              <Route path="dashboard" element={<DashBoard />} />
+              <Route path="dashboard" element={<DashBoard />}>
+                <Route path="ngay" element={<Days />} />
+                <Route path="tuan" element={<Weeks />} />
+                <Route path="thang" element={<Months />} />
+              </Route>
             </Route>
           </Route>
         </Routes>

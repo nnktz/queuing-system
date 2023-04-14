@@ -1,0 +1,109 @@
+#dashboard-date-picker {
+  display: none;
+}
+
+.ant-picker {
+  z-index: -1;
+}
+
+.ant-picker-panel-container {
+  position: absolute;
+  width: 353px;
+  height: 336px;
+  left: 24px;
+  top: 408px;
+  box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+  border-radius: 12px;
+}
+
+.ant-picker-date-panel {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell
+  .ant-picker-cell-inner {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 10px;
+  border-radius: 8px;
+}
+
+.ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner {
+  background: #ff7506;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border: 1px solid #ff7506;
+  border-radius: 8px;
+}
+
+.ant-picker-dropdown .ant-picker-panel-container .ant-picker-panel-focused {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-date-panel {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-date-panel
+  .ant-picker-content {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-header {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ff9138;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-content
+  th {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #ff9138;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell-in-view {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #535261;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-date-panel
+  .ant-picker-body {
+  height: 295.2px;
+}
