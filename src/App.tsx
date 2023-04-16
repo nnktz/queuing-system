@@ -10,6 +10,9 @@ const DashBoard = lazy(() => import("./pages/dashboard"));
 const Weeks = lazy(() => import("./pages/dashboard/weeks"));
 const Days = lazy(() => import("./pages/dashboard/days"));
 const Months = lazy(() => import("./pages/dashboard/months"));
+const Device = lazy(() => import("./pages/device"));
+const DeviceList = lazy(() => import("./pages/device/deviceList"));
+const AddDevice = lazy(() => import("./pages/device/addDevice"));
 
 function App() {
   return (
@@ -31,6 +34,10 @@ function App() {
                 <Route path="ngay" element={<Days />} />
                 <Route path="tuan" element={<Weeks />} />
                 <Route path="thang" element={<Months />} />
+              </Route>
+              <Route path="thiet-bi" element={<Device />}>
+                <Route path="danh-sach" element={<DeviceList />} />
+                <Route path="danh-sach/them-thiet-bi" element={<AddDevice />} />
               </Route>
             </Route>
           </Route>

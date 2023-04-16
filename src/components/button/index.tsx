@@ -1,5 +1,4 @@
 import { Button as AntButton } from "antd";
-import React from "react";
 
 type ButtonProps = {
   handleClick?: () => void;

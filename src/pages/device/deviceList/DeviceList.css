@@ -1,0 +1,176 @@
+.title-device {
+  position: absolute;
+  width: 200px;
+  height: 36px;
+  left: 224px;
+  top: 104px;
+}
+
+.active-status {
+  position: absolute;
+  width: 300px;
+  height: 72px;
+  left: 224px;
+  top: 156px;
+  display: flex;
+  flex-direction: column;
+}
+
+.connection-status {
+  position: absolute;
+  width: 300px;
+  height: 72px;
+  left: 548px;
+  top: 156px;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-with-keyword {
+  position: absolute;
+  width: 300px;
+  height: 72px;
+  left: 1036px;
+  top: 156px;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-device-btn {
+  position: absolute;
+  left: 1360px;
+  top: 244px;
+}
+
+.table-device-list {
+  position: absolute;
+  width: 1112px;
+  height: 490px;
+  left: 224px;
+  top: 244px;
+}
+
+.device-status-active {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 8px;
+  gap: 10px;
+  width: 152px;
+  height: 49px;
+}
+
+.device-status-connection {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 8px;
+  gap: 10px;
+  width: 131px;
+  height: 49px;
+}
+
+.device-status-eclipse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.device-service {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 17px;
+  width: 212px;
+  height: 49px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.device-ip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 8px;
+  gap: 10px;
+  width: 100px;
+  height: 49px;
+}
+
+.device-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 8px;
+  gap: 10px;
+  width: 87px;
+  height: 49px;
+}
+
+.device-key {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 16px;
+  gap: 10px;
+  width: 75px;
+  height: 49px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-tbody
+  > tr
+  > td {
+  padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  background: #ff9138;
+  padding-right: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active
+  a {
+  color: #ffffff !important;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active {
+  background-color: #ff7506;
+  border-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active:hover {
+  border-color: transparent;
+  opacity: 0.8;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item
+  a {
+  color: #7e7d88;
+}

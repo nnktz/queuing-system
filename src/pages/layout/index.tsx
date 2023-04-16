@@ -3,7 +3,6 @@ import "./Layout.css";
 import menuItems from "../../components/menubar/MenuItem";
 import TopBar from "../../components/topbar";
 import { Outlet } from "react-router-dom";
-import OverviewBar from "../../components/overviewbar";
 
 const Layout = () => {
   const currentPath = window.location.pathname;
@@ -23,6 +22,12 @@ const Layout = () => {
       defaultSelectedKey = "dashboard";
       break;
     case "/thiet-bi":
+      defaultSelectedKey = "device";
+      break;
+    case "/thiet-bi/danh-sach":
+      defaultSelectedKey = "device";
+      break;
+    case "/thiet-bi/danh-sach/them-thiet-bi":
       defaultSelectedKey = "device";
       break;
     case "/dich-vu":
@@ -53,7 +58,6 @@ const Layout = () => {
       <Menubar menuItems={menuItems} defaultSelectedKey={defaultSelectedKey} />
       <TopBar />
       <Outlet />
-      <OverviewBar />
     </div>
   );
 };

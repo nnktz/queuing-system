@@ -83,10 +83,10 @@
 }
 
 :where(.css-dev-only-do-not-override-1vtf12y).ant-breadcrumb a:hover {
-  color: #ff7506;
+  color: #ff7506 !important;
   background-color: #f7f7f7;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-breadcrumb a {
-  color: #ff9138;
+.last-breadcrumb {
+  color: #ff9138 !important;
 }

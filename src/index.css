@@ -57,6 +57,10 @@ code {
   background: #5185f7;
 }
 
+.bg-red {
+  background: #e73f3f;
+}
+
 .bg-fuschia-50 {
   background: #f178b6;
 }
@@ -118,20 +122,24 @@ code {
   color: #a9a9b0;
 }
 
+.gray-5 {
+  color: #535261;
+}
+
 /* identical to box height, or 150% */
 .text-center {
   text-align: center;
 }
 
-/* reg */
-.reg-18-18 {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 27px;
+.text-underline {
+  text-decoration-line: underline !important;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
+/* reg */
 .reg-36-36 {
   font-family: "Nunito";
   font-style: normal;
@@ -146,6 +154,14 @@ code {
   font-weight: 400;
   font-size: 34px;
   line-height: 51px;
+}
+
+.reg-18-18 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
 }
 
 .reg-16-16 {
@@ -236,6 +252,14 @@ code {
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
+}
+
+.semi-14-14 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
 }
 
 /* layout */

@@ -1,6 +1,7 @@
 import { List, Popover } from "antd";
 import { useState } from "react";
 import "./Notification.css";
+import { NotificationType } from "./Notification.type";
 
 const NotificationPopover = (props: { children: React.ReactNode }) => {
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
@@ -9,7 +10,7 @@ const NotificationPopover = (props: { children: React.ReactNode }) => {
     setIsPopoverVisible(visible);
   };
 
-  const notifications = [
+  const notifications: NotificationType = [
     {
       title: "Người dùng: Nguyễn Thị Thuỳ Dung",
       description: "Thời gian nhận số: 12h20 ngày 30/11/2021",

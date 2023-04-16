@@ -7,6 +7,9 @@ interface Props {
   value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  placeholder?: string;
+  iconSuffix?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 const InputText: React.FC<Props> = ({
@@ -15,6 +18,9 @@ const InputText: React.FC<Props> = ({
   onChange,
   className,
   disabled,
+  placeholder,
+  iconSuffix,
+  style,
 }) => {
   return (
     <Input
@@ -23,6 +29,9 @@ const InputText: React.FC<Props> = ({
       value={value}
       onChange={onChange}
       disabled={disabled}
+      placeholder={placeholder}
+      suffix={iconSuffix}
+      style={style}
     />
   );
 };

@@ -10,6 +10,7 @@ import Dashboard_05 from "../../assets/icons/icon dashboard05.svg";
 import Dashboard_03 from "../../assets/icons/icon dashboard03.svg";
 import Dashboard_02 from "../../assets/icons/icon dashboard02.svg";
 import { Outlet, useNavigate } from "react-router-dom";
+import OverviewBar from "../../components/overviewbar";
 
 const Dashboard = () => {
   const dispatch = useDispatch();
@@ -198,6 +199,7 @@ const Dashboard = () => {
       </div>
 
       <Outlet />
+      <OverviewBar />
     </>
   );
 };

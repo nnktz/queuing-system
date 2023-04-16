@@ -1,0 +1,31 @@
+.auto-layout_button-custom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 4px;
+  gap: 4px;
+}
+
+.btn-custom {
+  width: 80px;
+  height: 94px;
+  border: none;
+}
+
+.btn-custom:hover {
+  opacity: 0.8;
+}
+
+.down-btn-custom {
+  box-shadow: 0px 0px 6px #e7e9f2;
+  border-radius: 8px;
+}
+
+.text-btn-custom {
+  width: 72px;
+  height: 38px;
+  padding: 0 8px;
+  white-space: initial;
+  margin: 0 !important;
+}

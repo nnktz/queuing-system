@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
+import { DashboardItems, OptionStatus } from "./dropdown.type";
 
-export const items = [
+export const items: DashboardItems[] = [
   {
     key: "1",
     label: <Link to="/dashboard/ngay">Ngày</Link>,
@@ -13,4 +14,16 @@ export const items = [
     key: "3",
     label: <Link to="/dashboard/thang">Tháng</Link>,
   },
+];
+
+export const optionStatusActive: OptionStatus[] = [
+  { value: "all", label: "Tất cả" },
+  { value: "active", label: "Hoạt động" },
+  { value: "inactive", label: "Ngưng hoạt động" },
+];
+
+export const optionStatusConnection: OptionStatus[] = [
+  { value: "all", label: "Tất cả" },
+  { value: "connect", label: "Kết nối" },
+  { value: "disconnect", label: "Mất kết nối" },
 ];

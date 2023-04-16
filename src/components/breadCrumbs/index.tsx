@@ -5,9 +5,14 @@ import { useSelector } from "react-redux";
 const BreadcrumbContainer = (props: any) => {
   const items = useSelector((state: any) => state.breadcrumb.items);
 
-  const breadcrumbItems = items.map((item: any) => {
+  const breadcrumbItems = items.map((item: any, index: number) => {
+    const isLastItem = index === items.length - 1;
     return {
-      title: <Link to={item.link}>{item.title}</Link>,
+      title: (
+        <Link to={item.link} className={isLastItem ? "last-breadcrumb" : ""}>
+          {item.title}
+        </Link>
+      ),
     };
   });
 

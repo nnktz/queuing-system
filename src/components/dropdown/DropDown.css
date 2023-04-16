@@ -30,3 +30,40 @@
 :where(.css-dev-only-do-not-override-1vtf12y).ant-dropdown .ant-dropdown-menu {
   padding: 4px 0;
 }
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-dropdown {
+  padding: 4px 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-dropdown
+  .ant-select-item {
+  height: 44px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-dropdown
+  .ant-select-item-option {
+  align-items: center;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-dropdown
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  background: #fff2e7;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #d4d4d7;
+  border-radius: 8px;
+}
+
+.ant-select-focused:where(.css-dev-only-do-not-override-1vtf12y).ant-select:not(
+    .ant-select-disabled
+  ):not(.ant-se1ect-customize-input):not(.ant-pagination-size-changer)
+  .ant-select-selector {
+  border-color: #ffac6a;
+}
