@@ -1,14 +1,17 @@
 import "./TopBar.css";
-import Notification from "../../assets/icons/notification.svg";
 import { Typography } from "antd";
 import BreadcrumbContainer from "../breadCrumbs";
+import { BellOutlined } from "@ant-design/icons";
+import NotificationPopover from "../notification";
 
 const TopBar = () => {
   return (
     <div className="top-bar">
-      <div className="frame-271 orange-50">
-        <img src={Notification} alt="" className="noti-icon" />
-      </div>
+      <NotificationPopover>
+        <div className="frame-271 bg-orange-50">
+          <BellOutlined className="noti-icon orange-300" />
+        </div>
+      </NotificationPopover>
 
       <div className="topbar-info">
         <div className="group-296">

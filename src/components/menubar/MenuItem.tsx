@@ -13,10 +13,8 @@ const menuItems = [
     key: "dashboard",
     icon: <img src={Dashboard} alt="" />,
     label: (
-      <Link to="dashboard/tuan">
-        <Typography.Text className="gray-300 semi-16-16">
-          Dashboard
-        </Typography.Text>
+      <Link to="dashboard/tuan" className="gray-300 semi-16-16">
+        Dashboard
       </Link>
     ),
   },
@@ -24,10 +22,8 @@ const menuItems = [
     key: "device",
     icon: <img src={Monitor} alt="" />,
     label: (
-      <Link to="thiet-bi">
-        <Typography.Text className="gray-300 semi-16-16">
-          Thiết bị
-        </Typography.Text>
+      <Link to="thiet-bi" className="gray-300 semi-16-16">
+        Thiết bị
       </Link>
     ),
   },
@@ -35,10 +31,8 @@ const menuItems = [
     key: "service",
     icon: <img src={Group_304} alt="" />,
     label: (
-      <Link to="dich-vu">
-        <Typography.Text className="gray-300 semi-16-16">
-          Dịch vụ
-        </Typography.Text>
+      <Link to="dich-vu" className="gray-300 semi-16-16">
+        Dịch vụ
       </Link>
     ),
   },
@@ -46,10 +40,8 @@ const menuItems = [
     key: "queue number level",
     icon: <img src={Layers} alt="" />,
     label: (
-      <Link to="cap-so">
-        <Typography.Text className="gray-300 semi-16-16">
-          Cấp số
-        </Typography.Text>
+      <Link to="cap-so" className="gray-300 semi-16-16">
+        Cấp số
       </Link>
     ),
   },
@@ -58,9 +50,7 @@ const menuItems = [
     icon: <img src={Report} alt="" />,
     label: (
       <Link to="bao-cao" className="gray-300 semi-16-16">
-        <Typography.Text className="gray-300 semi-16-16">
-          Báo cáo
-        </Typography.Text>
+        Báo cáo
       </Link>
     ),
   },
@@ -77,30 +67,33 @@ const menuItems = [
       {
         key: "role management",
         label: (
-          <Link to="cai-dat-he-thong/quan-ly-vai-tro">
-            <Typography.Text className="gray-300 semi-16-16">
-              Quản lý vai trò
-            </Typography.Text>
+          <Link
+            to="cai-dat-he-thong/quan-ly-vai-tro"
+            className="gray-300 semi-16-16"
+          >
+            Quản lý vai trò
           </Link>
         ),
       },
       {
         key: "account management",
         label: (
-          <Link to="cai-dat-he-thong/quan-ly-tai-khoan">
-            <Typography.Text className="gray-300 semi-16-16">
-              Quản lý tài khoản
-            </Typography.Text>
+          <Link
+            to="cai-dat-he-thong/quan-ly-tai-khoan"
+            className="gray-300 semi-16-16"
+          >
+            Quản lý tài khoản
           </Link>
         ),
       },
       {
         key: "user log",
         label: (
-          <Link to="cai-dat-he-thong/nhat-ky-nguoi-dung">
-            <Typography.Text className="gray-300 semi-16-16">
-              Nhật ký người dùng
-            </Typography.Text>
+          <Link
+            to="cai-dat-he-thong/nhat-ky-nguoi-dung"
+            className="gray-300 semi-16-16"
+          >
+            Nhật ký người dùng
           </Link>
         ),
       },

@@ -1,0 +1,71 @@
+.ant-popover {
+  width: 360px;
+  min-height: calc(48px + 80px);
+  max-height: 526px;
+  z-index: 969696;
+  box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
+  border-radius: 10px;
+}
+
+.ant-popover .ant-list {
+  max-height: 478px;
+  overflow-y: auto;
+}
+
+.ant-popover .ant-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.ant-popover .ant-list::-webkit-scrollbar-thumb {
+  background: #ffc89b;
+  border-radius: 43px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-popover .ant-popover-inner {
+  padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-popover .ant-popover-title {
+  height: 48px;
+  margin: 0;
+  background: #ff9138;
+  color: #ffffff;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  padding: 8px 24px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-list .ant-list-item {
+  padding: 12px 24px;
+  height: 80px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-list
+  .ant-list-item
+  .ant-list-item-meta
+  .ant-list-item-meta-title {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+  color: #bf5805;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-list
+  .ant-list-item
+  .ant-list-item-meta
+  .ant-list-item-meta-description {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #535261;
+}

@@ -16,12 +16,22 @@
   z-index: 1;
 }
 
+.frame-271:hover {
+  cursor: pointer;
+  background-color: #ff7506;
+}
+
+.frame-271:hover .noti-icon {
+  color: #ffffff;
+}
+
 .noti-icon {
   position: absolute;
   width: 20px;
   height: 20px;
   left: 6px;
   top: 6px;
+  color: #ffac6a;
 }
 
 .topbar-info {
