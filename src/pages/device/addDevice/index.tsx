@@ -1,6 +1,7 @@
 import "./AddDevice.css";
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { Typography } from "antd";
 
 const AddDevice = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,13 @@ const AddDevice = () => {
     });
   }, [dispatch]);
 
-  return <div>AddDevice</div>;
+  return (
+    <>
+      <Typography.Text className="bold-24-24 orange-500 title-device">
+        Quản lý thiết bị
+      </Typography.Text>
+    </>
+  );
 };
 
 export default AddDevice;

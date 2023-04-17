@@ -118,6 +118,14 @@
   height: 49px;
 }
 
+.service-show-more {
+  width: 394px !important;
+  border: 1px solid #ffc89b;
+  border-radius: 8px;
+  padding: 0;
+  top: 200px;
+}
+
 :where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
   .ant-table-tbody
   > tr
@@ -173,4 +181,13 @@
   .ant-pagination-item
   a {
   color: #7e7d88;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
 }

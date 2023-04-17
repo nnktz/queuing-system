@@ -49,6 +49,10 @@ const DeviceList = () => {
     setSearch(event.target.value);
   };
 
+  const handleViewMore = (record: DeviceType) => {
+    console.log(record);
+  };
+
   useEffect(() => {
     const newData = data.filter((item) => {
       if (selectedValues.active && selectedValues.connection) {
@@ -157,6 +161,7 @@ const DeviceList = () => {
         columns={columns}
         dataSource={filteredData.length > 0 ? filteredData : data}
         pagination={{ pageSize: 9 }}
+        onRow={(record) => ({ onClick: () => handleViewMore(record) })}
       />
     </>
   );
