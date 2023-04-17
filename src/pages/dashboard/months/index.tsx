@@ -1,9 +1,7 @@
 import { Typography } from "antd";
 import "../Dashboard.css";
 import { DropDownStatistical } from "../../../components/dropdown";
-import GraphicMonth from "../../../assets/images/graphic-month.svg";
-import Flat from "../../../assets/images/flat.svg";
-import { Line } from "@ant-design/charts";
+import { Area } from "@ant-design/plots";
 
 const dataMonth = [
   { month: "1", value: 2800 },
@@ -27,7 +25,7 @@ const config = {
   label: {
     fields: ["value"],
     style: {
-      fill: "#fff",
+      fill: "#000",
       opacity: 0.6,
     },
   },
@@ -35,6 +33,10 @@ const config = {
     size: 5,
     shape: "diamond",
   },
+  xAxis: {
+    range: [0, 1],
+  },
+  smooth: true,
 };
 
 const Months = () => {
@@ -58,23 +60,8 @@ const Months = () => {
       </div>
 
       <div className="statistical-table">
-        {/* <img src={GraphicMonth} alt="" className="graphic" />
-        <img src={Flat} alt="" /> */}
-        <Line {...config} className="graphic" />
+        <Area {...config} className="graphic" />
       </div>
-
-      {/* <div className="month-progress">
-        <div className="selector bg-blue" />
-        <div className="current-gain">
-          <Typography.Text className="bold-14-14 text-center white number-progress">
-            4.221
-          </Typography.Text>
-          <div className="union">
-            <div className="progress-rectangle bg-blue" />
-          </div>
-          <div className="line-month" />
-        </div>
-      </div> */}
     </div>
   );
 };

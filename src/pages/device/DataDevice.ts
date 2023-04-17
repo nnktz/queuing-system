@@ -8,7 +8,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "inactive",
     status_connection: "disconnect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_02",
@@ -17,7 +20,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "connect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_03",
@@ -26,7 +32,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "disconnect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_04",
@@ -35,7 +44,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "inactive",
     status_connection: "connect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_05",
@@ -44,7 +56,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "disconnect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_06",
@@ -53,7 +68,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "connect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_07",
@@ -62,7 +80,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "inactive",
     status_connection: "connect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_08",
@@ -71,7 +92,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "connect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_09",
@@ -80,7 +104,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "disconnect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_10",
@@ -89,7 +116,10 @@ export const DataDevice: DeviceType[] = [
     status_active: "inactive",
     status_connection: "disconnect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
   {
     key: "KIO_11",
@@ -98,6 +128,9 @@ export const DataDevice: DeviceType[] = [
     status_active: "active",
     status_connection: "connect",
     service_use:
-      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát",
+      "Khám tim mạch, Khám Sản - Phụ khoa, Khám răng hàm mặt, Khám tai mũi họng, Khám hô hấp, Khám tổng quát.",
+    category: "Kiosk",
+    username: "Linhkyo011",
+    password: "CMS",
   },
 ];

@@ -2,9 +2,10 @@ import Menubar from "../../components/menubar";
 import "./Layout.css";
 import menuItems from "../../components/menubar/MenuItem";
 import TopBar from "../../components/topbar";
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 
 const Layout = () => {
+  const { id } = useParams();
   const currentPath = window.location.pathname;
   let defaultSelectedKey = "";
 
@@ -30,7 +31,10 @@ const Layout = () => {
     case "/thiet-bi/danh-sach/them-thiet-bi":
       defaultSelectedKey = "device";
       break;
-    case "/thiet-bi/danh-sach/chi-tiet/:id":
+    case `/thiet-bi/danh-sach/chi-tiet/${id}`:
+      defaultSelectedKey = "device";
+      break;
+    case `/thiet-bi/danh-sach/cap-nhat/${id}`:
       defaultSelectedKey = "device";
       break;
     case "/dich-vu":

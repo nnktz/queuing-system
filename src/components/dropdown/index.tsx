@@ -2,7 +2,6 @@ import { Button, Dropdown, Select, Typography } from "antd";
 import ChevronDown from "../../assets/icons/fi_chevron-down.svg";
 import "./DropDown.css";
 import { items } from "./ItemDropdown";
-import { useState } from "react";
 import { OptionStatus } from "./dropdown.type";
 import { CaretDownOutlined } from "@ant-design/icons";
 
@@ -28,6 +27,8 @@ export const DropDownStatistical = (props: any) => {
 interface DropdownStatusProps {
   options: OptionStatus[];
   onChange: (value: string) => void;
+  placeholder?: string;
+  value?: string;
 }
 
 const { Option } = Select;
@@ -45,6 +46,34 @@ export const DropDownStatus: React.FC<DropdownStatusProps> = ({
       defaultValue={options[0].value}
       suffixIcon={<CaretDownOutlined className="orange-500" />}
       onChange={handleChange}
+    >
+      {options.map((option) => (
+        <Option key={option.value} value={option.value}>
+          <Typography.Text className="reg-16-16 gray-5">
+            {option.label}
+          </Typography.Text>
+        </Option>
+      ))}
+    </Select>
+  );
+};
+
+export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
+  options,
+  onChange,
+  placeholder,
+  value,
+}) => {
+  const handleChange = (value: string) => {
+    onChange(value);
+  };
+
+  return (
+    <Select
+      placeholder={placeholder}
+      suffixIcon={<CaretDownOutlined className="orange-500" />}
+      onChange={handleChange}
+      value={value}
     >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>

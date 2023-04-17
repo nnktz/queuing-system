@@ -27,3 +27,8 @@ export const optionStatusConnection: OptionStatus[] = [
   { value: "connect", label: "Kết nối" },
   { value: "disconnect", label: "Mất kết nối" },
 ];
+
+export const optionCategoryDevice: OptionStatus[] = [
+  { value: "kiosk", label: "Kiosk" },
+  { value: "displayCounter", label: "Display counter" },
+];

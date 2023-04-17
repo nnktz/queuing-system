@@ -1,9 +1,7 @@
 import { Typography } from "antd";
 import "../Dashboard.css";
 import { DropDownStatistical } from "../../../components/dropdown";
-import GraphicWeek from "../../../assets/images/graphic-week.svg";
-import Flat from "../../../assets/images/flat.svg";
-import { Line } from "@ant-design/charts";
+import { Area } from "@ant-design/plots";
 
 const dataWeek = [
   { week: "1", value: 2200 },
@@ -19,7 +17,7 @@ const config = {
   label: {
     fields: ["value"],
     style: {
-      fill: "#fff",
+      fill: "#000",
       opacity: 0.6,
     },
   },
@@ -27,6 +25,10 @@ const config = {
     size: 5,
     shape: "diamond",
   },
+  xAxis: {
+    range: [0, 1],
+  },
+  smooth: true,
 };
 
 const Weeks = () => {
@@ -50,23 +52,8 @@ const Weeks = () => {
       </div>
 
       <div className="statistical-table">
-        {/* <img src={GraphicWeek} alt="" className="graphic" />
-        <img src={Flat} alt="" /> */}
-        <Line {...config} className="graphic" />
+        <Area {...config} className="graphic" />
       </div>
-
-      {/* <div className="week-progress">
-        <div className="selector bg-blue" />
-        <div className="current-gain">
-          <Typography.Text className="bold-14-14 text-center white number-progress">
-            4.221
-          </Typography.Text>
-          <div className="union">
-            <div className="progress-rectangle bg-blue" />
-          </div>
-          <div className="line-week" />
-        </div>
-      </div> */}
     </div>
   );
 };

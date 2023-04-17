@@ -5,6 +5,7 @@ type ButtonProps = {
   htmlType?: "submit";
   className?: string;
   children: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 const Button = ({
@@ -12,9 +13,15 @@ const Button = ({
   children,
   className,
   htmlType,
+  style,
 }: ButtonProps) => {
   return (
-    <AntButton onClick={handleClick} htmlType={htmlType} className={className}>
+    <AntButton
+      onClick={handleClick}
+      htmlType={htmlType}
+      className={className}
+      style={style}
+    >
       {children}
     </AntButton>
   );

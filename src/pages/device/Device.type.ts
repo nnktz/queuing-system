@@ -5,4 +5,7 @@ export interface DeviceType {
   status_active: string;
   status_connection: string;
   service_use: string;
+  username: string;
+  password: string;
+  category: string;
 }

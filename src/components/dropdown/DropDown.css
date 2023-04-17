@@ -60,10 +60,3 @@
   border: 1.5px solid #d4d4d7;
   border-radius: 8px;
 }
-
-.ant-select-focused:where(.css-dev-only-do-not-override-1vtf12y).ant-select:not(
-    .ant-select-disabled
-  ):not(.ant-se1ect-customize-input):not(.ant-pagination-size-changer)
-  .ant-select-selector {
-  border-color: #ffac6a;
-}

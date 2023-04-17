@@ -1,0 +1,71 @@
+.title-device {
+  position: absolute;
+  width: 169px;
+  height: 36px;
+  left: 224px;
+  top: 104px;
+}
+
+.detail-device-box {
+  position: absolute;
+  width: 1112px;
+  height: 604px;
+  left: 224px;
+  top: 156px;
+}
+
+.detail-device-box_title {
+  position: absolute;
+  width: 160px;
+  height: 30px;
+  left: 24px;
+  top: 16px;
+  margin: 0 !important;
+}
+
+.detail-box-container {
+  width: 100%;
+  position: absolute;
+  top: 66px;
+  left: 24px;
+  display: flex;
+}
+
+.detail-box-items {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-box-item {
+  height: 24px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.info-detail-device {
+  flex-basis: 50%;
+}
+
+.detail-box-item:first-child {
+  margin-top: 0;
+}
+
+.box-service-use {
+  width: 100%;
+  height: 56px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 24px;
+  top: 198px;
+}
+
+.edit-device-btn {
+  position: absolute;
+  left: 1360px;
+  top: 156px;
+}

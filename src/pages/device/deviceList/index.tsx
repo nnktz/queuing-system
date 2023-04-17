@@ -90,6 +90,9 @@ const DeviceList = () => {
       status_active: device.status_active,
       status_connection: device.status_connection,
       service_use: device.service_use,
+      category: device.category,
+      username: device.username,
+      password: device.password,
     }));
     setData(newData);
   }, [devices]);
