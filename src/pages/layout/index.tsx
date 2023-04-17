@@ -30,6 +30,9 @@ const Layout = () => {
     case "/thiet-bi/danh-sach/them-thiet-bi":
       defaultSelectedKey = "device";
       break;
+    case "/thiet-bi/danh-sach/chi-tiet/:id":
+      defaultSelectedKey = "device";
+      break;
     case "/dich-vu":
       defaultSelectedKey = "service";
       break;

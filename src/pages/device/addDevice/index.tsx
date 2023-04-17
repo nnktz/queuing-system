@@ -24,6 +24,15 @@ const AddDevice = () => {
       <Typography.Text className="bold-24-24 orange-500 title-device">
         Quản lý thiết bị
       </Typography.Text>
+
+      <div className="shadow-box bg-white add-device-box">
+        <Typography.Title
+          level={4}
+          className="bold-20-20 orange-500 add-device-box_title"
+        >
+          Thông tin thiết bị
+        </Typography.Title>
+      </div>
     </>
   );
 };

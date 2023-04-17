@@ -132,7 +132,7 @@ const columns: ColumnsType<DeviceType> = [
     key: "detail",
     render: (_, record) => (
       <Typography.Link
-        href={`thiet-bi/danh-sach/chi-tiet/${record.key}`}
+        href={`danh-sach/chi-tiet/${record.key}`}
         className="text-underline"
       >
         Chi tiết
@@ -144,7 +144,7 @@ const columns: ColumnsType<DeviceType> = [
     key: "update",
     render: (_, record) => (
       <Typography.Link
-        href={`thiet-bi/danh-sach/cap-nhat/${record.key}`}
+        href={`danh-sach/cap-nhat/${record.key}`}
         className="text-underline"
       >
         Cập nhật

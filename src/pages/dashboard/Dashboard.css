@@ -261,9 +261,9 @@
 .graphic {
   position: absolute;
   width: 754px;
-  height: 373px;
+  height: 360px !important;
   left: 24px;
-  top: 78px;
+  top: 100px;
   border-radius: 8px;
 }
 

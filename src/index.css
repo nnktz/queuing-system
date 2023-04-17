@@ -67,7 +67,7 @@ code {
 
 /* text */
 .orange-500 {
-  color: #ff7506;
+  color: #ff7506 !important;
 }
 
 .orange-400 {
@@ -222,11 +222,11 @@ code {
 }
 
 .bold-20-20 {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 30px;
+  font-family: "Nunito" !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  font-size: 20px !important;
+  line-height: 30px !important;
 }
 
 .bold-16-16 {
@@ -300,4 +300,9 @@ code {
 .pink-shadow {
   filter: drop-shadow(2px 2px 15px rgba(70, 64, 67, 0.1));
   border-radius: 12px;
+}
+
+.shadow-box {
+  box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
+  border-radius: 16px;
 }

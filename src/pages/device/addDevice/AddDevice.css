@@ -1,0 +1,16 @@
+.add-device-box {
+  position: absolute;
+  width: 1152px;
+  height: 550px;
+  left: 224px;
+  top: 156px;
+}
+
+.add-device-box_title {
+  position: absolute;
+  width: 160px;
+  height: 30px;
+  left: 24px;
+  top: 16px;
+  margin: 0 !important;
+}

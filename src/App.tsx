@@ -13,6 +13,7 @@ const Months = lazy(() => import("./pages/dashboard/months"));
 const Device = lazy(() => import("./pages/device"));
 const DeviceList = lazy(() => import("./pages/device/deviceList"));
 const AddDevice = lazy(() => import("./pages/device/addDevice"));
+const DetailDevice = lazy(() => import("./pages/device/detailDevice"));
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
               <Route path="thiet-bi" element={<Device />}>
                 <Route path="danh-sach" element={<DeviceList />} />
                 <Route path="danh-sach/them-thiet-bi" element={<AddDevice />} />
+                <Route
+                  path="danh-sach/chi-tiet/:id"
+                  element={<DetailDevice />}
+                />
               </Route>
             </Route>
           </Route>
