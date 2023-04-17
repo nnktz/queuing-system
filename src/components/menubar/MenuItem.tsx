@@ -13,7 +13,7 @@ const menuItems = [
     key: "dashboard",
     icon: <img src={Dashboard} alt="" />,
     label: (
-      <Link to="dashboard/tuan" className="gray-300 semi-16-16">
+      <Link to="dashboard/ngay" className="gray-300 semi-16-16">
         Dashboard
       </Link>
     ),

@@ -3,8 +3,11 @@ import { Typography } from "antd";
 import BreadcrumbContainer from "../breadCrumbs";
 import { BellOutlined } from "@ant-design/icons";
 import NotificationPopover from "../notification";
+import { useNavigate } from "react-router-dom";
 
 const TopBar = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="top-bar">
       <NotificationPopover>
@@ -24,8 +27,9 @@ const TopBar = () => {
           </Typography.Text>
         </div>
         <div
-          className="small-avatar"
+          className="small-avatar pointer"
           style={{ background: `url("/images/Avatar small.svg")` }}
+          onClick={() => navigate("/tai-khoan-ca-nhan")}
         />
       </div>
 
