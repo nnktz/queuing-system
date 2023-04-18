@@ -1,17 +1,17 @@
 import { Typography } from "antd";
 import { Link } from "react-router-dom";
-import Dashboard from "../../assets/icons/dashboard.svg";
-import Monitor from "../../assets/icons/monitor.svg";
-import Group_304 from "../../assets/icons/Group 304.svg";
 import More_Vertical from "../../assets/icons/fi_more-vertical.svg";
-import Layers from "../../assets/icons/fi_layers.svg";
-import Report from "../../assets/icons/report.svg";
-import Setting from "../../assets/icons/setting.svg";
+import AppstoreOutlined from "@ant-design/icons/lib/icons/AppstoreOutlined";
+import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
+import HeatMapOutlined from "@ant-design/icons/lib/icons/HeatMapOutlined";
+import WechatOutlined from "@ant-design/icons/lib/icons/WechatOutlined";
+import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
+import SettingOutlined from "@ant-design/icons/lib/icons/SettingOutlined";
 
 const menuItems = [
   {
     key: "dashboard",
-    icon: <img src={Dashboard} alt="" />,
+    icon: <AppstoreOutlined className="menu-icon" />,
     label: (
       <Link to="dashboard/ngay" className="gray-300 semi-16-16">
         Dashboard
@@ -20,7 +20,7 @@ const menuItems = [
   },
   {
     key: "device",
-    icon: <img src={Monitor} alt="" />,
+    icon: <DesktopOutlined className="menu-icon" />,
     label: (
       <Link to="thiet-bi" className="gray-300 semi-16-16">
         Thiết bị
@@ -29,7 +29,7 @@ const menuItems = [
   },
   {
     key: "service",
-    icon: <img src={Group_304} alt="" />,
+    icon: <WechatOutlined className="menu-icon" />,
     label: (
       <Link to="dich-vu" className="gray-300 semi-16-16">
         Dịch vụ
@@ -38,7 +38,7 @@ const menuItems = [
   },
   {
     key: "queue number level",
-    icon: <img src={Layers} alt="" />,
+    icon: <HeatMapOutlined className="menu-icon" />,
     label: (
       <Link to="cap-so" className="gray-300 semi-16-16">
         Cấp số
@@ -47,7 +47,7 @@ const menuItems = [
   },
   {
     key: "report",
-    icon: <img src={Report} alt="" />,
+    icon: <ContainerOutlined className="menu-icon" />,
     label: (
       <Link to="bao-cao" className="gray-300 semi-16-16">
         Báo cáo
@@ -56,11 +56,17 @@ const menuItems = [
   },
   {
     key: "setting",
-    icon: <img src={Setting} alt="" />,
+    icon: <SettingOutlined className="menu-icon" />,
     label: (
       <Typography.Text className="gray-300 semi-16-16">
         Cài đặt hệ thống
-        <img src={More_Vertical} alt="" style={{ verticalAlign: "-0.325em" }} height={20} width={20}/>
+        <img
+          src={More_Vertical}
+          alt=""
+          style={{ verticalAlign: "-0.325em" }}
+          height={20}
+          width={20}
+        />
       </Typography.Text>
     ),
     children: [
