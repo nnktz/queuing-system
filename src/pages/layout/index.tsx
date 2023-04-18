@@ -1,8 +1,14 @@
 import Menubar from "../../components/menubar";
-import "./Layout.css";
 import menuItems from "../../components/menubar/MenuItem";
 import TopBar from "../../components/topbar";
 import { Outlet, useParams } from "react-router-dom";
+
+const LayoutStyles = {
+  position: "relative",
+  background: "#f7f7f7",
+  height: "810px",
+  borderRadius: "16px",
+} as React.CSSProperties;
 
 const Layout = () => {
   const { id } = useParams();
@@ -61,7 +67,7 @@ const Layout = () => {
   }
 
   return (
-    <div className="layout">
+    <div style={LayoutStyles}>
       <Menubar menuItems={menuItems} defaultSelectedKey={defaultSelectedKey} />
       <TopBar />
       <Outlet />

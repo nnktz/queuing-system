@@ -29,6 +29,7 @@ interface DropdownStatusProps {
   onChange: (value: string) => void;
   placeholder?: string;
   value?: string;
+  className?: string;
 }
 
 const { Option } = Select;
@@ -63,6 +64,7 @@ export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
   onChange,
   placeholder,
   value,
+  className,
 }) => {
   const handleChange = (value: string) => {
     onChange(value);
@@ -77,7 +79,48 @@ export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
     >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>
-          <Typography.Text className="reg-16-16 gray-5">
+          <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
+            {option.label}
+          </Typography.Text>
+        </Option>
+      ))}
+    </Select>
+  );
+};
+
+interface DropdownServiceProps {
+  options: OptionStatus[];
+  onChange: (values: Array<{ label: string; value: string } | null>) => void;
+  placeholder?: string;
+  className?: string;
+  mode?: "multiple" | "tags" | undefined;
+}
+
+export const DropDownServiceUseDevice: React.FC<DropdownServiceProps> = ({
+  options,
+  onChange,
+  placeholder,
+  className,
+  mode,
+}) => {
+  const handleChange = (values: string[]) => {
+    const selectedOptions = values.map((value) => {
+      const selectedOption = options.find((option) => option.value === value);
+      return selectedOption ? { label: selectedOption.label, value } : null;
+    });
+    onChange(selectedOptions);
+  };
+
+  return (
+    <Select
+      mode={mode}
+      placeholder={placeholder}
+      onChange={handleChange}
+      suffixIcon={false}
+    >
+      {options.map((option) => (
+        <Option key={option.value} value={option.value}>
+          <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
             {option.label}
           </Typography.Text>
         </Option>

@@ -1,4 +1,4 @@
-import { DeviceType } from "./Device.type";
+import { DeviceType } from "../../models/Device.type";
 
 export const DataDevice: DeviceType[] = [
   {

@@ -60,7 +60,7 @@ const menuItems = [
     label: (
       <Typography.Text className="gray-300 semi-16-16">
         Cài đặt hệ thống
-        <img src={More_Vertical} alt="" className="three-dots" />
+        <img src={More_Vertical} alt="" style={{ verticalAlign: "-0.325em" }} height={20} width={20}/>
       </Typography.Text>
     ),
     children: [

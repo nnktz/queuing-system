@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 import InputText from "../../components/inputs/text";
-import { PersonProps } from "./Person.type";
+import { PersonProps } from "../../models/Person.type";
 import "./PersonalAccount.css";
 import Camera from "../../assets/icons/camera.svg";
 import { useEffect } from "react";

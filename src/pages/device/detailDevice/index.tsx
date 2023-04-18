@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import "./DetailDevice.css";
 import { DataDevice } from "../DataDevice";
-import { DeviceType } from "../Device.type";
+import { DeviceType } from "../../../models/Device.type";
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -12,8 +12,12 @@ const DetailDevice = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const [devices] = useState<DeviceType[]>(DataDevice);
+  const devices = DataDevice;
   const [dataDevice, setDataDevice] = useState<DeviceType | null>(null);
+
+  const handleEditDevice = () => {
+    navigate(`/thiet-bi/danh-sach/cap-nhat/${id}`);
+  };
 
   const getDeviceByKey = useCallback(
     (id: string) => {
@@ -27,10 +31,6 @@ const DetailDevice = () => {
     [devices]
   );
 
-  const handleEditDevice = () => {
-    navigate(`/thiet-bi/danh-sach/cap-nhat/${id}`);
-  };
-
   useEffect(() => {
     if (id) {
       getDeviceByKey(id);
@@ -41,14 +41,14 @@ const DetailDevice = () => {
     const data = [
       { title: "Thiết bị", link: "thiet-bi/danh-sach" },
       { title: "Danh sách thiết bị", link: "thiet-bi/danh-sach" },
-      { title: "Chi tiết thiết bị", link: "thiet-bi/danh-sach/chi-tiet/:id" },
+      { title: "Chi tiết thiết bị", link: `thiet-bi/danh-sach/chi-tiet/${id}` },
     ];
 
     dispatch({
       type: "UPDATE_BREADCRUMB_ITEMS",
       payload: { items: data },
     });
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <>

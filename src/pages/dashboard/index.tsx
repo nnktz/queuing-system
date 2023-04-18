@@ -139,7 +139,10 @@ const Dashboard = () => {
           </div>
 
           <div className="dashboard-title">
-            <Typography.Text className="bold-14-14 gray-400 dashboard-title_text">
+            <Typography.Text
+              className="bold-14-14 gray-400 dashboard-title_text"
+              style={{ width: 70 }}
+            >
               Số thứ tự đã sử dụng
             </Typography.Text>
             <DashboardFrame

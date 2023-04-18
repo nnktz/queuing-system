@@ -32,3 +32,12 @@ export const optionCategoryDevice: OptionStatus[] = [
   { value: "kiosk", label: "Kiosk" },
   { value: "displayCounter", label: "Display counter" },
 ];
+
+export const optionService: OptionStatus[] = [
+  { value: "timMach", label: "Khám tim mạch" },
+  { value: "sanPhuKhoa", label: "Khám sản phụ khoa" },
+  { value: "rangHamMat", label: "Khám răng hàm mạch" },
+  { value: "taiMuiHong", label: "Khám tai mũi họng" },
+  { value: "hoHop", label: "Khám hô hấp" },
+  { value: "tongQuat", label: "Khám tổng quát" },
+];

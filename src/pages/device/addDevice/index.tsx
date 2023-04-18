@@ -100,6 +100,7 @@ const AddDevice = () => {
             value={keyDevice}
             onChange={handleKeyDeviceChange}
             style={{ width: "100%" }}
+            className="reg-16-16"
           />
         </Form.Item>
 
@@ -140,6 +141,7 @@ const AddDevice = () => {
             value={nameDevice}
             onChange={handleNameDeviceChange}
             style={{ width: "100%" }}
+            className="reg-16-16"
           />
         </Form.Item>
 
@@ -160,6 +162,7 @@ const AddDevice = () => {
             value={username}
             onChange={handleUsernameChange}
             style={{ width: "100%" }}
+            className="reg-16-16"
           />
         </Form.Item>
 
@@ -180,6 +183,7 @@ const AddDevice = () => {
             value={ipAddress}
             onChange={handleIPAddressChange}
             style={{ width: "100%" }}
+            className="reg-16-16"
           />
         </Form.Item>
 
@@ -200,6 +204,7 @@ const AddDevice = () => {
             value={password}
             onChange={handlePasswordChange}
             style={{ width: "100%" }}
+            className="reg-16-16"
           />
         </Form.Item>
 
@@ -220,6 +225,7 @@ const AddDevice = () => {
             value={serviceUse}
             onChange={handleServiceUseChange}
             style={{ width: "100%" }}
+            className="reg-16-16"
           />
         </Form.Item>
 

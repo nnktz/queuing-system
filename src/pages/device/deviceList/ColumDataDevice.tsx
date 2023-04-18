@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { DeviceType } from "../Device.type";
+import { DeviceType } from "../../../models/Device.type";
 import { Modal, Typography } from "antd";
 import "./DeviceList.css";
 import { useState } from "react";
