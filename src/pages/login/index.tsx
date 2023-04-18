@@ -5,11 +5,12 @@ import Group_341 from "../../assets/images/Group 341.svg";
 import Logo_Alta from "../../assets/images/Logo alta.svg";
 import InputText from "../../components/inputs/text";
 import InputPassword from "../../components/inputs/password";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import Button from "../../components/button";
 
 function Login() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [login, setLogin] = useState(true);
@@ -29,6 +30,9 @@ function Login() {
     }
     setLogin(true);
     alert("Đăng nhập thành công!");
+    setTimeout(() => {
+      navigate("/dashboard");
+    }, 500);
   };
 
   return (

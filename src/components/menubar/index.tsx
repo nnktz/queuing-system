@@ -14,7 +14,7 @@ const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {
 
   return (
     <main className="menu-main dropdown-menu bg-white">
-      <img src={LogoAlta} alt="" className="logo" />
+      <img src={LogoAlta} alt="" className="logo-alta" />
       <Menu
         theme="light"
         mode="vertical"

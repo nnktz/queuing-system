@@ -31,12 +31,11 @@ function ForgotPassword() {
   };
 
   const handleContinue = () => {
-    if (email !== "") {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (emailRegex.test(email)) {
       setIsEmail(false);
-      console.log(isEmail);
     } else {
       setIsEmail(true);
-      console.log(isEmail);
     }
   };
 
@@ -46,9 +45,12 @@ function ForgotPassword() {
 
   const handleConfirm = () => {
     if (!confirmPass.includes(password)) {
-      alert("Mật khẩu không trùng khớp");
+      alert("Mật khẩu nhập lại không trùng khớp");
     } else {
       alert("Thành công");
+      setTimeout(() => {
+        navigate("/dang-nhap");
+      }, 500);
     }
   };
 
@@ -65,7 +67,17 @@ function ForgotPassword() {
           </Button>
 
           <Form scrollToFirstError>
-            <Form.Item className="group-322">
+            <Form.Item
+              name="email"
+              rules={[
+                { required: true, message: " " },
+                {
+                  type: "email",
+                  message: "Địa chỉ email không hợp lệ",
+                },
+              ]}
+              className="group-322"
+            >
               <Typography.Text className="reg-18-18 black sub-title">
                 Vui lòng nhập email để đặt lại mật khẩu của bạn *
               </Typography.Text>
@@ -92,7 +104,7 @@ function ForgotPassword() {
       ) : (
         <>
           <Form scrollToFirstError>
-            <Form.Item className="frame-624730">
+            <Form.Item name="confirm-password" className="frame-624730">
               <Typography.Text className="black reg-18-18">
                 Nhập lại mật khẩu
               </Typography.Text>
@@ -102,7 +114,7 @@ function ForgotPassword() {
               />
             </Form.Item>
 
-            <Form.Item className="group-323">
+            <Form.Item name="password" className="group-323">
               <Typography.Text className="black reg-18-18">
                 Mật khẩu
               </Typography.Text>

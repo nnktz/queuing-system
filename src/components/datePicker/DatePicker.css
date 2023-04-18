@@ -1,0 +1,73 @@
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker
+  .ant-picker-input
+  > input {
+  color: #a9a9b0;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker .ant-picker-suffix {
+  color: #ff7506;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-header {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #ff9138;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-content
+  th {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+  color: #ff9138;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell-in-view {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  color: #535261;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner {
+  background: #ff7506;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border: 1px solid #ff7506;
+  border-radius: 8px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
+  .ant-picker-cell-inner {
+  background: #ff7506;
+}

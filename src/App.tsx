@@ -15,6 +15,8 @@ const DeviceList = lazy(() => import("./pages/device/deviceList"));
 const AddDevice = lazy(() => import("./pages/device/addDevice"));
 const DetailDevice = lazy(() => import("./pages/device/detailDevice"));
 const UpdateDevice = lazy(() => import("./pages/device/updateDevice"));
+const Service = lazy(() => import("./pages/service"));
+const ServiceList = lazy(() => import("./pages/service/serviceList"));
 
 function App() {
   return (
@@ -48,6 +50,9 @@ function App() {
                   path="danh-sach/cap-nhat/:id"
                   element={<UpdateDevice />}
                 />
+              </Route>
+              <Route path="dich-vu" element={<Service />}>
+                <Route path="danh-sach" element={<ServiceList />} />
               </Route>
             </Route>
           </Route>

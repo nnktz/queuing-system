@@ -28,9 +28,6 @@ const Layout = () => {
     case "/dashboard/thang":
       defaultSelectedKey = "dashboard";
       break;
-    case "/thiet-bi":
-      defaultSelectedKey = "device";
-      break;
     case "/thiet-bi/danh-sach":
       defaultSelectedKey = "device";
       break;
@@ -43,7 +40,7 @@ const Layout = () => {
     case `/thiet-bi/danh-sach/cap-nhat/${id}`:
       defaultSelectedKey = "device";
       break;
-    case "/dich-vu":
+    case "/dich-vu/danh-sach":
       defaultSelectedKey = "service";
       break;
     case "/cap-so":
