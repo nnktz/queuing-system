@@ -1,0 +1,162 @@
+.detail-service-box {
+  position: absolute;
+  left: 224px;
+  top: 172px;
+}
+
+.detail-service {
+  width: 370px;
+  height: 606px;
+  border-radius: 12px;
+}
+
+.detail-service-list {
+  width: 718px;
+  height: 606px;
+  border-radius: 12px;
+}
+
+.btn-edit-service {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.btn-back-service-list {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  height: 75px !important;
+}
+
+.btn-divider {
+  background-color: #ffe3cd;
+  margin: 0;
+}
+
+.detail-service-info {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+}
+
+.detail-describe {
+  width: 227px;
+  word-break: break-all;
+  display: block;
+}
+
+.detail-service-queue {
+  position: absolute;
+  left: 418px;
+  top: 16px;
+}
+
+.datepicker {
+  height: 44px;
+  width: 280px;
+  border: 1.5px solid #d4d4d7;
+  border-radius: 8px;
+}
+
+.queue-service-key {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 16px;
+  gap: 10px;
+  width: 318.5px;
+  height: 49px;
+}
+
+.queue-service-status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 18px;
+  gap: 10px;
+  width: 318.5px;
+  height: 49px;
+}
+
+.status-eclipse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.table-queue-service {
+  width: 669px;
+  height: 441px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-single:not(
+    .ant-select-customize-input
+  )
+  .ant-select-selector {
+  width: 160px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-tbody
+  > tr
+  > td {
+  padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  background: #ff9138;
+  padding-right: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active
+  a {
+  color: #ffffff !important;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active {
+  background-color: #ff7506;
+  border-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active:hover {
+  border-color: transparent;
+  opacity: 0.8;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item
+  a {
+  color: #7e7d88;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
+}

@@ -10,7 +10,7 @@ import InputText from "../../../components/inputs/text";
 import { SearchOutlined } from "@ant-design/icons";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import AddSquare from "../../../assets/icons/add-square.svg";
-import columns from "./ColumDataDevice";
+import columns from "./ColumDataService";
 import { ServiceType } from "../../../models/Service.type";
 import { DataService } from "../DataService";
 
@@ -63,6 +63,7 @@ const ServiceList = () => {
       name: service.name,
       describe: service.describe,
       status_active: service.status_active,
+      queue: service.queue,
     }));
     setData(newData);
   }, [services]);

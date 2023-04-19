@@ -136,7 +136,12 @@ const AddService = () => {
             </Checkbox>
           </Col>
           <Col>
-            <InputText value="0001" style={{ width: 61 }} readonly />
+            <InputText
+              value="0001"
+              style={{ width: 61 }}
+              readonly
+              className="reg-16-16 gray-400"
+            />
           </Col>
           <Col>
             <Typography.Text className="semi-16-16 gray-500">
@@ -144,7 +149,12 @@ const AddService = () => {
             </Typography.Text>
           </Col>
           <Col>
-            <InputText value="9999" style={{ width: 61 }} readonly />
+            <InputText
+              value="9999"
+              style={{ width: 61 }}
+              readonly
+              className="reg-16-16 gray-400"
+            />
           </Col>
         </Row>
         <Row align="middle" gutter={82}>
@@ -156,7 +166,12 @@ const AddService = () => {
             </Checkbox>
           </Col>
           <Col>
-            <InputText value="0001" style={{ width: 61 }} readonly />
+            <InputText
+              value="0001"
+              style={{ width: 61 }}
+              readonly
+              className="reg-16-16 gray-400"
+            />
           </Col>
         </Row>
         <Row align="middle" gutter={82}>
@@ -168,7 +183,12 @@ const AddService = () => {
             </Checkbox>
           </Col>
           <Col>
-            <InputText value="0001" style={{ width: 61 }} readonly />
+            <InputText
+              value="0001"
+              style={{ width: 61 }}
+              readonly
+              className="reg-16-16 gray-400"
+            />
           </Col>
         </Row>
         <Row>

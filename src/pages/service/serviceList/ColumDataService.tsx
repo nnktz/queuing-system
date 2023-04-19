@@ -45,12 +45,16 @@ const columns: ColumnsType<ServiceType> = [
         {status === "active" ? (
           <>
             <div className="service-status-eclipse bg-green" />
-            <Typography.Text>Hoạt động</Typography.Text>
+            <Typography.Text className="reg-14-14 gray-400">
+              Hoạt động
+            </Typography.Text>
           </>
         ) : (
           <>
             <div className="service-status-eclipse bg-red" />
-            <Typography.Text>Ngưng hoạt động</Typography.Text>
+            <Typography.Text className="reg-14-14 gray-400">
+              Ngưng hoạt động
+            </Typography.Text>
           </>
         )}
       </div>

@@ -3,7 +3,7 @@ import Button from "..";
 import "./ButtonCustom.css";
 
 type ButtonCustomProps = {
-  className: string;
+  className?: string;
   title: string;
   imageURL: string;
   onClick: () => void;

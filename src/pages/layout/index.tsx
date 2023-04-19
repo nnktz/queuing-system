@@ -8,7 +8,6 @@ const LayoutStyles = {
   background: "#f7f7f7",
   maxHeight: "810px",
   maxWidth: "1536px",
-  borderRadius: "16px",
 } as React.CSSProperties;
 
 const Layout = () => {
@@ -48,6 +47,9 @@ const Layout = () => {
       defaultSelectedKey = "service";
       break;
     case "/dich-vu/danh-sach/them-dich-vu":
+      defaultSelectedKey = "service";
+      break;
+    case `/dich-vu/danh-sach/chi-tiet/${id}`:
       defaultSelectedKey = "service";
       break;
     case "/cap-so":

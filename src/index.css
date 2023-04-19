@@ -41,6 +41,10 @@ code {
   background: #eaeaec;
 }
 
+.bg-gray-2 {
+  background: #6c7585;
+}
+
 .bg-orange-500 {
   background: #ff7506;
 }

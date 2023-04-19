@@ -9,7 +9,7 @@ const NotFound = () => {
       title="404"
       subTitle="Xin lỗi, trang bạn truy cập không tồn tại."
       extra={
-        <Link to="/">
+        <Link to="/dashboard">
           <Button type="primary">Quay về trang chủ</Button>
         </Link>
       }

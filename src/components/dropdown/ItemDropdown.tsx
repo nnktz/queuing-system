@@ -33,6 +33,13 @@ export const optionCategoryDevice: OptionStatus[] = [
   { value: "displayCounter", label: "Display counter" },
 ];
 
+export const optionStatusQueue: OptionStatus[] = [
+  { value: "all", label: "Tất cả" },
+  { value: "finished", label: "Đã hoàn thành" },
+  { value: "processing", label: "Đang thực hiện" },
+  { value: "absent", label: "Vắng" },
+];
+
 export const optionService: OptionStatus[] = [
   { value: "timMach", label: "Khám tim mạch" },
   { value: "sanPhuKhoa", label: "Khám sản phụ khoa" },
