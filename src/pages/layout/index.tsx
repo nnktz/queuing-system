@@ -47,6 +47,9 @@ const Layout = () => {
     case "/dich-vu/danh-sach":
       defaultSelectedKey = "service";
       break;
+    case "/dich-vu/danh-sach/them-dich-vu":
+      defaultSelectedKey = "service";
+      break;
     case "/cap-so":
       defaultSelectedKey = "queue number level";
       break;

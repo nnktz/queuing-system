@@ -52,14 +52,9 @@ const UpdateDevice = () => {
     form.setFieldValue("category", value);
   };
 
-  const handleSelectedServiceChange = (
-    values: Array<{ label: string; value: string } | null>
-  ) => {
-    const labels = values
-      .filter((option) => option !== null)
-      .map((option) => option!.label);
-    form.setFieldValue("service", labels.join(", "));
-    console.log(labels);
+  const handleSelectedServiceChange = (value: string) => {
+    form.setFieldValue("service", value);
+    console.log(value);
   };
 
   const getDeviceByKey = useCallback(

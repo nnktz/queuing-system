@@ -9,6 +9,7 @@
   left: 0px;
   top: 150px;
   width: 100%;
+  user-select: none;
 }
 
 .dropdown-menu {
@@ -22,6 +23,7 @@
   height: 64px;
   left: 60px;
   top: 32px;
+  user-select: none;
 }
 
 .ant-menu-submenu-arrow {

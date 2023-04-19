@@ -18,6 +18,7 @@ const DetailDevice = lazy(() => import("./pages/device/detailDevice"));
 const UpdateDevice = lazy(() => import("./pages/device/updateDevice"));
 const Service = lazy(() => import("./pages/service"));
 const ServiceList = lazy(() => import("./pages/service/serviceList"));
+const AddService = lazy(() => import("./pages/service/addService"));
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
               </Route>
               <Route path="dich-vu" element={<Service />}>
                 <Route path="danh-sach" element={<ServiceList />} />
+                <Route path="danh-sach/them-dich-vu" element={<AddService />} />
               </Route>
             </Route>
           </Route>
