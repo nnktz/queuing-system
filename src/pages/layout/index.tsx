@@ -6,7 +6,8 @@ import { Outlet, useParams } from "react-router-dom";
 const LayoutStyles = {
   position: "relative",
   background: "#f7f7f7",
-  height: "810px",
+  maxHeight: "810px",
+  maxWidth: "1536px",
   borderRadius: "16px",
 } as React.CSSProperties;
 
@@ -28,7 +29,10 @@ const Layout = () => {
     case "/dashboard/thang":
       defaultSelectedKey = "dashboard";
       break;
-    case "/thiet-bi/danh-sach":
+    case "/thiet-bi":
+      defaultSelectedKey = "device";
+      break;
+    case "/thiet-bi/danh-sach/":
       defaultSelectedKey = "device";
       break;
     case "/thiet-bi/danh-sach/them-thiet-bi":

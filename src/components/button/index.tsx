@@ -6,6 +6,14 @@ type ButtonProps = {
   className?: string;
   children: React.ReactNode;
   style?: React.CSSProperties;
+  type?:
+    | "link"
+    | "text"
+    | "ghost"
+    | "default"
+    | "primary"
+    | "dashed"
+    | undefined;
 };
 
 const Button = ({
@@ -14,6 +22,7 @@ const Button = ({
   className,
   htmlType,
   style,
+  type,
 }: ButtonProps) => {
   return (
     <AntButton
@@ -21,6 +30,7 @@ const Button = ({
       htmlType={htmlType}
       className={className}
       style={style}
+      type={type}
     >
       {children}
     </AntButton>

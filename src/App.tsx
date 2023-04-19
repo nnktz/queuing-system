@@ -5,6 +5,7 @@ import { Spin } from "antd";
 const Login = lazy(() => import("./pages/login"));
 const ForgotPassword = lazy(() => import("./pages/forgotPassword"));
 const Layout = lazy(() => import("./pages/layout"));
+const NotFound = lazy(() => import("./pages/404"));
 const PersonalAccount = lazy(() => import("./pages/personalAccount"));
 const DashBoard = lazy(() => import("./pages/dashboard"));
 const Weeks = lazy(() => import("./pages/dashboard/weeks"));
@@ -56,6 +57,7 @@ function App() {
               </Route>
             </Route>
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </Router>
