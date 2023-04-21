@@ -187,6 +187,7 @@ const QueueList = () => {
               options={optionService}
               onChange={handleServiceChange}
               style={{ width: 154 }}
+              className="reg-14-14 gray-500"
             />
           </Space>
         </Col>
@@ -199,6 +200,7 @@ const QueueList = () => {
               options={optionStatusQueue}
               onChange={handleStatusChange}
               style={{ width: 154 }}
+              className="reg-14-14 gray-500"
             />
           </Space>
         </Col>
@@ -211,6 +213,7 @@ const QueueList = () => {
               options={optionDeviceQueue}
               onChange={handleDeviceChange}
               style={{ width: 154 }}
+              className="reg-14-14 gray-500"
             />
           </Space>
         </Col>

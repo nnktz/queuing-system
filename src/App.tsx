@@ -23,6 +23,7 @@ const DetailService = lazy(() => import("./pages/service/detailService"));
 const UpdateService = lazy(() => import("./pages/service/updateService"));
 const Queue = lazy(() => import("./pages/queue"));
 const QueueList = lazy(() => import("./pages/queue/queueList"));
+const NewQueue = lazy(() => import("./pages/queue/newQueue"));
 
 function App() {
   return (
@@ -67,6 +68,7 @@ function App() {
               </Route>
               <Route path="cap-so" element={<Queue />}>
                 <Route path="danh-sach" element={<QueueList />} />
+                <Route path="danh-sach/cap-so-moi" element={<NewQueue />} />
               </Route>
             </Route>
           </Route>

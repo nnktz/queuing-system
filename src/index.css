@@ -139,6 +139,10 @@ code {
   text-decoration-line: underline !important;
 }
 
+.uppercase {
+  text-transform: uppercase;
+}
+
 .pointer {
   cursor: pointer;
 }
@@ -201,6 +205,22 @@ code {
 }
 
 /* bold */
+.bold-56-56 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 56px;
+  line-height: 60px;
+}
+
+.bold-32-32 {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 48px;
+}
+
 .bold-30-30 {
   font-family: "Nunito";
   font-style: normal;
@@ -309,4 +329,8 @@ code {
 .shadow-box {
   box-shadow: 2px 2px 8px rgba(232, 239, 244, 0.8);
   border-radius: 16px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-layout-header {
+  background: inherit;
 }

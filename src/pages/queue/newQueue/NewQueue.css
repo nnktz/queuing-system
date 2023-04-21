@@ -1,0 +1,68 @@
+.new-queue {
+  position: absolute;
+  width: 1192px;
+  height: 604px;
+  left: 224px;
+  top: 164px;
+}
+
+.new-queue-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 24px;
+  gap: 20px;
+}
+
+.btn-queue {
+  width: 115px;
+  height: 48px;
+  border: 1.5px solid #ff9138;
+  box-shadow: 0px 0px 6px #e7e9f2;
+  border-radius: 8px;
+}
+
+.modal-center-items {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 48px;
+  width: 100%;
+}
+
+.footer-modal {
+  background: #ff9138;
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 24px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px 0;
+}
+
+.ant-space-item {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  padding: 0 !important;
+  border-radius: 24px;
+  width: 469px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-space-vertical {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-body {
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close {
+  color: #ff9138;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close:hover {
+  color: #ff7506;
+}

@@ -2,6 +2,7 @@ import Menubar from "../../components/menubar";
 import menuItems from "../../components/menubar/MenuItem";
 import TopBar from "../../components/topbar";
 import { Outlet, useParams } from "react-router-dom";
+import { Layout as LayoutAntd } from "antd";
 
 const LayoutStyles = {
   position: "relative",
@@ -58,6 +59,9 @@ const Layout = () => {
     case "/cap-so/danh-sach":
       defaultSelectedKey = "queue number level";
       break;
+    case "/cap-so/danh-sach/cap-so-moi":
+      defaultSelectedKey = "queue number level";
+      break;
     case "/bao-cao":
       defaultSelectedKey = "report";
       break;
@@ -76,11 +80,11 @@ const Layout = () => {
   }
 
   return (
-    <div style={LayoutStyles}>
+    <LayoutAntd style={LayoutStyles}>
       <Menubar menuItems={menuItems} defaultSelectedKey={defaultSelectedKey} />
       <TopBar />
       <Outlet />
-    </div>
+    </LayoutAntd>
   );
 };
 

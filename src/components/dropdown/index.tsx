@@ -45,6 +45,7 @@ export const DropDownStatus: React.FC<DropdownStatusProps> = ({
   options,
   onChange,
   style,
+  className,
 }) => {
   const handleChange = (value: string) => {
     onChange(value);
@@ -59,7 +60,7 @@ export const DropDownStatus: React.FC<DropdownStatusProps> = ({
     >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>
-          <Typography.Text className="reg-16-16 gray-5">
+          <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
             {option.label}
           </Typography.Text>
         </Option>
@@ -74,6 +75,7 @@ export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
   placeholder,
   value,
   className,
+  style,
 }) => {
   const handleChange = (value: string) => {
     onChange(value);
@@ -85,6 +87,7 @@ export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
       suffixIcon={<CaretDownOutlined className="orange-500" />}
       onChange={handleChange}
       value={value}
+      style={style}
     >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>
@@ -138,12 +141,14 @@ interface DropDownArrayProps {
   options: OptionStatus[];
   onChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
   style?: React.CSSProperties;
+  className?: string;
 }
 
 export const DropDownArray: React.FC<DropDownArrayProps> = ({
   options,
   onChange,
   style,
+  className,
 }) => {
   const optionsWithAll = [allOption, ...options];
 
@@ -160,7 +165,7 @@ export const DropDownArray: React.FC<DropDownArrayProps> = ({
     >
       {optionsWithAll.map((option) => (
         <Option key={option.value} value={option.value}>
-          <Typography.Text className="reg-16-16 gray-5">
+          <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
             {option.label}
           </Typography.Text>
         </Option>
