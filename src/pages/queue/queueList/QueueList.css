@@ -1,0 +1,150 @@
+.queue-list {
+  position: absolute;
+  left: 224px;
+  top: 156px;
+}
+
+.table-queue-list {
+  width: 1112px;
+  height: 490px;
+}
+
+.list-service-date-picker {
+  height: 44px;
+  width: 314px;
+  border: 1.5px solid #d4d4d7;
+  border-radius: 8px;
+}
+
+.status-eclipse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.queue-id {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 17px;
+  gap: 10px;
+  width: 59px;
+  height: 49px;
+}
+
+.queue-customer_name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 17px;
+  gap: 10px;
+  width: 125px;
+  height: 49px;
+}
+
+.queue-service_name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 17px;
+  gap: 10px;
+  width: 100px;
+  height: 49px;
+}
+
+.queue-start-time,
+.queue-end-time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 17px;
+  gap: 10px;
+  width: 126px;
+  height: 49px;
+}
+
+.queue-service-status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 17px;
+  gap: 10px;
+  width: 83px;
+  height: 49px;
+}
+
+.queue-device-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 17px;
+  gap: 10px;
+  width: 103px;
+  height: 49px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-tbody
+  > tr
+  > td {
+  padding: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  background: #ff9138;
+  padding-right: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active
+  a {
+  color: #ffffff !important;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active {
+  background-color: #ff7506;
+  border-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active:hover {
+  border-color: transparent;
+  opacity: 0.8;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item
+  a {
+  color: #7e7d88;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
+}

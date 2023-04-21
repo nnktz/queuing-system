@@ -55,7 +55,7 @@ const Layout = () => {
     case `/dich-vu/danh-sach/chi-tiet/cap-nhat/${id}`:
       defaultSelectedKey = "service";
       break;
-    case "/cap-so":
+    case "/cap-so/danh-sach":
       defaultSelectedKey = "queue number level";
       break;
     case "/bao-cao":

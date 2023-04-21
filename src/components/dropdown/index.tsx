@@ -5,6 +5,14 @@ import { items } from "./ItemDropdown";
 import { OptionStatus } from "./dropdown.type";
 import { CaretDownOutlined } from "@ant-design/icons";
 
+const { Option } = Select;
+
+const allOption = {
+  key: "all",
+  value: "all",
+  label: "Tất cả",
+};
+
 export const DropDownStatistical = (props: any) => {
   return (
     <Dropdown menu={{ items }} placement="bottom" trigger={["click"]}>
@@ -32,8 +40,6 @@ interface DropdownStatusProps {
   className?: string;
   style?: React.CSSProperties;
 }
-
-const { Option } = Select;
 
 export const DropDownStatus: React.FC<DropdownStatusProps> = ({
   options,
@@ -96,7 +102,7 @@ interface DropdownServiceProps {
   onChange: (value: string) => void;
   placeholder?: string;
   className?: string;
-  mode?: "multiple" | "tags" | undefined;
+  mode: "multiple" | "tags" | undefined;
 }
 
 export const DropDownServiceUseDevice: React.FC<DropdownServiceProps> = ({
@@ -120,6 +126,41 @@ export const DropDownServiceUseDevice: React.FC<DropdownServiceProps> = ({
       {options.map((option) => (
         <Option key={option.value} value={option.value}>
           <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
+            {option.label}
+          </Typography.Text>
+        </Option>
+      ))}
+    </Select>
+  );
+};
+
+interface DropDownArrayProps {
+  options: OptionStatus[];
+  onChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
+  style?: React.CSSProperties;
+}
+
+export const DropDownArray: React.FC<DropDownArrayProps> = ({
+  options,
+  onChange,
+  style,
+}) => {
+  const optionsWithAll = [allOption, ...options];
+
+  const handleChange = (value: string) => {
+    onChange({ target: { value } } as React.ChangeEvent<{ value: unknown }>);
+  };
+
+  return (
+    <Select
+      defaultValue={allOption.value}
+      suffixIcon={<CaretDownOutlined className="orange-500" />}
+      onChange={handleChange}
+      style={style}
+    >
+      {optionsWithAll.map((option) => (
+        <Option key={option.value} value={option.value}>
+          <Typography.Text className="reg-16-16 gray-5">
             {option.label}
           </Typography.Text>
         </Option>

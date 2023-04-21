@@ -30,6 +30,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "finished",
+        customer: null,
       },
       {
         id: 2010002,
@@ -54,6 +55,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "processing",
+        customer: null,
       },
       {
         id: 2010003,
@@ -78,6 +80,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "finished",
+        customer: null,
       },
       {
         id: 2010004,
@@ -102,6 +105,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "absent",
+        customer: null,
       },
       {
         id: 2010005,
@@ -126,6 +130,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "finished",
+        customer: null,
       },
       {
         id: 2010006,
@@ -150,6 +155,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "processing",
+        customer: null,
       },
       {
         id: 2010007,
@@ -174,6 +180,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "finished",
+        customer: null,
       },
       {
         id: 2010008,
@@ -198,6 +205,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "finished",
+        customer: null,
       },
       {
         id: 2010009,
@@ -222,6 +230,7 @@ export const DataService: ServiceType[] = [
           category: "kiosk",
         },
         status: "absent",
+        customer: null,
       },
     ],
   },

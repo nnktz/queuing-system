@@ -10,7 +10,7 @@ import { ServiceType } from "../../../models/Service.type";
 import { DataService } from "../DataService";
 import InputText from "../../../components/inputs/text";
 import { DropDownStatus } from "../../../components/dropdown";
-import { optionStatusQueue } from "../../../components/dropdown/ItemDropdown";
+import { optionStatusServiceQueue } from "../../../components/dropdown/ItemDropdown";
 import DatePickerWithRange from "../../../components/datePicker";
 import { SearchOutlined } from "@ant-design/icons";
 import { QueueType } from "../../../models/Queue.type";
@@ -86,6 +86,7 @@ const DetailService = () => {
         end_time: queue.end_time,
         device: queue.device,
         status: queue.status,
+        customer: queue.customer,
       }));
     if (newData === null) {
       // handle the case where newData is null
@@ -233,7 +234,7 @@ const DetailService = () => {
                     Trạng thái
                   </Typography.Text>
                   <DropDownStatus
-                    options={optionStatusQueue}
+                    options={optionStatusServiceQueue}
                     onChange={handleStatusChange}
                     style={{ width: 160 }}
                   />
