@@ -20,6 +20,7 @@ const Service = lazy(() => import("./pages/service"));
 const ServiceList = lazy(() => import("./pages/service/serviceList"));
 const AddService = lazy(() => import("./pages/service/addService"));
 const DetailService = lazy(() => import("./pages/service/detailService"));
+const UpdateService = lazy(() => import("./pages/service/updateService"));
 
 function App() {
   return (
@@ -57,10 +58,10 @@ function App() {
               <Route path="dich-vu" element={<Service />}>
                 <Route path="danh-sach" element={<ServiceList />} />
                 <Route path="danh-sach/them-dich-vu" element={<AddService />} />
-                <Route
-                  path="danh-sach/chi-tiet/:id"
-                  element={<DetailService />}
-                />
+                <Route path="danh-sach/chi-tiet">
+                  <Route path=":id" element={<DetailService />} />
+                  <Route path="cap-nhat/:id" element={<UpdateService />} />
+                </Route>
               </Route>
             </Route>
           </Route>

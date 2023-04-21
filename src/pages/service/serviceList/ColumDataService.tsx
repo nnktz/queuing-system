@@ -78,7 +78,7 @@ const columns: ColumnsType<ServiceType> = [
     key: "update",
     render: (_, record) => (
       <Typography.Link
-        href={`danh-sach/cap-nhat/${record.key}`}
+        href={`danh-sach/chi-tiet/cap-nhat/${record.key}`}
         className="text-underline"
         style={{ marginLeft: 16 }}
       >

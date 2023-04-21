@@ -1,43 +1,66 @@
-import { Form, Typography, Space, Checkbox, Row, Col } from "antd";
-import "./AddService.css";
-import InputText from "../../../components/inputs/text";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import "./UpdateService.css";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { Form, Typography, Space, Checkbox, Row, Col } from "antd";
+import InputText from "../../../components/inputs/text";
 import InputTextArea from "../../../components/inputs/textArea";
 import Button from "../../../components/button";
+import { DataService } from "../DataService";
 
-const AddService = () => {
+const UpdateService = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const [keyService, setKeyService] = useState("");
-  const [nameService, setNameService] = useState("");
-  const [describeService, setDescribeService] = useState("");
+  const { id } = useParams();
+  const [form] = Form.useForm();
+  const services = DataService;
 
   const handleKeyServiceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setKeyService(event.target.value);
+    form.setFieldValue("key", event.target.value);
   };
 
   const handleNameServiceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setNameService(event.target.value);
+    form.setFieldValue("name", event.target.value);
   };
 
   const handleDescribeServiceChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    setDescribeService(event.target.value);
+    form.setFieldValue("describe", event.target.value);
   };
+
+  const getServiceByKey = useCallback(
+    (id: string) => {
+      const service = services.find((service) => service.key === id);
+      if (service) {
+        form.setFieldsValue({
+          key: service.key,
+          name: service.name,
+          describe: service.describe,
+        });
+      } else {
+        console.log(`Service with key ${id} not found`);
+      }
+    },
+    [form, services]
+  );
+
+  useEffect(() => {
+    if (id) {
+      getServiceByKey(id);
+    }
+  }, [getServiceByKey, id]);
 
   useEffect(() => {
     const data = [
       { title: "Dịch vụ", link: "dich-vu/danh-sach" },
       { title: "Danh sách dịch vụ", link: "dich-vu/danh-sach" },
-      { title: "Thêm dịch vụ", link: "dich-vu/danh-sach/them-dich-vu" },
+      { title: "Chi tiết", link: "dich-vu/danh-sach/chi-tiet" },
+      { title: "Cập nhật", link: "dich-vu/danh-sach/chi-tiet/cap-nhat" },
     ];
 
     dispatch({
@@ -47,10 +70,14 @@ const AddService = () => {
   }, [dispatch]);
 
   return (
-    <Form scrollToFirstError className="shadow-box bg-white add-service-box">
+    <Form
+      form={form}
+      scrollToFirstError
+      className="shadow-box bg-white update-service-box"
+    >
       <Typography.Title
         level={4}
-        className="bold-20-20 orange-500 add-service-box_title"
+        className="bold-20-20 orange-500 update-service-box_title"
       >
         Thông tin dịch vụ
       </Typography.Title>
@@ -69,7 +96,6 @@ const AddService = () => {
       >
         <InputText
           placeholder="Nhập mã dịch vụ"
-          value={keyService}
           onChange={handleKeyServiceChange}
           style={{ width: "100%" }}
           className="reg-16-16"
@@ -90,7 +116,6 @@ const AddService = () => {
       >
         <InputText
           placeholder="Nhập tên dịch vụ"
-          value={nameService}
           onChange={handleNameServiceChange}
           style={{ width: "100%" }}
           className="reg-16-16"
@@ -111,7 +136,6 @@ const AddService = () => {
       >
         <InputTextArea
           placeholder="Nhập mô tả dịch vụ"
-          value={describeService}
           onChange={handleDescribeServiceChange}
           style={{ width: "100%", height: 154, resize: "none" }}
           className="reg-16-16"
@@ -139,7 +163,6 @@ const AddService = () => {
             <InputText
               value="0001"
               style={{ width: 61 }}
-              readonly
               className="reg-16-16 gray-400"
             />
           </Col>
@@ -152,7 +175,6 @@ const AddService = () => {
             <InputText
               value="9999"
               style={{ width: 61 }}
-              readonly
               className="reg-16-16 gray-400"
             />
           </Col>
@@ -169,7 +191,6 @@ const AddService = () => {
             <InputText
               value="0001"
               style={{ width: 61 }}
-              readonly
               className="reg-16-16 gray-400"
             />
           </Col>
@@ -186,7 +207,6 @@ const AddService = () => {
             <InputText
               value="0001"
               style={{ width: 61 }}
-              readonly
               className="reg-16-16 gray-400"
             />
           </Col>
@@ -215,7 +235,7 @@ const AddService = () => {
           <Button
             style={{ border: "1.5px solid #FF9138" }}
             className="bg-orange-50 btn-service"
-            handleClick={() => navigate("..")}
+            handleClick={() => navigate(`/dich-vu/danh-sach/chi-tiet/${id}`)}
           >
             <Typography.Text className="orange-400 bold-16-16">
               Huỷ bỏ
@@ -225,7 +245,7 @@ const AddService = () => {
           <Button
             htmlType="submit"
             className="bg-orange-400 btn-service"
-            handleClick={() => navigate("..")}
+            handleClick={() => navigate(`/dich-vu/danh-sach/chi-tiet/${id}`)}
           >
             <Typography.Text className="white bold-16-16">
               Thêm dịch vụ
@@ -237,4 +257,4 @@ const AddService = () => {
   );
 };
 
-export default AddService;
+export default UpdateService;

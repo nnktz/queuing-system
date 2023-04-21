@@ -34,7 +34,7 @@ const DetailService = () => {
   const [filteredData, setFilteredData] = useState<QueueType[]>(data);
 
   const handleEditService = () => {
-    navigate(`/dich-vu/danh-sach/cap-nhat/${id}`);
+    navigate(`/dich-vu/danh-sach/chi-tiet/cap-nhat/${id}`);
   };
 
   const handleBackServiceList = () => {
@@ -179,7 +179,6 @@ const DetailService = () => {
                   <InputText
                     value="0001"
                     style={{ width: 61 }}
-                    readonly
                     className="reg-16-16 gray-400"
                   />
                 </Col>
@@ -192,7 +191,6 @@ const DetailService = () => {
                   <InputText
                     value="9999"
                     style={{ width: 61 }}
-                    readonly
                     className="reg-16-16 gray-400"
                   />
                 </Col>
@@ -207,7 +205,6 @@ const DetailService = () => {
                   <InputText
                     value="0001"
                     style={{ width: 61 }}
-                    readonly
                     className="reg-16-16 gray-400"
                   />
                 </Col>
