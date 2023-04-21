@@ -235,7 +235,7 @@ const DetailService = () => {
                   <DropDownStatus
                     options={optionStatusQueue}
                     onChange={handleStatusChange}
-                    className="status-queue"
+                    style={{ width: 160 }}
                   />
                 </Space>
               </Col>
@@ -244,7 +244,7 @@ const DetailService = () => {
                   <Typography.Text className="semi-16-16 gray-500">
                     Chọn thời gian
                   </Typography.Text>
-                  <DatePickerWithRange className="datepicker" />
+                  <DatePickerWithRange className="detail-service-date-picker" />
                 </Space>
               </Col>
               <Col>

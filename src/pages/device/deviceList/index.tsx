@@ -115,7 +115,7 @@ const DeviceList = () => {
         Danh sách thiết bị
       </Typography.Text>
 
-      <div className="active-status">
+      <div className="list-device-active-status">
         <Typography.Text className="gray-500 semi-16-16">
           Trạng thái hoạt động
         </Typography.Text>

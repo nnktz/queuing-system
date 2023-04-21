@@ -88,12 +88,16 @@ const columns: ColumnsType<DeviceType> = [
         {status === "active" ? (
           <>
             <div className="device-status-eclipse bg-green" />
-            <Typography.Text>Hoạt động</Typography.Text>
+            <Typography.Text className="reg-14-14 gray-400">
+              Hoạt động
+            </Typography.Text>
           </>
         ) : (
           <>
             <div className="device-status-eclipse bg-red" />
-            <Typography.Text>Ngưng hoạt động</Typography.Text>
+            <Typography.Text className="reg-14-14 gray-400">
+              Ngưng hoạt động
+            </Typography.Text>
           </>
         )}
       </div>
@@ -108,12 +112,16 @@ const columns: ColumnsType<DeviceType> = [
         {status === "connect" ? (
           <>
             <div className="device-status-eclipse bg-green" />
-            <Typography.Text>Kết nối</Typography.Text>
+            <Typography.Text className="reg-14-14 gray-400">
+              Kết nối
+            </Typography.Text>
           </>
         ) : (
           <>
             <div className="device-status-eclipse bg-red" />
-            <Typography.Text>Mất kết nối</Typography.Text>
+            <Typography.Text className="reg-14-14 gray-400">
+              Mất kết nối
+            </Typography.Text>
           </>
         )}
       </div>

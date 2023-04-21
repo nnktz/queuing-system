@@ -30,6 +30,7 @@ interface DropdownStatusProps {
   placeholder?: string;
   value?: string;
   className?: string;
+  style?: React.CSSProperties;
 }
 
 const { Option } = Select;
@@ -37,6 +38,7 @@ const { Option } = Select;
 export const DropDownStatus: React.FC<DropdownStatusProps> = ({
   options,
   onChange,
+  style,
 }) => {
   const handleChange = (value: string) => {
     onChange(value);
@@ -47,6 +49,7 @@ export const DropDownStatus: React.FC<DropdownStatusProps> = ({
       defaultValue={options[0].value}
       suffixIcon={<CaretDownOutlined className="orange-500" />}
       onChange={handleChange}
+      style={style}
     >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>

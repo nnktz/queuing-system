@@ -82,7 +82,7 @@ const ServiceList = () => {
 
   return (
     <>
-      <div className="active-status">
+      <div className="list-service-active-status">
         <Typography.Text className="gray-500 semi-16-16">
           Trạng thái hoạt động
         </Typography.Text>
@@ -98,7 +98,7 @@ const ServiceList = () => {
           Chọn thời gian
         </Typography.Text>
 
-        <DatePickerWithRange className="datepicker" />
+        <DatePickerWithRange className="list-service-date-picker" />
       </div>
 
       <div className="search-with-keyword">
