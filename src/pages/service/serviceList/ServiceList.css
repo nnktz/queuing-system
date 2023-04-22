@@ -23,6 +23,7 @@
   height: 44px;
   border: 1.5px solid #d4d4d7;
   border-radius: 8px;
+  z-index: 1 !important;
 }
 
 .search-with-keyword {

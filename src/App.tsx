@@ -4,7 +4,7 @@ import { Spin } from "antd";
 
 const Login = lazy(() => import("./pages/login"));
 const ForgotPassword = lazy(() => import("./pages/forgotPassword"));
-const Layout = lazy(() => import("./pages/layout"));
+const Layout = lazy(() => import("./components/layout"));
 const NotFound = lazy(() => import("./pages/404"));
 const PersonalAccount = lazy(() => import("./pages/personalAccount"));
 const DashBoard = lazy(() => import("./pages/dashboard"));
@@ -25,6 +25,7 @@ const Queue = lazy(() => import("./pages/queue"));
 const QueueList = lazy(() => import("./pages/queue/queueList"));
 const NewQueue = lazy(() => import("./pages/queue/newQueue"));
 const DetailQueue = lazy(() => import("./pages/queue/detailQueue"));
+const Report = lazy(() => import("./pages/report"));
 
 function App() {
   return (
@@ -37,44 +38,36 @@ function App() {
         }
       >
         <Routes>
-          <Route path="/">
-            <Route path="dang-nhap" element={<Login />} />
-            <Route path="quen-mat-khau" element={<ForgotPassword />} />
-            <Route path="" element={<Layout />}>
-              <Route path="tai-khoan-ca-nhan" element={<PersonalAccount />} />
-              <Route path="dashboard" element={<DashBoard />}>
-                <Route path="ngay" element={<Days />} />
-                <Route path="tuan" element={<Weeks />} />
-                <Route path="thang" element={<Months />} />
+          <Route path="dang-nhap" element={<Login />} />
+          <Route path="quen-mat-khau" element={<ForgotPassword />} />
+          <Route path="/" element={<Layout />}>
+            <Route path="tai-khoan-ca-nhan" element={<PersonalAccount />} />
+            <Route path="dashboard" element={<DashBoard />}>
+              <Route path="ngay" element={<Days />} />
+              <Route path="tuan" element={<Weeks />} />
+              <Route path="thang" element={<Months />} />
+            </Route>
+            <Route path="thiet-bi" element={<Device />}>
+              <Route path="danh-sach" element={<DeviceList />} />
+              <Route path="danh-sach/them-thiet-bi" element={<AddDevice />} />
+              <Route path="danh-sach/chi-tiet/:id" element={<DetailDevice />} />
+              <Route path="danh-sach/cap-nhat/:id" element={<UpdateDevice />} />
+            </Route>
+            <Route path="dich-vu" element={<Service />}>
+              <Route path="danh-sach" element={<ServiceList />} />
+              <Route path="danh-sach/them-dich-vu" element={<AddService />} />
+              <Route path="danh-sach/chi-tiet">
+                <Route path=":id" element={<DetailService />} />
+                <Route path="cap-nhat/:id" element={<UpdateService />} />
               </Route>
-              <Route path="thiet-bi" element={<Device />}>
-                <Route path="danh-sach" element={<DeviceList />} />
-                <Route path="danh-sach/them-thiet-bi" element={<AddDevice />} />
-                <Route
-                  path="danh-sach/chi-tiet/:id"
-                  element={<DetailDevice />}
-                />
-                <Route
-                  path="danh-sach/cap-nhat/:id"
-                  element={<UpdateDevice />}
-                />
-              </Route>
-              <Route path="dich-vu" element={<Service />}>
-                <Route path="danh-sach" element={<ServiceList />} />
-                <Route path="danh-sach/them-dich-vu" element={<AddService />} />
-                <Route path="danh-sach/chi-tiet">
-                  <Route path=":id" element={<DetailService />} />
-                  <Route path="cap-nhat/:id" element={<UpdateService />} />
-                </Route>
-              </Route>
-              <Route path="cap-so" element={<Queue />}>
-                <Route path="danh-sach" element={<QueueList />} />
-                <Route path="danh-sach/cap-so-moi" element={<NewQueue />} />
-                <Route
-                  path="danh-sach/chi-tiet/:id"
-                  element={<DetailQueue />}
-                />
-              </Route>
+            </Route>
+            <Route path="cap-so" element={<Queue />}>
+              <Route path="danh-sach" element={<QueueList />} />
+              <Route path="danh-sach/cap-so-moi" element={<NewQueue />} />
+              <Route path="danh-sach/chi-tiet/:id" element={<DetailQueue />} />
+            </Route>
+            <Route path="bao-cao" element={<Report />}>
+              <Route path="lap-bao-cao" element={<Report />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

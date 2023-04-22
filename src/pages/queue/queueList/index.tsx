@@ -222,7 +222,7 @@ const QueueList = () => {
             <Typography.Text className="semi-16-16 gray-500">
               Chọn thời gian
             </Typography.Text>
-            <DatePickerWithRange className="list-service-date-picker" />
+            <DatePickerWithRange className="list-queue-date-picker" />
           </Space>
         </Col>
         <Col>

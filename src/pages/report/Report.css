@@ -1,0 +1,98 @@
+.report {
+  position: absolute;
+  left: 224px;
+  top: 104px;
+}
+
+.report-date-picker_range {
+  width: 320px;
+  height: 44px;
+  border-radius: 8px;
+  z-index: 1 !important;
+}
+
+.report-table {
+  width: 1112px;
+  height: 539px;
+}
+
+.report-download {
+  height: 75px !important;
+}
+
+.status-eclipse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.report-id {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 91px;
+  height: 49px;
+}
+
+.report-service_name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 153px;
+  height: 49px;
+}
+
+.report-start-time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 126px;
+  height: 49px;
+}
+
+.report-status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 100px;
+  height: 49px;
+}
+
+.report-device-name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 103px;
+  height: 49px;
+}
+
+.ant-table-wrapper .ant-table.ant-table-middle .ant-table-title,
+.ant-table-wrapper .ant-table.ant-table-middle .ant-table-footer,
+.ant-table-wrapper .ant-table.ant-table-middle .ant-table-thead > tr > th,
+.ant-table-wrapper .ant-table.ant-table-middle .ant-table-tbody > tr > th,
+.ant-table-wrapper .ant-table.ant-table-middle .ant-table-tbody > tr > td,
+.ant-table-wrapper .ant-table.ant-table-middle tfoot > tr > th,
+.ant-table-wrapper .ant-table.ant-table-middle tfoot > tr > td {
+  padding: 0 0 0 17px;
+}
+
+.ant-table-thead .ant-table-cell {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700 !important;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff !important;
+  background: #ff9138 !important;
+  padding: 12.5px 0 12.5px 16px !important;
+}
+
+.ant-table-wrapper .ant-table-filter-trigger {
+  padding: 0 14px;
+  color: #ffffff;
+  margin-inline-end: 0 !important;
+}
+.ant-table-wrapper .ant-table-filter-trigger:hover {
+  background: none;
+}

@@ -9,11 +9,12 @@
   height: 490px;
 }
 
-.list-service-date-picker {
+.list-queue-date-picker {
   height: 44px;
   width: 314px;
   border: 1.5px solid #d4d4d7;
   border-radius: 8px;
+  z-index: 1 !important;
 }
 
 .status-eclipse {

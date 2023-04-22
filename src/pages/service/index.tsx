@@ -15,10 +15,7 @@ const Service = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (
-      window.location.pathname === "/dich-vu" ||
-      window.location.pathname === "/dich-vu/"
-    ) {
+    if (window.location.pathname.startsWith("/dich-vu")) {
       navigate("danh-sach");
     }
   }, [navigate]);

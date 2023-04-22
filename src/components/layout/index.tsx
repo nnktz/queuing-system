@@ -1,6 +1,6 @@
-import Menubar from "../../components/menubar";
-import menuItems from "../../components/menubar/MenuItem";
-import TopBar from "../../components/topbar";
+import Menubar from "../menubar";
+import menuItems from "../menubar/MenuItem";
+import TopBar from "../topbar";
 import { Outlet, useParams } from "react-router-dom";
 import { Layout as LayoutAntd } from "antd";
 
@@ -65,16 +65,16 @@ const Layout = () => {
     case `/cap-so/danh-sach/chi-tiet/${id}`:
       defaultSelectedKey = "queue number level";
       break;
-    case "/bao-cao":
+    case "/bao-cao/lap-bao-cao":
       defaultSelectedKey = "report";
       break;
     case "/cai-dat-he-thong/quan-ly-vai-tro":
       defaultSelectedKey = "role management";
       break;
-    case "cai-dat-he-thong/quan-ly-tai-khoan":
+    case "/cai-dat-he-thong/quan-ly-tai-khoan":
       defaultSelectedKey = "account management";
       break;
-    case "cai-dat-he-thong/nhat-ky-nguoi-dung":
+    case "/cai-dat-he-thong/nhat-ky-nguoi-dung":
       defaultSelectedKey = "user log";
       break;
     default:

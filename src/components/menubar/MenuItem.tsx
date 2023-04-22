@@ -13,7 +13,7 @@ const menuItems = [
     key: "dashboard",
     icon: <AppstoreOutlined className="menu-icon" />,
     label: (
-      <Link to="dashboard/ngay" className="gray-300 semi-16-16">
+      <Link to="dashboard" className="gray-300 semi-16-16">
         Dashboard
       </Link>
     ),
