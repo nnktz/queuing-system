@@ -24,6 +24,7 @@ const UpdateService = lazy(() => import("./pages/service/updateService"));
 const Queue = lazy(() => import("./pages/queue"));
 const QueueList = lazy(() => import("./pages/queue/queueList"));
 const NewQueue = lazy(() => import("./pages/queue/newQueue"));
+const DetailQueue = lazy(() => import("./pages/queue/detailQueue"));
 
 function App() {
   return (
@@ -69,6 +70,10 @@ function App() {
               <Route path="cap-so" element={<Queue />}>
                 <Route path="danh-sach" element={<QueueList />} />
                 <Route path="danh-sach/cap-so-moi" element={<NewQueue />} />
+                <Route
+                  path="danh-sach/chi-tiet/:id"
+                  element={<DetailQueue />}
+                />
               </Route>
             </Route>
           </Route>

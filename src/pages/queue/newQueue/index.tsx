@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./NewQueue.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Row, Layout, Typography, Col, Modal, Space } from "antd";
+import { Row, Layout, Typography, Col, Modal } from "antd";
 import { DropDownCategoryDevice } from "../../../components/dropdown";
 import { optionService } from "../../../components/dropdown/ItemDropdown";
 import Button from "../../../components/button";

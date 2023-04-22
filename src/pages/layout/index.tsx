@@ -62,6 +62,9 @@ const Layout = () => {
     case "/cap-so/danh-sach/cap-so-moi":
       defaultSelectedKey = "queue number level";
       break;
+    case `/cap-so/danh-sach/chi-tiet/${id}`:
+      defaultSelectedKey = "queue number level";
+      break;
     case "/bao-cao":
       defaultSelectedKey = "report";
       break;
