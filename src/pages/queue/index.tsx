@@ -15,7 +15,10 @@ const Queue = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.location.pathname.startsWith("/cap-so")) {
+    if (
+      window.location.pathname === "/cap-so" ||
+      window.location.pathname === "/cap-so/"
+    ) {
       navigate("danh-sach");
     }
   }, [navigate]);

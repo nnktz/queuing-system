@@ -17,9 +17,12 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const data = [{ title: "Dashboard", link: "dashboard/tuan" }];
+    const data = [{ title: "Dashboard", link: "dashboard" }];
 
-    if (window.location.pathname.startsWith("/dashboard")) {
+    if (
+      window.location.pathname === "/dashboard" ||
+      window.location.pathname === "/dashboard/"
+    ) {
       navigate("ngay");
     }
 

@@ -3,7 +3,7 @@ import "./Report.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout, Row, Space, Typography } from "antd";
-import DatePickerWithRange from "../../components/datePicker";
+import DatePickerWithRange from "../../components/datePicker/DatePickerWithRange";
 import ProTable from "@ant-design/pro-table";
 import ButtonCustom from "../../components/button/buttonCustom";
 import Download from "../../assets/icons/document-download.svg";
@@ -65,7 +65,10 @@ const Report = () => {
       { title: "Lập báo cáo", link: "bao-cao/lap-bao-cao" },
     ];
 
-    if (window.location.pathname.startsWith("/bao-cao")) {
+    if (
+      window.location.pathname === "/bao-cao" ||
+      window.location.pathname === "/bao-cao/"
+    ) {
       navigate("/bao-cao/lap-bao-cao");
     }
 

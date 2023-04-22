@@ -11,7 +11,7 @@ import { DataService } from "../DataService";
 import InputText from "../../../components/inputs/text";
 import { DropDownStatus } from "../../../components/dropdown";
 import { optionStatusServiceQueue } from "../../../components/dropdown/ItemDropdown";
-import DatePickerWithRange from "../../../components/datePicker";
+import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
 import { SearchOutlined } from "@ant-design/icons";
 import { QueueType } from "../../../models/Queue.type";
 import columns from "./ColumDataQueueService";

@@ -1,15 +1,8 @@
-import { DatePicker } from "antd";
+import { Calendar } from "antd";
 import "./DatePicker.css";
 
 const DashboardDatePicker = () => {
-  return (
-    <DatePicker
-      open
-      showToday={false}
-      format="DD/MM/YYYY"
-      id="dashboard-date-picker"
-    />
-  );
+  return <Calendar fullscreen={false} className="calendar pink-shadow" />;
 };
 
 export default DashboardDatePicker;

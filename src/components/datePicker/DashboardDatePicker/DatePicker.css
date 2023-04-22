@@ -1,158 +1,55 @@
-#dashboard-date-picker {
-  display: none;
-}
-
-.ant-picker {
-  z-index: -1;
-}
-
-.ant-picker-panel-container {
-  position: absolute;
+.calendar {
   width: 353px;
   height: 336px;
-  left: 24px;
-  top: 408px;
-  box-shadow: 2px 2px 15px rgba(70, 64, 67, 0.1);
-  border-radius: 12px;
 }
 
-.ant-picker-date-panel {
-  width: 100%;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-cell
-  .ant-picker-cell-inner {
-  height: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 0;
-  margin: 2px;
-  gap: 10px;
-  border-radius: 8px;
-}
-
-.ant-picker-dropdown
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
   .ant-picker-cell-in-view.ant-picker-cell-selected
+  .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-range-start
+  .ant-picker-cell-inner,
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
+  .ant-picker-cell-in-view.ant-picker-cell-range-end
   .ant-picker-cell-inner {
   background: #ff7506;
+  color: #ffffff;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
   .ant-picker-cell-in-view.ant-picker-cell-today
   .ant-picker-cell-inner::before {
-  border: 1px solid #ff7506;
-  border-radius: 8px;
+  border: none;
 }
 
-.ant-picker-dropdown .ant-picker-panel-container .ant-picker-panel-focused {
-  width: 100%;
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
+  .ant-picker-calendar-header {
+  justify-content: center;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-date-panel {
-  width: 100%;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-date-panel
-  .ant-picker-content {
-  width: 100%;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-header {
+.ant-picker-content thead tr th {
+  color: #ff9138 !important;
   font-family: "Nunito";
   font-style: normal;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 22px;
-  color: #ff9138;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-content
-  th {
-  font-family: "Nunito";
-  font-style: normal;
-  font-weight: 700;
+  font-weight: 700 !important;
   font-size: 14px;
-  line-height: 19px;
-  color: #ff9138;
+  line-height: 19px !important;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
   .ant-picker-cell-in-view {
   font-family: "Nunito";
   font-style: normal;
-  font-weight: 600;
+  font-weight: 600 !important;
   font-size: 14px;
   line-height: 19px;
   color: #535261;
 }
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
+:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-calendar
   .ant-picker-cell {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 19px;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-date-panel
-  .ant-picker-body {
-  height: 295.2px;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-decade-panel,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-year-panel,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-quarter-panel,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-month-panel,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-week-panel,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-date-panel,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-time-panel {
-  width: 352px;
-  padding: 8px 18px;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-year-panel
-  .ant-picker-body {
-  padding-left: 60px;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-year-panel
-  .ant-picker-body,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-quarter-panel
-  .ant-picker-body,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-month-panel
-  .ant-picker-body {
-  width: 317px;
-  padding: 8px 18px;
-  padding-left: 60px;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-date-panel
-  .ant-picker-body {
-  padding: 0;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-picker-dropdown
-  .ant-picker-cell {
-  padding: 0;
 }

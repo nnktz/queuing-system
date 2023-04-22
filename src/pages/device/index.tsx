@@ -5,7 +5,10 @@ const Device = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (window.location.pathname.startsWith("/thiet-bi")) {
+    if (
+      window.location.pathname === "/thiet-bi" ||
+      window.location.pathname === "/thiet-bi/"
+    ) {
       navigate("danh-sach");
     }
   }, [navigate]);

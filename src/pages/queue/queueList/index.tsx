@@ -13,7 +13,7 @@ import {
   optionStatusQueue,
 } from "../../../components/dropdown/ItemDropdown";
 import { DropDownStatus } from "../../../components/dropdown";
-import DatePickerWithRange from "../../../components/datePicker";
+import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
 import InputText from "../../../components/inputs/text";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import ButtonCustom from "../../../components/button/buttonCustom";

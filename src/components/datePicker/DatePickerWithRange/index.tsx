@@ -1,5 +1,5 @@
 import { DatePicker } from "antd";
-import "./DatePicker.css";
+import "./DatePickerWithRange.css";
 
 const { RangePicker } = DatePicker;
 interface RangePickerProps {

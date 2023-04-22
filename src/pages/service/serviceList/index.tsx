@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { Typography, Table } from "antd";
 import { DropDownStatus } from "../../../components/dropdown";
 import { optionStatusActive } from "../../../components/dropdown/ItemDropdown";
-import DatePickerWithRange from "../../../components/datePicker";
+import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
 import InputText from "../../../components/inputs/text";
 import { SearchOutlined } from "@ant-design/icons";
 import ButtonCustom from "../../../components/button/buttonCustom";

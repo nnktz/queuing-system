@@ -8,10 +8,8 @@
   border-radius: 8px 0px 0px 8px;
 }
 
-.overview-title {
+.overview-layout {
   position: absolute;
-  width: 118px;
-  height: 36px;
   left: 24px;
   top: 104px;
 }
@@ -21,28 +19,31 @@
   border-radius: 12px;
 }
 
+.overview-space {
+  width: 100%;
+  height: 100%;
+  margin-left: 31px;
+}
+
+.overview-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 4px;
+}
+
 .overview-queue {
-  position: absolute;
   width: 353px;
   height: 83px;
-  left: 24px;
-  top: 346px;
 }
 
 .overview-service {
-  position: absolute;
   width: 353px;
   height: 83px;
-  left: 24px;
-  top: 251px;
 }
 
 .overview-device {
-  position: absolute;
   width: 353px;
   height: 83px;
-  left: 24px;
-  top: 156px;
 }
 
 .overview-queue,
@@ -52,225 +53,12 @@
   opacity: 0.8;
 }
 
-.queue-percent {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  left: 16px;
-  top: 11px;
-}
-
-.queue-title {
-  position: absolute;
-  width: 64px;
-  height: 54px;
-  left: 88px;
-  top: 14px;
-}
-
-.queue-icon {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  left: -1px;
-  top: 38px;
-}
-
-.queue-number {
-  position: absolute;
-  width: 64px;
-  height: 36px;
-  left: 0;
-  top: 0;
-  margin: 0 !important;
-}
-
-.queue-subtitle {
-  position: absolute;
-  width: 70px;
-  height: 21px;
-  left: 17px;
-  top: 36px;
-}
-
-.queue-result {
-  position: absolute;
-  width: 145px;
-  height: 63px;
-  left: 192px;
-  top: 10px;
-  display: flex;
-  flex-direction: column-reverse;
-  justify-content: center;
-}
-
-.queue-dismiss {
-  width: 124px;
-  height: 21px;
-  display: flex;
-  flex-direction: row;
-}
-
-.queue-dismiss_dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  top: 49.5px;
-  border-radius: 4px;
-}
-
-.queue-dismiss_box {
-  position: absolute;
-  width: 116px;
-  height: 21px;
-  left: 9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.queue-used {
-  width: 133px;
-  height: 21px;
-  display: flex;
-  flex-direction: row;
-}
-
-.queue-used_dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  top: 29px;
-  border-radius: 4px;
-}
-
-.queue-used_box {
-  position: absolute;
-  width: 125px;
-  height: 21px;
-  left: 9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.queue-waiting {
-  width: 145px;
-  height: 21px;
-  display: flex;
-  flex-direction: row;
-}
-
-.queue-waiting_dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  top: 9.1px;
-  border-radius: 4px;
-}
-
-.queue-waiting_box {
-  position: absolute;
-  width: 137px;
-  height: 21px;
-  left: 9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.eclipse-13_small {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  left: 10px;
-  top: 10px;
-}
-
-.eclipse-15 {
-  position: absolute;
-  left: 31px;
-  top: 10px;
-  z-index: 1;
-}
-
-.number-percent {
-  position: absolute;
-  width: 31px;
-  height: 24px;
-  left: 16px;
-  top: 21.5px;
-}
-
-.eclipse-12 {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  left: 0px;
-  top: 0px;
-  z-index: 1;
-}
-
-.eclipse-14 {
-  position: absolute;
-  left: 29.5px;
-  top: 5px;
-  z-index: 1;
-}
-
-.eclipse-13_big {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  left: 5px;
-  top: 5px;
-}
-
-.eclipse-11 {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  left: 0px;
-  top: 0px;
-}
-
-.service-active_box {
-  position: absolute;
-  width: 125px;
-  height: 21px;
-  left: 9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.service-inactive_box {
-  position: absolute;
-  width: 116px;
-  height: 21px;
-  left: 9px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.active_dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  top: 18.5px;
-  border-radius: 4px;
-}
-
-.inactive_dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  top: 40.5px;
-  border-radius: 4px;
+:where(.css-dev-only-do-not-override-1vtf12y).ant-progress.ant-progress-circle
+  .ant-progress-text {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 24px;
+  color: #535261;
 }
