@@ -39,7 +39,7 @@ const RoleList = () => {
   };
 
   const handleInsertRole = () => {
-    navigate("them-vai-tro");
+    navigate("/cai-dat/quan-ly-vai-tro/them-vai-tro");
   };
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const RoleList = () => {
           dataSource={filteredData.length > 0 ? filteredData : data}
         />
         <ButtonCustom
-          title="Cấp số mới"
+          title="Thêm vai trò"
           imageURL={AddSquare}
           onClick={handleInsertRole}
         />

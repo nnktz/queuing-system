@@ -1,0 +1,76 @@
+.role-layout {
+  position: absolute;
+  left: 224px;
+  top: 172px;
+}
+
+.box-info-role {
+  width: 1192px;
+  height: 534px;
+  padding: 16px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.required-rule {
+  display: inline-flex;
+  align-items: center;
+}
+
+.functional-group-box {
+  width: 560px;
+  height: 420px;
+  border-radius: 8px;
+  overflow-y: auto;
+}
+
+.functional-group-box::-webkit-scrollbar {
+  width: 4px;
+  height: 85px;
+}
+
+.functional-group-box::-webkit-scrollbar-thumb {
+  background-color: #ffc89b;
+  border-radius: 8px;
+}
+
+.btn-action {
+  width: 147px;
+  height: 48px;
+  box-shadow: 0px 0px 6px #e7e9f2;
+  border-radius: 8px;
+}
+
+.btn-action:hover {
+  border-color: transparent;
+  opacity: 0.8;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-form-item
+  .ant-form-item-label
+  > label {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #282739;
+}
+
+.checkbox-group .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-inline-start: 0;
+}
+
+.checkbox-group .ant-checkbox-wrapper + .ant-checkbox-wrapper {
+  margin-top: 12px;
+}
+
+.checkbox-group .ant-checkbox-wrapper {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #535261;
+}

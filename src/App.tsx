@@ -28,6 +28,7 @@ const DetailQueue = lazy(() => import("./pages/queue/detailQueue"));
 const Report = lazy(() => import("./pages/report"));
 const Role = lazy(() => import("./pages/settings/role"));
 const RoleList = lazy(() => import("./pages/settings/role/roleList"));
+const InsertRole = lazy(() => import("./pages/settings/role/insertRole"));
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
             <Route path="cai-dat">
               <Route path="quan-ly-vai-tro" element={<Role />}>
                 <Route path="danh-sach" element={<RoleList />} />
+                <Route path="them-vai-tro" element={<InsertRole />} />
               </Route>
             </Route>
           </Route>

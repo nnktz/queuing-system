@@ -147,6 +147,10 @@ code {
   cursor: pointer;
 }
 
+.width-full {
+  width: 100% !important;
+}
+
 /* reg */
 .reg-36-36 {
   font-family: "Nunito";
@@ -274,7 +278,7 @@ code {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 16px !important;
   line-height: 24px;
 }
 
