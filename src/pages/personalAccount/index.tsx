@@ -10,12 +10,20 @@ const PersonalAccount = () => {
   const dispatch = useDispatch();
 
   const person: PersonProps = {
+    key: "user",
     name: "Lê Quỳnh Ái Vân",
     username: "lequynhhaivan01",
     phone: "0767375921",
     password: "311940211",
     email: "adminSSO1@domain.com",
-    role: "Kế toán",
+    role: {
+      key: "role1",
+      name: "Kế toán",
+      describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
+      user: [],
+      permission: [],
+    },
+    status: "active",
   };
 
   useEffect(() => {
@@ -102,7 +110,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.role}
+          value={person.role.name}
           className="fill fill-email-role"
         />
       </div>

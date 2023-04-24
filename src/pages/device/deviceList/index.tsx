@@ -14,7 +14,7 @@ import AddSquare from "../../../assets/icons/add-square.svg";
 import { useNavigate } from "react-router-dom";
 import { DeviceType } from "../../../models/Device.type";
 import { DataDevice } from "../DataDevice";
-import columns from "./ColumDataDevice";
+import columns from "./ColumnDataDevice";
 
 interface SelectedValues {
   active: string;

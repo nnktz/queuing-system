@@ -26,6 +26,8 @@ const QueueList = lazy(() => import("./pages/queue/queueList"));
 const NewQueue = lazy(() => import("./pages/queue/newQueue"));
 const DetailQueue = lazy(() => import("./pages/queue/detailQueue"));
 const Report = lazy(() => import("./pages/report"));
+const Role = lazy(() => import("./pages/settings/role"));
+const RoleList = lazy(() => import("./pages/settings/role/roleList"));
 
 function App() {
   return (
@@ -68,6 +70,11 @@ function App() {
             </Route>
             <Route path="bao-cao" element={<Report />}>
               <Route path="lap-bao-cao" element={<Report />} />
+            </Route>
+            <Route path="cai-dat">
+              <Route path="quan-ly-vai-tro" element={<Role />}>
+                <Route path="danh-sach" element={<RoleList />} />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

@@ -116,7 +116,7 @@ const columns: ColumnsType<DataType> = [
       <Typography.Link
         href={`danh-sach/chi-tiet/${record.key}`}
         className="text-underline"
-        style={{ marginLeft: 16 }}
+        style={{ marginRight: 17 }}
       >
         Chi tiết
       </Typography.Link>

@@ -54,7 +54,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 8px;
   gap: 10px;
   width: 152px;
   height: 49px;
@@ -64,7 +63,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 8px;
   gap: 10px;
   width: 131px;
   height: 49px;
@@ -81,7 +79,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 17px;
   width: 212px;
   height: 49px;
   white-space: nowrap;
@@ -92,8 +89,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 8px;
-  gap: 10px;
   width: 100px;
   height: 49px;
 }
@@ -102,8 +97,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 8px;
-  gap: 10px;
   width: 87px;
   height: 49px;
 }
@@ -112,8 +105,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding-left: 16px;
-  gap: 10px;
   width: 75px;
   height: 49px;
 }
@@ -130,7 +121,7 @@
   .ant-table-tbody
   > tr
   > td {
-  padding: 0;
+  padding: 0 0 0 17px;
 }
 
 :where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper

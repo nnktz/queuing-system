@@ -68,13 +68,13 @@ const Layout = () => {
     case "/bao-cao/lap-bao-cao":
       defaultSelectedKey = "report";
       break;
-    case "/cai-dat-he-thong/quan-ly-vai-tro":
+    case "/cai-dat/quan-ly-vai-tro/danh-sach":
       defaultSelectedKey = "role management";
       break;
-    case "/cai-dat-he-thong/quan-ly-tai-khoan":
+    case "/cai-dat/quan-ly-tai-khoan":
       defaultSelectedKey = "account management";
       break;
-    case "/cai-dat-he-thong/nhat-ky-nguoi-dung":
+    case "/cai-dat/nhat-ky-nguoi-dung":
       defaultSelectedKey = "user log";
       break;
     default:

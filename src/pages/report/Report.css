@@ -93,6 +93,45 @@
   color: #ffffff;
   margin-inline-end: 0 !important;
 }
+
 .ant-table-wrapper .ant-table-filter-trigger:hover {
   background: none;
+}
+
+.ant-pagination .ant-pagination-item-active a {
+  color: #ffffff !important;
+}
+
+.ant-pagination .ant-pagination-item-active {
+  background-color: #ff7506;
+  border-color: transparent;
+}
+
+.ant-pagination .ant-pagination-item a {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+  color: #7e7d88;
+}
+
+.ant-table-wrapper .ant-table-pagination {
+  align-items: center;
+}
+
+.ant-pagination .ant-pagination-item-active:hover {
+  border-color: transparent;
+  opacity: 0.8;
+}
+
+.ant-pagination.ant-pagination-mini .ant-pagination-prev,
+.ant-pagination.ant-pagination-mini .ant-pagination-next,
+.ant-pagination.ant-pagination-mini .ant-pagination-item {
+  height: 32px;
+  width: 32px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
 }

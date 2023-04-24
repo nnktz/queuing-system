@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 const titleStyles = {
   position: "absolute",
-  width: "171px",
   height: "36px",
   left: "224px",
   top: "104px",

@@ -158,7 +158,26 @@
 
 :where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
   .ant-menu-submenu-title {
-  width: calc(100% - 4px);
+  width: 100%;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-inline .ant-menu-item,
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical .ant-menu-item,
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-inline
+  .ant-menu-submenu-title,
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
+  .ant-menu-submenu-title {
+  margin-inline: 0;
+
+  padding-left: 14px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
+  .ant-menu-item-selected,
+:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
+  > .ant-menu
+  .ant-menu-item-selected {
+  background-color: #ff9138;
 }
 
 .frame-269 {

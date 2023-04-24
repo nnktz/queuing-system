@@ -73,10 +73,7 @@ const menuItems = [
       {
         key: "role management",
         label: (
-          <Link
-            to="cai-dat-he-thong/quan-ly-vai-tro"
-            className="gray-300 semi-16-16"
-          >
+          <Link to="cai-dat/quan-ly-vai-tro" className="gray-300 semi-16-16">
             Quản lý vai trò
           </Link>
         ),
@@ -84,10 +81,7 @@ const menuItems = [
       {
         key: "account management",
         label: (
-          <Link
-            to="cai-dat-he-thong/quan-ly-tai-khoan"
-            className="gray-300 semi-16-16"
-          >
+          <Link to="cai-dat/quan-ly-tai-khoan" className="gray-300 semi-16-16">
             Quản lý tài khoản
           </Link>
         ),
@@ -95,10 +89,7 @@ const menuItems = [
       {
         key: "user log",
         label: (
-          <Link
-            to="cai-dat-he-thong/nhat-ky-nguoi-dung"
-            className="gray-300 semi-16-16"
-          >
+          <Link to="cai-dat/nhat-ky-nguoi-dung" className="gray-300 semi-16-16">
             Nhật ký người dùng
           </Link>
         ),

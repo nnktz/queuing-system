@@ -1,75 +1,33 @@
-.queue-list {
+.role-list-search {
+  position: absolute;
+  left: 1096px;
+  top: 104px;
+}
+
+.role-list {
   position: absolute;
   left: 224px;
-  top: 156px;
+  top: 192px;
 }
 
-.table-queue-list {
+.table-role-list {
   width: 1112px;
-  height: 490px;
+  height: 343px;
 }
 
-.list-queue-date-picker {
-  height: 44px;
-  width: 314px;
-  border: 1.5px solid #d4d4d7;
-  border-radius: 8px;
-  z-index: 1 !important;
-}
-
-.status-eclipse {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.queue-id {
+.role-name,
+.role-quantity {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 67px;
+  width: 124px;
   height: 49px;
 }
 
-.queue-customer_name {
+.role-describe {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 125px;
-  height: 49px;
-}
-
-.queue-service_name {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 121px;
-  height: 49px;
-}
-
-.queue-start-time,
-.queue-end-time {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 107px;
-  height: 49px;
-}
-
-.queue-service-status {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 10px;
-  width: 86px;
-  height: 49px;
-}
-
-.queue-device-name {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 95px;
   height: 49px;
 }
 
@@ -128,13 +86,4 @@
   .ant-pagination-item
   a {
   color: #7e7d88;
-}
-
-:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  padding: 4px 8px;
-  gap: 10px;
 }
