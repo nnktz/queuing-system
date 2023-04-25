@@ -22,6 +22,11 @@ export const optionStatusActive: OptionStatus[] = [
   { value: "inactive", label: "Ngưng hoạt động" },
 ];
 
+export const optionStatus: OptionStatus[] = [
+  { value: "active", label: "Hoạt động" },
+  { value: "inactive", label: "Ngưng hoạt động" },
+];
+
 export const optionStatusConnection: OptionStatus[] = [
   { value: "all", label: "Tất cả" },
   { value: "connect", label: "Kết nối" },

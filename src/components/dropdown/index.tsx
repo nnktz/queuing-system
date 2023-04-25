@@ -142,6 +142,8 @@ interface DropDownArrayProps {
   onChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
   style?: React.CSSProperties;
   className?: string;
+  value?: string;
+  placeholder?: string;
 }
 
 export const DropDownArray: React.FC<DropDownArrayProps> = ({
@@ -164,6 +166,37 @@ export const DropDownArray: React.FC<DropDownArrayProps> = ({
       style={style}
     >
       {optionsWithAll.map((option) => (
+        <Option key={option.value} value={option.value}>
+          <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
+            {option.label}
+          </Typography.Text>
+        </Option>
+      ))}
+    </Select>
+  );
+};
+
+export const SelectArray: React.FC<DropDownArrayProps> = ({
+  options,
+  onChange,
+  style,
+  className,
+  value,
+  placeholder,
+}) => {
+  const handleChange = (value: string) => {
+    onChange({ target: { value } } as React.ChangeEvent<{ value: unknown }>);
+  };
+
+  return (
+    <Select
+      suffixIcon={<CaretDownOutlined className="orange-500" />}
+      placeholder={placeholder}
+      onChange={handleChange}
+      style={style}
+      value={value}
+    >
+      {options.map((option) => (
         <Option key={option.value} value={option.value}>
           <Typography.Text className={`reg-16-16 gray-5 ${className}`}>
             {option.label}

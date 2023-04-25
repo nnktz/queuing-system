@@ -250,7 +250,7 @@ const UpdateRole = () => {
                     className="bg-orange-400 btn-action"
                   >
                     <Typography.Text className="white bold-16-16">
-                      Thêm dịch vụ
+                      Cập nhật
                     </Typography.Text>
                   </Button>
                 </Col>

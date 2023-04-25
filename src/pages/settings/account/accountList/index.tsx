@@ -167,7 +167,7 @@ const AccountList = () => {
             </Col>
             <Col>
               <ButtonCustom
-                title="Thêm vai trò"
+                title="Thêm tài khoản"
                 imageURL={AddSquare}
                 onClick={handleCreateAccount}
               />
