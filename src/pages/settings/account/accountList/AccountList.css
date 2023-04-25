@@ -1,33 +1,66 @@
-.role-list-search {
-  position: absolute;
-  left: 1096px;
-  top: 104px;
-}
-
-.role-list {
+.account-list-layout {
   position: absolute;
   left: 224px;
-  top: 192px;
+  top: 156px;
 }
 
-.table-role-list {
+.table-account-list {
   width: 1112px;
-  max-height: 343px;
+  max-height: 490px;
 }
 
-.role-name,
-.role-quantity {
+.role-status {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 124px;
+  gap: 10px;
+  width: 152px;
   height: 49px;
 }
 
-.role-describe {
+.status-eclipse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.account-name {
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 120px;
+  height: 49px;
+}
+
+.account-username {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 120px;
+  height: 49px;
+}
+
+.account-phone {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80px;
+  height: 49px;
+}
+
+.account-email {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 200px;
+  height: 49px;
+}
+
+.account-role {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80px;
   height: 49px;
 }
 
@@ -86,4 +119,13 @@
   .ant-pagination-item
   a {
   color: #7e7d88;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
 }

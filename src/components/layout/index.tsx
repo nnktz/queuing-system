@@ -77,7 +77,7 @@ const Layout = () => {
     case `/cai-dat/quan-ly-vai-tro/cap-nhat/${id}`:
       defaultSelectedKey = "role management";
       break;
-    case "/cai-dat/quan-ly-tai-khoan":
+    case "/cai-dat/quan-ly-tai-khoan/danh-sach":
       defaultSelectedKey = "account management";
       break;
     case "/cai-dat/nhat-ky-nguoi-dung":

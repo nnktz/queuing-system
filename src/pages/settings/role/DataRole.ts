@@ -298,7 +298,7 @@ export const DataRole: RoleType[] = [
       {
         key: "user12",
         name: "Nguyễn Văn A",
-        username: "nguyenvana@10",
+        username: "nguyenvana@12",
         password: "password@123",
         email: "nguyenvana123gmail.com",
         phone: "0919256712",
@@ -315,7 +315,7 @@ export const DataRole: RoleType[] = [
       {
         key: "user13",
         name: "Nguyễn Văn A",
-        username: "nguyenvana@11",
+        username: "nguyenvana@13",
         password: "password@123",
         email: "nguyenvana123gmail.com",
         phone: "0919256712",

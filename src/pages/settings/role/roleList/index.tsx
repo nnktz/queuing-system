@@ -83,7 +83,7 @@ const RoleList = () => {
 
       <Space size={24} align="start" className="role-list">
         <Table
-          className="table-role-list"
+          className="table-role-list shadow-box"
           columns={columns}
           dataSource={filteredData.length > 0 ? filteredData : data}
         />

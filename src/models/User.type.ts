@@ -1,6 +1,6 @@
 import { RoleType } from "./Role.type";
 
-export type PersonProps = {
+export type UserType = {
   key: string;
   name: string;
   username: string;

@@ -1,6 +1,6 @@
 import { Typography } from "antd";
 import InputText from "../../components/inputs/text";
-import { PersonProps } from "../../models/Person.type";
+import { UserType } from "../../models/User.type";
 import "./PersonalAccount.css";
 import Camera from "../../assets/icons/camera.svg";
 import { useEffect } from "react";
@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 const PersonalAccount = () => {
   const dispatch = useDispatch();
 
-  const person: PersonProps = {
+  const person: UserType = {
     key: "user",
     name: "Lê Quỳnh Ái Vân",
     username: "lequynhhaivan01",
