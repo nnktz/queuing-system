@@ -29,6 +29,7 @@ const Report = lazy(() => import("./pages/report"));
 const Role = lazy(() => import("./pages/settings/role"));
 const RoleList = lazy(() => import("./pages/settings/role/roleList"));
 const InsertRole = lazy(() => import("./pages/settings/role/insertRole"));
+const UpdateRole = lazy(() => import("./pages/settings/role/updateRole"));
 
 function App() {
   return (
@@ -76,6 +77,7 @@ function App() {
               <Route path="quan-ly-vai-tro" element={<Role />}>
                 <Route path="danh-sach" element={<RoleList />} />
                 <Route path="them-vai-tro" element={<InsertRole />} />
+                <Route path="cap-nhat/:id" element={<UpdateRole />} />
               </Route>
             </Route>
           </Route>

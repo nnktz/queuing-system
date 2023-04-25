@@ -35,6 +35,11 @@
   border-radius: 8px;
 }
 
+.group-role-items {
+  display: flex;
+  flex-direction: column;
+}
+
 .btn-action {
   width: 147px;
   height: 48px;

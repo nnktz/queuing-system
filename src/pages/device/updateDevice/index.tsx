@@ -85,7 +85,7 @@ const UpdateDevice = () => {
 
   useEffect(() => {
     const data = [
-      { title: "Thiết bị", link: "thiet-bi/danh-sach" },
+      { title: "Thiết bị" },
       { title: "Danh sách thiết bị", link: "thiet-bi/danh-sach" },
       { title: "Cập nhật thiết bị", link: `thiet-bi/danh-sach/cap-nhat/${id}` },
     ];

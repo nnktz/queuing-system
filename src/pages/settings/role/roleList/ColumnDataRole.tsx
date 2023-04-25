@@ -49,7 +49,7 @@ const columns: ColumnsType<DataType> = [
     key: "update",
     render: (_, record) => (
       <Typography.Link
-        href={`quan-ly-vai-tro/cap-nhat/${record.key}`}
+        href={`/cai-dat/quan-ly-vai-tro/cap-nhat/${record.key}`}
         className="text-underline"
         style={{ marginLeft: 16 }}
       >

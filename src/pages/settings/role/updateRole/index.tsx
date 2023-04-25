@@ -1,23 +1,25 @@
-import { useEffect, useState } from "react";
-import "./InsertRole.css";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import "../insertRole/InsertRole.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Checkbox, Col, Form, Layout, Row, Space, Typography } from "antd";
 import InputText from "../../../../components/inputs/text";
 import InputTextArea from "../../../../components/inputs/textArea";
-import { CheckboxValueType } from "antd/lib/checkbox/Group";
 import Button from "../../../../components/button";
-import { groupRole } from "./DataPermission";
+import { groupRole } from "../insertRole/DataPermission";
+import { CheckboxValueType } from "antd/lib/checkbox/Group";
+import { DataRole } from "../DataRole";
 
 const { Content } = Layout;
 
-const InsertRole = () => {
+const UpdateRole = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
   const [form] = Form.useForm();
+  const roles = DataRole;
 
-  const [nameRole, setNameRole] = useState("");
-  const [describeRole, setDescribeRole] = useState("");
+  const checkedGroupRef = useRef<{ [key: string]: string[] }>({});
   const [checkedGroup, setCheckedGroup] = useState<{ [key: string]: string[] }>(
     {}
   );
@@ -59,22 +61,52 @@ const InsertRole = () => {
   };
 
   const handleNameRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNameRole(event.target.value);
+    form.setFieldValue("name", event.target.value);
   };
 
   const handleDescribeRoleChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    setDescribeRole(event.target.value);
+    form.setFieldValue("describe", event.target.value);
   };
+
+  const getRoleByKey = useCallback(
+    (id: string) => {
+      const role = roles.find((role) => role.key === id);
+      if (role) {
+        form.setFieldsValue({
+          name: role.name,
+          describe: role.describe,
+          permission: role.permission.map((permission) => permission.key),
+        });
+        const newCheckedGroup = { ...checkedGroupRef.current };
+        role.permission.forEach((permission) => {
+          newCheckedGroup[permission.key] = permission.items.map(
+            (item) => item.value
+          );
+        });
+        checkedGroupRef.current = newCheckedGroup;
+      } else {
+        console.log(`Role with key ${id} not found`);
+      }
+    },
+    [form, roles]
+  );
+
+  useEffect(() => {
+    if (id) {
+      getRoleByKey(id);
+      setCheckedGroup(checkedGroupRef.current);
+    }
+  }, [getRoleByKey, id]);
 
   useEffect(() => {
     const data = [
       { title: "Cài đặt hệ thống" },
       { title: "Quản lý vai trò", link: "cai-dat/quan-ly-vai-tro" },
       {
-        title: "Thêm vai trò",
-        link: "cai-dat/quan-ly-vai-tro/them-vai-tro",
+        title: "Cập nhật vai trò",
+        link: `cai-dat/quan-ly-vai-tro/cap-nhat/${id}`,
       },
     ];
 
@@ -82,7 +114,7 @@ const InsertRole = () => {
       type: "UPDATE_BREADCRUMB_ITEMS",
       payload: { items: data },
     });
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <Layout className="role-layout">
@@ -109,7 +141,6 @@ const InsertRole = () => {
                   >
                     <InputText
                       placeholder="Nhập tên vai trò"
-                      value={nameRole}
                       onChange={handleNameRoleChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -123,7 +154,6 @@ const InsertRole = () => {
                   >
                     <InputTextArea
                       placeholder="Nhập mô tả"
-                      value={describeRole}
                       onChange={handleDescribeRoleChange}
                       style={{ width: 560, height: 160, resize: "none" }}
                       className="reg-16-16"
@@ -233,4 +263,4 @@ const InsertRole = () => {
   );
 };
 
-export default InsertRole;
+export default UpdateRole;

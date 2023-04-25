@@ -1,5 +1,7 @@
+import { PermissionItemType } from "./PermissionItem.type";
+
 export type PermissionType = {
   key: string;
   name: string;
-  describe: string;
+  items: PermissionItemType[];
 };
