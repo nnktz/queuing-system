@@ -1,17 +1,18 @@
-import { useNavigate } from "react-router-dom";
-import "./CreateAccount.css";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import "../createAccount/CreateAccount.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { DataRole } from "../../role/DataRole";
+import { useCallback, useEffect, useState } from "react";
 import { Col, Form, Layout, Row, Space, Typography } from "antd";
 import Button from "../../../../components/button";
-import InputText from "../../../../components/inputs/text";
 import {
   DropDownCategoryDevice,
   SelectArray,
 } from "../../../../components/dropdown";
-import { DataRole } from "../../role/DataRole";
 import { optionStatus } from "../../../../components/dropdown/ItemDropdown";
 import InputPassword from "../../../../components/inputs/password";
+import InputText from "../../../../components/inputs/text";
+import { DataAccount } from "../DataAccount";
 
 const { Content } = Layout;
 
@@ -20,17 +21,14 @@ interface IRoleSelect {
   label: string;
 }
 
-const CreateAccount = () => {
+const UpdateAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
+  const [form] = Form.useForm();
   const roles = DataRole;
+  const accounts = DataAccount;
 
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [optionRole, setOptionRole] = useState<IRoleSelect[]>([]);
   const [selectedRole, setSelectedRole] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
@@ -45,31 +43,44 @@ const CreateAccount = () => {
     setSelectedStatus(value);
   };
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-  };
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
-  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPhone(event.target.value);
-  };
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
-  };
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
 
-  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUsername(event.target.value);
-  };
+  const handleUsernameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {};
 
-  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
-  };
+  const handlePasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {};
 
   const handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setConfirmPassword(event.target.value);
-  };
+  ) => {};
+
+  const getAccountByKey = useCallback(
+    (id: string) => {
+      const account = accounts.find((account) => account.key === id);
+      if (account) {
+        form.setFieldsValue({
+          name: account.name,
+          phone: account.phone,
+          email: account.email,
+          role: account.role.name,
+          username: account.username,
+          password: account.password,
+          confirmPassword: account.password,
+          status: account.status,
+        });
+      } else {
+        console.log(`Account with key ${id} not found`);
+      }
+    },
+    [form, accounts]
+  );
 
   useEffect(() => {
     if (roles) {
@@ -79,15 +90,18 @@ const CreateAccount = () => {
       }));
       setOptionRole(newRole);
     }
-  }, [roles]);
+    if (id) {
+      getAccountByKey(id);
+    }
+  }, [getAccountByKey, id, roles]);
 
   useEffect(() => {
     const data = [
       { title: "Cài đặt hệ thống" },
       { title: "Quản lý tài khoản", link: "cai-dat/quan-ly-tai-khoan" },
       {
-        title: "Thêm tài khoản",
-        link: "cai-dat/quan-ly-tai-khoan/them-tai-khoan",
+        title: "Cập nhật tài khoản",
+        link: `cai-dat/quan-ly-tai-khoan/cap-nhat/${id}`,
       },
     ];
 
@@ -95,12 +109,12 @@ const CreateAccount = () => {
       type: "UPDATE_BREADCRUMB_ITEMS",
       payload: { items: data },
     });
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <Layout className="account-layout">
       <Content>
-        <Form scrollToFirstError>
+        <Form form={form} scrollToFirstError>
           <Space direction="vertical" size={46} align="center">
             <div className="bg-white account-box_info shadow-box">
               <Typography.Text className="bold-20-20 orange-500">
@@ -122,7 +136,6 @@ const CreateAccount = () => {
                   >
                     <InputText
                       placeholder="Nhập họ tên"
-                      value={name}
                       onChange={handleNameChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -146,7 +159,6 @@ const CreateAccount = () => {
                   >
                     <InputText
                       placeholder="Nhập số điện thoại"
-                      value={phone}
                       onChange={handlePhoneChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -170,7 +182,6 @@ const CreateAccount = () => {
                   >
                     <InputText
                       placeholder="Nhập email"
-                      value={email}
                       onChange={handleEmailChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -189,11 +200,9 @@ const CreateAccount = () => {
                   >
                     <SelectArray
                       placeholder="Chọn vai trò"
-                      value={selectedRole}
                       options={optionRole}
                       onChange={handleRoleChange}
                       style={{ width: "100%" }}
-                      className="reg-16-16 gray-400"
                     />
                   </Form.Item>
                   <div className="required-rule red bold-20-20">
@@ -221,7 +230,6 @@ const CreateAccount = () => {
                   >
                     <InputText
                       placeholder="Nhập tên đăng nhập"
-                      value={username}
                       onChange={handleUsernameChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -240,7 +248,6 @@ const CreateAccount = () => {
                   >
                     <InputPassword
                       placeholder="Nhập mật khẩu"
-                      value={password}
                       onChange={handlePasswordChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -268,7 +275,6 @@ const CreateAccount = () => {
                   >
                     <InputPassword
                       placeholder="Nhập lại mật khẩu"
-                      value={confirmPassword}
                       onChange={handleConfirmPasswordChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -291,7 +297,6 @@ const CreateAccount = () => {
                       options={optionStatus}
                       onChange={handleStatusChange}
                       style={{ width: "100%" }}
-                      className="reg-16-16 gray-400"
                     />
                   </Form.Item>
                 </Col>
@@ -318,7 +323,7 @@ const CreateAccount = () => {
                     className="bg-orange-400 btn-action"
                   >
                     <Typography.Text className="white bold-16-16">
-                      Thêm
+                      Cập nhật
                     </Typography.Text>
                   </Button>
                 </Col>
@@ -331,4 +336,4 @@ const CreateAccount = () => {
   );
 };
 
-export default CreateAccount;
+export default UpdateAccount;

@@ -35,6 +35,9 @@ const AccountList = lazy(() => import("./pages/settings/account/accountList"));
 const CreateAccount = lazy(
   () => import("./pages/settings/account/createAccount")
 );
+const UpdateAccount = lazy(
+  () => import("./pages/settings/account/updateAccount")
+);
 
 function App() {
   return (
@@ -87,6 +90,7 @@ function App() {
               <Route path="quan-ly-tai-khoan" element={<Account />}>
                 <Route path="danh-sach" element={<AccountList />} />
                 <Route path="them-tai-khoan" element={<CreateAccount />} />
+                <Route path="cap-nhat/:id" element={<UpdateAccount />} />
               </Route>
             </Route>
           </Route>

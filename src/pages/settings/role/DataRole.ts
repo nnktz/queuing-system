@@ -11,7 +11,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@1",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -28,7 +28,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@2",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -45,7 +45,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@3",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "inactive",
         role: {
@@ -85,7 +85,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@4",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -102,7 +102,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@5",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -119,7 +119,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@6",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -136,7 +136,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@7",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "inactive",
         role: {
@@ -172,7 +172,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@8",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -189,7 +189,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@9",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -233,7 +233,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@10",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -250,7 +250,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@11",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -300,7 +300,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@12",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
@@ -317,7 +317,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@13",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "inactive",
         role: {
@@ -375,7 +375,7 @@ export const DataRole: RoleType[] = [
         name: "Nguyễn Văn A",
         username: "nguyenvana@14",
         password: "password@123",
-        email: "nguyenvana123gmail.com",
+        email: "nguyenvana123@gmail.com",
         phone: "0919256712",
         status: "active",
         role: {
