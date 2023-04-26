@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import "./Report.css";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Layout, Row, Space, Typography } from "antd";
 import DatePickerWithRange from "../../components/datePicker/DatePickerWithRange";
@@ -12,10 +12,13 @@ import { QueueType } from "../../models/Queue.type";
 import { DataQueue } from "../queue/DataQueue";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+import _debounce from "lodash/debounce";
 
 const { Content } = Layout;
-
-interface DataType {
+dayjs.extend(isBetween);
+interface IDataType {
   key: number;
   customer: string | null;
   service: string;
@@ -29,8 +32,11 @@ const Report = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [data, setData] = useState<DataType[]>([]);
+  const [data, setData] = useState<IDataType[]>([]);
   const [queues] = useState<QueueType[]>(DataQueue);
+  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
+  const [startDate, setStartDate] = useState(dayjs().startOf("day").toDate());
+  const [endDate, setEndDate] = useState(dayjs().endOf("day").toDate());
 
   const handleDownload = () => {
     const sheet = XLSX.utils.json_to_sheet(data);
@@ -46,18 +52,43 @@ const Report = () => {
     saveAs(excelBlob, "report.xlsx");
   };
 
+  const handleDateChange = (dates: any, dateStrings: [string, string]) => {
+    if (dates) {
+      setStartDate(dates[0].startOf("day").toDate());
+      setEndDate(dates[1].endOf("day").toDate());
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleDataFiltering = useCallback(
+    _debounce(() => {
+      const newData = data.filter((item) => {
+        const itemDate = dayjs(item.start_time);
+        return itemDate.isBetween(startDate, endDate, null, "[]");
+      });
+      setFilteredData(newData.length > 0 ? newData : []);
+    }, 300),
+    [data, startDate, endDate]
+  );
+
   useEffect(() => {
-    const newData: DataType[] = queues.map((queue) => ({
-      key: queue.id,
-      customer: queue.customer?.name ?? null,
-      service: queue.service.name,
-      start_time: queue.start_time,
-      end_time: queue.end_time,
-      device: queue.device.name,
-      status: queue.status,
-    }));
-    setData(newData);
+    if (queues) {
+      const newData: IDataType[] = queues.map((queue) => ({
+        key: queue.id,
+        customer: queue.customer?.name ?? null,
+        service: queue.service.name,
+        start_time: queue.start_time,
+        end_time: queue.end_time,
+        device: queue.device.name,
+        status: queue.status,
+      }));
+      setData(newData);
+    }
   }, [queues]);
+
+  useEffect(() => {
+    handleDataFiltering();
+  }, [handleDataFiltering]);
 
   useEffect(() => {
     const data = [
@@ -88,14 +119,17 @@ const Report = () => {
                 Chọn thời gian
               </Typography.Text>
 
-              <DatePickerWithRange className="report-date-picker_range" />
+              <DatePickerWithRange
+                className="report-date-picker_range"
+                onChange={handleDateChange}
+              />
             </Space>
           </Row>
           <Row>
             <Space size={24} align="start">
               <ProTable
                 tableClassName="report-table pink-shadow"
-                dataSource={data}
+                dataSource={filteredData.length > 0 ? filteredData : data}
                 columns={columns}
                 pagination={{
                   pageSize: 10,

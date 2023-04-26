@@ -38,6 +38,7 @@ const CreateAccount = lazy(
 const UpdateAccount = lazy(
   () => import("./pages/settings/account/updateAccount")
 );
+const AuditLog = lazy(() => import("./pages/settings/auditLog"));
 
 function App() {
   return (
@@ -92,6 +93,7 @@ function App() {
                 <Route path="them-tai-khoan" element={<CreateAccount />} />
                 <Route path="cap-nhat/:id" element={<UpdateAccount />} />
               </Route>
+              <Route path="nhat-ky-hoat-dong" element={<AuditLog />} />
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />

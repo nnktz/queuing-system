@@ -234,7 +234,7 @@ export const DataQueue: QueueType[] = [
       status_active: "active",
       queue: [],
     },
-    start_time: new Date("2021-11-07T14:35:00"),
+    start_time: new Date("2021-11-08T14:35:00"),
     end_time: new Date("2021-11-12T14:35:00"),
     status: "absent",
     device: {

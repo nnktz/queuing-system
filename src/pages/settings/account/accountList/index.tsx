@@ -107,7 +107,10 @@ const AccountList = () => {
   useEffect(() => {
     const data = [
       { title: "Cài đặt hệ thống" },
-      { title: "Quản lý tài khoản", link: "cai-dat/quan-ly-tai-khoan" },
+      {
+        title: "Quản lý tài khoản",
+        link: "cai-dat/quan-ly-tai-khoan/danh-sach",
+      },
     ];
 
     dispatch({
@@ -122,11 +125,10 @@ const AccountList = () => {
         <Space size={16} direction="vertical">
           <Space size={512}>
             <Col>
-              <Row>
-                <Typography.Text className="semi-16-16 gray-500">
-                  Tên vai trò
-                </Typography.Text>
-              </Row>
+              <Typography.Text className="semi-16-16 gray-500">
+                Tên vai trò
+              </Typography.Text>
+
               <Row>
                 <DropDownArray
                   options={optionRole}
@@ -138,21 +140,18 @@ const AccountList = () => {
             </Col>
 
             <Col>
-              <Row>
-                <Typography.Text className="semi-16-16 gray-500">
-                  Từ khoá
-                </Typography.Text>
-              </Row>
-              <Row>
-                <InputText
-                  placeholder="Nhập từ khoá"
-                  iconSuffix={<SearchOutlined className="orange-500" />}
-                  className="reg-16-16"
-                  style={{ gap: 0, width: 300 }}
-                  onChange={handleSearchChange}
-                  value={search}
-                />
-              </Row>
+              <Typography.Text className="semi-16-16 gray-500">
+                Từ khoá
+              </Typography.Text>
+
+              <InputText
+                placeholder="Nhập từ khoá"
+                iconSuffix={<SearchOutlined className="orange-500" />}
+                className="reg-16-16"
+                style={{ gap: 0, width: 300 }}
+                onChange={handleSearchChange}
+                value={search}
+              />
             </Col>
           </Space>
 
@@ -162,7 +161,7 @@ const AccountList = () => {
                 columns={columns}
                 dataSource={filteredData.length > 0 ? filteredData : data}
                 pagination={{ pageSize: 9 }}
-                className="table-account-list shadow-box"
+                className="table-account-list"
               />
             </Col>
             <Col>

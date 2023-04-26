@@ -87,9 +87,9 @@ const menuItems = [
         ),
       },
       {
-        key: "user log",
+        key: "audit log",
         label: (
-          <Link to="cai-dat/nhat-ky-nguoi-dung" className="gray-300 semi-16-16">
+          <Link to="cai-dat/nhat-ky-hoat-dong" className="gray-300 semi-16-16">
             Nhật ký người dùng
           </Link>
         ),

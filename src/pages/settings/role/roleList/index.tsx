@@ -55,7 +55,7 @@ const RoleList = () => {
   useEffect(() => {
     const data = [
       { title: "Cài đặt hệ thống" },
-      { title: "Quản lý vai trò", link: "cai-dat/quan-ly-vai-tro" },
+      { title: "Quản lý vai trò", link: "cai-dat/quan-ly-vai-tro/danh-sach" },
     ];
 
     dispatch({

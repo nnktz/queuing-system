@@ -1,0 +1,114 @@
+.audit-log_layout {
+  position: absolute;
+  left: 224px;
+  top: 104px;
+}
+
+.adit-log_date-picker__range {
+  height: 44px;
+  border-radius: 8px;
+  z-index: 1 !important;
+}
+
+.table-adit-log {
+  width: 1112px;
+  max-height: 539px;
+}
+
+.audit-log_username {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 49px;
+}
+
+.audit-log_ip {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 85px;
+  height: 49px;
+}
+
+.audit-log_time {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 130px;
+  height: 49px;
+}
+
+.audit-log_note {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 49px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-tbody
+  > tr
+  > td {
+  padding: 0 0 0 17px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-table-wrapper
+  .ant-table-thead
+  > tr
+  > th {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: #ffffff;
+  background: #ff9138;
+  padding-right: 0;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active
+  a {
+  color: #ffffff !important;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active {
+  background-color: #ff7506;
+  border-color: transparent;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item-active:hover {
+  border-color: transparent;
+  opacity: 0.8;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-pagination
+  .ant-pagination-item
+  a {
+  color: #7e7d88;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  gap: 10px;
+}

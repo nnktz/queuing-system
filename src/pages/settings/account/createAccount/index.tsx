@@ -193,7 +193,6 @@ const CreateAccount = () => {
                       options={optionRole}
                       onChange={handleRoleChange}
                       style={{ width: "100%" }}
-                      className="reg-16-16 gray-400"
                     />
                   </Form.Item>
                   <div className="required-rule red bold-20-20">
@@ -291,7 +290,6 @@ const CreateAccount = () => {
                       options={optionStatus}
                       onChange={handleStatusChange}
                       style={{ width: "100%" }}
-                      className="reg-16-16 gray-400"
                     />
                   </Form.Item>
                 </Col>
