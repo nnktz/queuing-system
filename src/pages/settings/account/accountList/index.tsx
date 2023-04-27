@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Col, Layout, Row, Space, Table, Typography } from "antd";
 import "./AccountList.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import AddSquare from "../../../../assets/icons/add-square.svg";
 import ButtonCustom from "../../../../components/button/buttonCustom";
 import { SearchOutlined } from "@ant-design/icons";
@@ -11,6 +12,7 @@ import { DropDownArray } from "../../../../components/dropdown";
 import { DataRole } from "../../role/DataRole";
 import { DataAccount } from "../DataAccount";
 import columns from "./ColumnDataAccount";
+import _debounce from "lodash/debounce";
 
 const { Content } = Layout;
 
@@ -64,23 +66,33 @@ const AccountList = () => {
     navigate("/cai-dat/quan-ly-tai-khoan/them-tai-khoan");
   };
 
+  const handleFiltering = useCallback(
+    _debounce(() => {
+      const newData = data.filter((item) => {
+        if (selectedValues.role) {
+          return (
+            (selectedValues.role === "all" ||
+              item.role === selectedValues.role) &&
+            item.username
+              .toString()
+              .toLowerCase()
+              .includes(search.toLowerCase())
+          );
+        } else {
+          return item.username
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        }
+      });
+      setFilteredData(newData.length > 0 ? newData : []);
+    }, 300),
+    [data, search, selectedValues.role]
+  );
+
   useEffect(() => {
-    const newData = data.filter((item) => {
-      if (selectedValues.role) {
-        return (
-          (selectedValues.role === "all" ||
-            item.role === selectedValues.role) &&
-          item.username.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else {
-        return item.username
-          .toString()
-          .toLowerCase()
-          .includes(search.toLowerCase());
-      }
-    });
-    setFilteredData(newData.length > 0 ? newData : []);
-  }, [selectedValues, data, search]);
+    handleFiltering();
+  }, [handleFiltering]);
 
   useEffect(() => {
     if (roles) {

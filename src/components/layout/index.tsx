@@ -1,8 +1,18 @@
 import Menubar from "../menubar";
 import menuItems from "../menubar/MenuItem";
 import TopBar from "../topbar";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 import { Layout as LayoutAntd } from "antd";
+import { useDispatch } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../core/state/store";
+import { AuthAction } from "../../core/state/action-type/auth.type";
+import { useEffect } from "react";
+import {
+  getUserFromLocalStorage,
+  setLoading,
+} from "../../core/state/actions/authActions";
+import { COLLECTIONS } from "../../core/constants";
 
 const LayoutStyles = {
   position: "relative",
@@ -13,10 +23,16 @@ const LayoutStyles = {
 
 const Layout = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const currentPath = window.location.pathname;
   let defaultSelectedKey = "";
 
   switch (currentPath) {
+    case "/":
+      defaultSelectedKey = "dashboard";
+      break;
     case "/dashboard":
       defaultSelectedKey = "dashboard";
       break;
@@ -93,6 +109,21 @@ const Layout = () => {
       defaultSelectedKey = "";
       break;
   }
+
+  useEffect(() => {
+    authDispatch(setLoading(true));
+    authDispatch(getUserFromLocalStorage());
+    const user = localStorage.getItem(COLLECTIONS.USERS);
+    if (user) {
+      if (window.location.pathname === "/") {
+        authDispatch(setLoading(false));
+        navigate("dashboard/ngay");
+      }
+    } else {
+      authDispatch(setLoading(false));
+      navigate("dang-nhap");
+    }
+  }, [authDispatch, navigate]);
 
   return (
     <LayoutAntd style={LayoutStyles}>

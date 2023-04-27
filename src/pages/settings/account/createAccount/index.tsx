@@ -12,6 +12,14 @@ import {
 import { DataRole } from "../../role/DataRole";
 import { optionStatus } from "../../../../components/dropdown/ItemDropdown";
 import InputPassword from "../../../../components/inputs/password";
+import MyAlert from "../../../../components/alert";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../../core/state/store";
+import { setError, signup } from "../../../../core/state/actions/authActions";
+import { ThunkDispatch } from "redux-thunk";
+import { AuthAction } from "../../../../core/state/action-type/auth.type";
+import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import { RoleUser } from "../../../../core/state/action-type/role.type";
 
 const { Content } = Layout;
 
@@ -24,7 +32,11 @@ const CreateAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const roles = DataRole;
+  const { error } = useSelector((state: RootState) => state.auth);
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
 
+  const [success, setSuccess] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -33,12 +45,15 @@ const CreateAccount = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [optionRole, setOptionRole] = useState<IRoleSelect[]>([]);
   const [selectedRole, setSelectedRole] = useState("");
+  const [role, setRole] = useState<RoleUser>();
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const roleKey = event.target.value as string;
     setSelectedRole(roleKey);
-    console.log(selectedRole);
+    const selectedRole = roles.find((role) => role.key === roleKey);
+    setRole(selectedRole);
   };
 
   const handleStatusChange = (value: string) => {
@@ -71,6 +86,56 @@ const CreateAccount = () => {
     setConfirmPassword(event.target.value);
   };
 
+  // const onFinish = async (values: IFormValues) => {
+  //   const { name, username, password, phone, email, role, status } = values;
+
+  //   try {
+  //     const response = await db.firestore().collection(COLLECTIONS.USERS).add({
+  //       name,
+  //       username,
+  //       password,
+  //       phone,
+  //       email,
+  //       role,
+  //       status,
+  //     });
+  //     setSuccess("Thành công");
+  //     console.log(response);
+  //   } catch (error) {
+  //     setError("Thất bại");
+  //     console.error("Lỗi khi thêm người dùng", error);
+  //   }
+  // };
+
+  const submitHandler = () => {
+    setLoading(true);
+    authDispatch(
+      signup(
+        {
+          username,
+          email,
+          password,
+          name,
+          phone,
+          status: selectedStatus,
+          role: role,
+        },
+        () => {
+          setLoading(false);
+          setSuccess("Thêm thành công");
+        }
+      )
+    );
+  };
+
+  useEffect(() => {
+    return () => {
+      if (error) {
+        authDispatch(setError(""));
+      }
+    };
+  }, [authDispatch, error]);
+
   useEffect(() => {
     if (roles) {
       const newRole: IRoleSelect[] = roles.map((role) => ({
@@ -91,16 +156,21 @@ const CreateAccount = () => {
       },
     ];
 
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
+    dispatch(updateBreadcrumbItems(data));
   }, [dispatch]);
 
   return (
     <Layout className="account-layout">
       <Content>
-        <Form scrollToFirstError>
+        {success && (
+          <MyAlert
+            message={success}
+            type="success"
+            onclose={() => setSuccess("")}
+          />
+        )}
+        {error && <MyAlert message={error} type="error" />}
+        <Form scrollToFirstError onFinish={submitHandler}>
           <Space direction="vertical" size={46} align="center">
             <div className="bg-white account-box_info shadow-box">
               <Typography.Text className="bold-20-20 orange-500">
@@ -314,9 +384,10 @@ const CreateAccount = () => {
                   <Button
                     htmlType="submit"
                     className="bg-orange-400 btn-action"
+                    isDisable={loading}
                   >
                     <Typography.Text className="white bold-16-16">
-                      Thêm
+                      {loading ? "Loading..." : "Thêm"}
                     </Typography.Text>
                   </Button>
                 </Col>

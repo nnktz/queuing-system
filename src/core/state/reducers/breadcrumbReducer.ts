@@ -1,7 +1,7 @@
 import { BreadcrumbType } from "../action-type/breadcrumb.type";
 import { BreadcrumbActionTypes } from "../actions/breadcrumbActions";
 
-export interface BreadcrumbState {
+interface BreadcrumbState {
   items: BreadcrumbType[];
 }
 

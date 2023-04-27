@@ -27,11 +27,9 @@
 
 .noti-icon {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  font-size: 20px;
   left: 6px;
   top: 6px;
-  color: #ffac6a;
 }
 
 .topbar-info {
@@ -45,10 +43,12 @@
 
 .group-296 {
   position: absolute;
-  width: 124px;
+  width: 150px;
   height: 42px;
   left: 48px;
   top: 0px;
+  display: flex;
+  flex-direction: column;
 }
 
 .small-avatar {
@@ -58,21 +58,6 @@
   right: 132px;
   top: 0px;
   border-radius: 48px;
-}
-
-.name {
-  position: absolute;
-  height: 24px;
-  right: 0px;
-  top: 18px;
-}
-
-.hello {
-  position: absolute;
-  width: 47px;
-  height: 18px;
-  right: 77px;
-  top: 0px;
 }
 
 .breadcrumb {

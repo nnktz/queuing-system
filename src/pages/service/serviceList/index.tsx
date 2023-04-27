@@ -11,7 +11,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import AddSquare from "../../../assets/icons/add-square.svg";
 import columns from "./ColumnDataService";
-import { ServiceType } from "../../../models/Service.type";
+import { ServiceType } from "../../../core/models/Service.type";
 import { DataService } from "../DataService";
 
 interface SelectedValues {

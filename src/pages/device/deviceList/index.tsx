@@ -12,7 +12,7 @@ import { SearchOutlined } from "@ant-design/icons";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import AddSquare from "../../../assets/icons/add-square.svg";
 import { useNavigate } from "react-router-dom";
-import { DeviceType } from "../../../models/Device.type";
+import { DeviceType } from "../../../core/models/Device.type";
 import { DataDevice } from "../DataDevice";
 import columns from "./ColumnDataDevice";
 

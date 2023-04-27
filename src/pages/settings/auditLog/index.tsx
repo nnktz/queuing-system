@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch } from "react-redux";
 import "./AuditLog.css";
 import { useCallback, useEffect, useState } from "react";
@@ -43,7 +44,6 @@ const AuditLog = () => {
     }
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearchFiltering = useCallback(
     _debounce(() => {
       let newData = data;
@@ -59,7 +59,6 @@ const AuditLog = () => {
     [data, search]
   );
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleDateFiltering = useCallback(
     _debounce(() => {
       let newData = data;

@@ -1,4 +1,4 @@
-import { ServiceType } from "../../models/Service.type";
+import { ServiceType } from "../../core/models/Service.type";
 
 export const DataService: ServiceType[] = [
   {

@@ -4,11 +4,12 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { RoleType } from "../../../../models/Role.type";
+import { Role } from "../../../../core/models/Role.type";
 import { DataRole } from "../DataRole";
 import ButtonCustom from "../../../../components/button/buttonCustom";
 import AddSquare from "../../../../assets/icons/add-square.svg";
 import columns from "./ColumnDataRole";
+import _debounce from "lodash/debounce";
 
 interface DataType {
   key: string;
@@ -23,15 +24,15 @@ const RoleList = () => {
 
   const [search, setSearch] = useState("");
   const [data, setData] = useState<DataType[]>([]);
-  const [roles] = useState<RoleType[]>(DataRole);
+  // const [roles] = useState<Role[]>(DataRole);
   const [filteredData, setFilteredData] = useState<DataType[]>(data);
 
-  const handleSearch = (value: string) => {
+  const handleSearch = _debounce((value: string) => {
     const filtered = data.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())
     );
     setFilteredData(filtered);
-  };
+  }, 300);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -42,15 +43,15 @@ const RoleList = () => {
     navigate("/cai-dat/quan-ly-vai-tro/them-vai-tro");
   };
 
-  useEffect(() => {
-    const newData: DataType[] = roles.map((role) => ({
-      key: role.key,
-      name: role.name,
-      quantity: role.user.length,
-      describe: role.describe,
-    }));
-    setData(newData);
-  }, [roles]);
+  // useEffect(() => {
+  //   const newData: DataType[] = roles.map((role) => ({
+  //     key: role.key,
+  //     name: role.name,
+  //     quantity: role.user.length,
+  //     describe: role.describe,
+  //   }));
+  //   setData(newData);
+  // }, [roles]);
 
   useEffect(() => {
     const data = [

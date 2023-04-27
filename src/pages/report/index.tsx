@@ -8,7 +8,7 @@ import ProTable from "@ant-design/pro-table";
 import ButtonCustom from "../../components/button/buttonCustom";
 import Download from "../../assets/icons/document-download.svg";
 import columns from "./ColumnDataReport";
-import { QueueType } from "../../models/Queue.type";
+import { QueueType } from "../../core/models/Queue.type";
 import { DataQueue } from "../queue/DataQueue";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";

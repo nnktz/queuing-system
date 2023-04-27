@@ -1,12 +1,12 @@
-import { RoleType } from "./Role.type";
+import { Role } from "./Role.type";
 
 export interface UserType {
   key: string;
   name: string;
   username: string;
-  phone: string;
   password: string;
+  phone: string;
   email: string;
-  role: RoleType;
+  role: Role;
   status: string;
 }

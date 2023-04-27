@@ -1,7 +1,7 @@
 import { Typography } from "antd";
 import "./DetailDevice.css";
 import { DataDevice } from "../DataDevice";
-import { DeviceType } from "../../../models/Device.type";
+import { DeviceType } from "../../../core/models/Device.type";
 import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";

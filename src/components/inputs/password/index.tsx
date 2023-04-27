@@ -8,6 +8,7 @@ interface Props {
   className?: string;
   placeholder?: string;
   style?: React.CSSProperties;
+  isRequired?: boolean;
 }
 
 const InputPassword: React.FC<Props> = ({
@@ -17,6 +18,7 @@ const InputPassword: React.FC<Props> = ({
   placeholder,
   className,
   style,
+  isRequired,
 }) => {
   return (
     <Input.Password
@@ -26,6 +28,7 @@ const InputPassword: React.FC<Props> = ({
       onChange={onChange}
       placeholder={placeholder}
       style={style}
+      required={isRequired}
     />
   );
 };

@@ -1,10 +1,12 @@
+import { User } from "../state/action-type/auth.type";
 import { PermissionType } from "./Permission.type";
-import { UserType } from "./User.type";
 
-export interface RoleType {
+export interface Role {
   key: string;
   name: string;
   describe: string;
-  user: UserType[];
+  user: User[] | null;
   permission: PermissionType[];
+  createAt?: any;
+  updateAt?: any;
 }

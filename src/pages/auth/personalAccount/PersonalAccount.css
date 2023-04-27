@@ -94,12 +94,13 @@
 
 .name-below-avatar {
   position: absolute;
-  width: 186px;
+  width: 100%;
   height: 36px;
-  left: 40px;
   top: 265px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .box-avatar {
@@ -124,8 +125,8 @@
   position: absolute;
   width: 30px;
   height: 30px;
-  left: 9px;
-  top: 9px;
+  left: 7px;
+  top: 7px;
   z-index: 1;
 }
 

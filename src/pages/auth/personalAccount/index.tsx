@@ -1,38 +1,19 @@
 import { Typography } from "antd";
-import InputText from "../../components/inputs/text";
-import { UserType } from "../../models/User.type";
+import InputText from "../../../components/inputs/text";
 import "./PersonalAccount.css";
-import Camera from "../../assets/icons/camera.svg";
+import Camera from "../../../assets/icons/camera.svg";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { updateBreadcrumbItems } from "../../../core/state/actions/breadcrumbActions";
+import { RootState } from "../../../core/state/store";
 
 const PersonalAccount = () => {
   const dispatch = useDispatch();
-
-  const person: UserType = {
-    key: "user",
-    name: "Lê Quỳnh Ái Vân",
-    username: "lequynhhaivan01",
-    phone: "0767375921",
-    password: "311940211",
-    email: "adminSSO1@domain.com",
-    role: {
-      key: "role1",
-      name: "Kế toán",
-      describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
-      user: [],
-      permission: [],
-    },
-    status: "active",
-  };
+  const { user } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const data = [{ title: "Thông tin cá nhân", link: "tai-khoan-ca-nhan" }];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
+    dispatch(updateBreadcrumbItems(data));
   }, [dispatch]);
 
   return (
@@ -45,7 +26,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.name}
+          value={user?.name}
           className="fill fill-username-name"
         />
       </div>
@@ -58,7 +39,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.username}
+          value={user?.username}
           className="fill fill-username-name"
         />
       </div>
@@ -71,7 +52,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.phone}
+          value={user?.phone}
           className="fill fill-phone-password"
         />
       </div>
@@ -84,7 +65,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.password}
+          value={user?.password}
           className="fill fill-phone-password"
         />
       </div>
@@ -97,7 +78,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.email}
+          value={user?.email}
           className="fill fill-email-role"
         />
       </div>
@@ -110,14 +91,14 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={person.role.name}
+          value={user?.role?.name}
           className="fill fill-email-role"
         />
       </div>
 
       <div className="info-avatar">
         <Typography.Text className="bold-24-24 gray-500 name-below-avatar">
-          {person.name}
+          {user?.name}
         </Typography.Text>
         <div className="box-avatar">
           <div className="camera">

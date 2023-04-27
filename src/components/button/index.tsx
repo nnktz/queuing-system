@@ -14,6 +14,7 @@ type ButtonProps = {
     | "primary"
     | "dashed"
     | undefined;
+  isDisable?: boolean;
 };
 
 const Button = ({
@@ -23,6 +24,7 @@ const Button = ({
   htmlType,
   style,
   type,
+  isDisable,
 }: ButtonProps) => {
   return (
     <AntButton
@@ -31,6 +33,7 @@ const Button = ({
       className={className}
       style={style}
       type={type}
+      disabled={isDisable}
     >
       {children}
     </AntButton>

@@ -6,7 +6,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import { DataQueue } from "../DataQueue";
-import { QueueType } from "../../../models/Queue.type";
+import { QueueType } from "../../../core/models/Queue.type";
 import { format } from "date-fns";
 
 const DetailQueue = () => {

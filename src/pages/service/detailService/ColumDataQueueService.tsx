@@ -1,7 +1,7 @@
 import { ColumnsType } from "antd/es/table";
 import { Typography } from "antd";
 import "./DetailService.css";
-import { QueueType } from "../../../models/Queue.type";
+import { QueueType } from "../../../core/models/Queue.type";
 
 const columns: ColumnsType<QueueType> = [
   {

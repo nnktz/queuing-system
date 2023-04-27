@@ -4,11 +4,19 @@ import { Menu, Typography } from "antd";
 import "./Menubar.css";
 import Button from "../button";
 import { MenuProps } from "./Menu.type";
+import { useDispatch } from "react-redux";
+import { RootState } from "../../core/state/store";
+import { signout } from "../../core/state/actions/authActions";
+import { ThunkDispatch } from "redux-thunk";
+import { AuthAction } from "../../core/state/action-type/auth.type";
 import { useNavigate } from "react-router-dom";
 
 const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {
+  const dispatch = useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const navigate = useNavigate();
-  const handleLogout = () => {
+
+  const handleLogout = async () => {
+    await dispatch(signout());
     navigate("/dang-nhap");
   };
 

@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import { Spin } from "antd";
 
-const Login = lazy(() => import("./pages/login"));
-const ForgotPassword = lazy(() => import("./pages/forgotPassword"));
+const Login = lazy(() => import("./pages/auth/login"));
+const ForgotPassword = lazy(() => import("./pages/auth/forgotPassword"));
 const Layout = lazy(() => import("./components/layout"));
 const NotFound = lazy(() => import("./pages/404"));
-const PersonalAccount = lazy(() => import("./pages/personalAccount"));
+const PersonalAccount = lazy(() => import("./pages/auth/personalAccount"));
 const DashBoard = lazy(() => import("./pages/dashboard"));
 const Weeks = lazy(() => import("./pages/dashboard/weeks"));
 const Days = lazy(() => import("./pages/dashboard/days"));

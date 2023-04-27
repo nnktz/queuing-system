@@ -6,14 +6,14 @@ import { Col, Divider, Row, Space, Table, Typography } from "antd";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import EditSquare from "../../../assets/icons/Edit Square.svg";
 import BackSquare from "../../../assets/icons/back-square.svg";
-import { ServiceType } from "../../../models/Service.type";
+import { ServiceType } from "../../../core/models/Service.type";
 import { DataService } from "../DataService";
 import InputText from "../../../components/inputs/text";
 import { DropDownStatus } from "../../../components/dropdown";
 import { optionStatusServiceQueue } from "../../../components/dropdown/ItemDropdown";
 import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
 import { SearchOutlined } from "@ant-design/icons";
-import { QueueType } from "../../../models/Queue.type";
+import { QueueType } from "../../../core/models/Queue.type";
 import columns from "./ColumDataQueueService";
 
 interface SelectedValues {

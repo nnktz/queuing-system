@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./QueueList.css";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { QueueType } from "../../../models/Queue.type";
+import { QueueType } from "../../../core/models/Queue.type";
 import { DataQueue } from "../DataQueue";
 import { Col, Row, Space, Table, Typography } from "antd";
 import columns from "./ColumnDataQueue";

@@ -11,6 +11,7 @@ interface Props {
   placeholder?: string;
   iconSuffix?: React.ReactNode;
   style?: React.CSSProperties;
+  isRequired?: boolean;
 }
 
 const InputText: React.FC<Props> = ({
@@ -23,6 +24,7 @@ const InputText: React.FC<Props> = ({
   placeholder,
   iconSuffix,
   style,
+  isRequired,
 }) => {
   return (
     <Input
@@ -35,6 +37,7 @@ const InputText: React.FC<Props> = ({
       placeholder={placeholder}
       suffix={iconSuffix}
       style={style}
+      required={isRequired}
     />
   );
 };

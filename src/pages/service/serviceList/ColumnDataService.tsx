@@ -1,5 +1,5 @@
 import { ColumnsType } from "antd/es/table";
-import { ServiceType } from "../../../models/Service.type";
+import { ServiceType } from "../../../core/models/Service.type";
 import { Typography } from "antd";
 import "./ServiceList.css";
 
