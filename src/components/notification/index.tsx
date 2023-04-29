@@ -49,6 +49,7 @@ const NotificationPopover = (props: { children: React.ReactNode }) => {
       trigger="click"
       placement="bottomRight"
       arrow={false}
+      destroyTooltipOnHide
       content={
         <List
           dataSource={notifications}

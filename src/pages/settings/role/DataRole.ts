@@ -5,7 +5,7 @@ export const DataRole: RoleUser[] = [
     key: "role1",
     name: "Kế toán",
     describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
-    permission: [
+    permissions: [
       {
         key: "groupA",
         name: "Nhóm chức năng A",
@@ -27,7 +27,7 @@ export const DataRole: RoleUser[] = [
     name: "Bác sĩ",
     describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
 
-    permission: [
+    permissions: [
       {
         key: "groupB",
         name: "Nhóm chức năng B",
@@ -45,7 +45,7 @@ export const DataRole: RoleUser[] = [
     name: "Lễ tân",
     describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
 
-    permission: [
+    permissions: [
       {
         key: "groupB",
         name: "Nhóm chức năng B",
@@ -71,7 +71,7 @@ export const DataRole: RoleUser[] = [
     name: "Quản lý",
     describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
 
-    permission: [
+    permissions: [
       {
         key: "groupA",
         name: "Nhóm chức năng A",
@@ -103,7 +103,7 @@ export const DataRole: RoleUser[] = [
     name: "Admin",
     describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
 
-    permission: [
+    permissions: [
       {
         key: "groupA",
         name: "Nhóm chức năng A",
@@ -143,7 +143,7 @@ export const DataRole: RoleUser[] = [
     name: "Super admin",
     describe: "Thực hiện nhiệm vụ về thống kê số liệu và tổng hợp số liệu",
 
-    permission: [
+    permissions: [
       {
         key: "groupA",
         name: "Nhóm chức năng A",

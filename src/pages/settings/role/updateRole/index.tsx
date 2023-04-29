@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useDispatch, useSelector } from "react-redux";
 import "../insertRole/InsertRole.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -6,27 +7,56 @@ import { Checkbox, Col, Form, Layout, Row, Space, Typography } from "antd";
 import InputText from "../../../../components/inputs/text";
 import InputTextArea from "../../../../components/inputs/textArea";
 import Button from "../../../../components/button";
-import { groupRole } from "../insertRole/DataPermission";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
-import { DataRole } from "../DataRole";
+import { RootState } from "../../../../core/state/store";
+import { RoleAction } from "../../../../core/state/action-type/role.type";
+import { ThunkDispatch } from "redux-thunk";
+import {
+  getRoleByKey,
+  updateRole,
+} from "../../../../core/state/actions/roleAtions";
+import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import MyAlert from "../../../../components/alert";
+import {
+  setError,
+  setSuccess,
+} from "../../../../core/state/actions/authActions";
+import { AuthAction } from "../../../../core/state/action-type/auth.type";
 
 const { Content } = Layout;
+
+type CheckedGroup = { [key: string]: string[] };
 
 const UpdateRole = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
   const [form] = Form.useForm();
-  const roles = DataRole;
+  const { permissions, role } = useSelector((state: RootState) => state.role);
+  const { error, success } = useSelector((state: RootState) => state.auth);
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const permissionData =
+    permissions.map((permission) => permission.items) || [];
 
-  const checkedGroupRef = useRef<{ [key: string]: string[] }>({});
-  const [checkedGroup, setCheckedGroup] = useState<{ [key: string]: string[] }>(
-    {}
+  const checkedGroupRef = useRef<CheckedGroup>(
+    permissions.reduce((acc, permission) => {
+      acc[permission.key] = [];
+      return acc;
+    }, {} as CheckedGroup)
+  );
+  const [checkedGroup, setCheckedGroup] = useState<CheckedGroup>(
+    permissions.reduce((acc, permission) => {
+      acc[permission.key] = [];
+      return acc;
+    }, {} as CheckedGroup)
   );
   const [checkedAllGroup, setCheckedAllGroup] = useState<boolean[]>(
-    groupRole.map(() => false)
+    permissions.map(() => false)
   );
-  const dataGroup = groupRole.map((role) => role.items) || [];
+  const [loading, setLoading] = useState(false);
 
   const handleCheckAllGroup = (groupIndex: number, checked: boolean) => {
     const newCheckedAllGroup = [...checkedAllGroup];
@@ -35,14 +65,13 @@ const UpdateRole = () => {
 
     const newCheckedGroup = { ...checkedGroup };
     if (checked) {
-      newCheckedGroup[groupRole[groupIndex].key] = dataGroup[groupIndex].map(
-        (item) => item.value
-      );
+      newCheckedGroup[permissions[groupIndex].key] = permissionData[
+        groupIndex
+      ].map((item) => item.value);
     } else {
-      delete newCheckedGroup[groupRole[groupIndex].key];
+      delete newCheckedGroup[permissions[groupIndex].key];
     }
     setCheckedGroup(newCheckedGroup);
-    console.log(checkedGroup);
   };
 
   const handleCheckedGroup = (
@@ -51,13 +80,12 @@ const UpdateRole = () => {
   ) => {
     const newCheckedAllGroup = [...checkedAllGroup];
     newCheckedAllGroup[groupIndex] =
-      checkedValues.length === dataGroup[groupIndex].length;
+      checkedValues.length === permissionData[groupIndex].length;
     setCheckedAllGroup(newCheckedAllGroup);
 
     const newCheckedGroup = { ...checkedGroup };
-    newCheckedGroup[groupRole[groupIndex].key] = checkedValues as string[];
+    newCheckedGroup[permissions[groupIndex].key] = checkedValues as string[];
     setCheckedGroup(newCheckedGroup);
-    console.log(checkedGroup);
   };
 
   const handleNameRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,35 +98,94 @@ const UpdateRole = () => {
     form.setFieldValue("describe", event.target.value);
   };
 
-  const getRoleByKey = useCallback(
-    (id: string) => {
-      const role = roles.find((role) => role.key === id);
-      if (role) {
-        form.setFieldsValue({
-          name: role.name,
-          describe: role.describe,
-          permission: role.permission.map((permission) => permission.key),
-        });
-        const newCheckedGroup = { ...checkedGroupRef.current };
-        role.permission.forEach((permission) => {
-          newCheckedGroup[permission.key] = permission.items.map(
-            (item) => item.value
-          );
-        });
-        checkedGroupRef.current = newCheckedGroup;
-      } else {
-        console.log(`Role with key ${id} not found`);
+  const submitHandler = async () => {
+    setLoading(true);
+    const newPermissions = permissions.map((permission) => {
+      return {
+        key: permission.key,
+        name: permission.name,
+        items: permission.items.filter((item) =>
+          checkedGroup[permission.key]?.includes(item.value)
+        ),
+      };
+    });
+    try {
+      if (id) {
+        await roleDispatch(
+          updateRole(
+            id,
+            {
+              name: form.getFieldValue("name"),
+              describe: form.getFieldValue("describe"),
+              permissions: newPermissions,
+            },
+            () => setLoading(false)
+          )
+        );
+        setTimeout(() => {
+          navigate("..");
+        }, 1000);
       }
-    },
-    [form, roles]
-  );
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const setDataRole = useCallback(() => {
+    if (role) {
+      const selectedPermissions = role.permissions?.map(
+        (permission) => permission.key
+      );
+      form.setFieldsValue({
+        name: role.name,
+        describe: role.describe,
+        permission: selectedPermissions,
+      });
+
+      const newCheckedGroup = { ...checkedGroupRef.current };
+      role.permissions?.forEach((permission) => {
+        newCheckedGroup[permission.key] = permission.items?.map(
+          (item) => item.value
+        );
+      });
+      checkedGroupRef.current = newCheckedGroup;
+      setCheckedGroup(newCheckedGroup);
+    }
+  }, [role]);
 
   useEffect(() => {
     if (id) {
-      getRoleByKey(id);
-      setCheckedGroup(checkedGroupRef.current);
+      roleDispatch(getRoleByKey(id));
     }
-  }, [getRoleByKey, id]);
+  }, [id, roleDispatch]);
+
+  useEffect(() => {
+    setDataRole();
+    setCheckedGroup(checkedGroupRef.current);
+  }, [setDataRole]);
+
+  useEffect(() => {
+    const newCheckedAllGroup = checkedGroup
+      ? permissions.map((permission) => {
+          const group = checkedGroup[permission.key];
+          return group && group.length === permission.items?.length;
+        })
+      : checkedAllGroup;
+
+    setCheckedAllGroup(newCheckedAllGroup);
+  }, [checkedGroup, permissions]);
+
+  useEffect(() => {
+    return () => {
+      if (error) {
+        authDispatch(setError(""));
+      }
+      if (success) {
+        authDispatch(setSuccess(""));
+      }
+    };
+  }, [authDispatch, error, success]);
 
   useEffect(() => {
     const data = [
@@ -109,17 +196,15 @@ const UpdateRole = () => {
         link: `cai-dat/quan-ly-vai-tro/cap-nhat/${id}`,
       },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
+    dispatch(updateBreadcrumbItems(data));
   }, [dispatch, id]);
 
   return (
     <Layout className="role-layout">
       <Content>
-        <Form form={form} scrollToFirstError>
+        {success && <MyAlert message={success} type="success" />}
+        {error && <MyAlert message={error} type="error" />}
+        <Form form={form} scrollToFirstError onFinish={submitHandler}>
           <Space direction="vertical" size={24} align="center">
             <div className="bg-white box-info-role shadow-box">
               <Typography.Text className="bold-20-20 orange-500">
@@ -193,10 +278,13 @@ const UpdateRole = () => {
                   >
                     <div className="functional-group-box bg-orange-50">
                       <Space direction="vertical" style={{ padding: 24 }}>
-                        {groupRole.map((role, groupIndex) => (
-                          <div className="group-role-items" key={role.key}>
+                        {permissions.map((permission, groupIndex) => (
+                          <div
+                            className="group-role-items"
+                            key={permission.key}
+                          >
                             <Typography.Text className="bold-20-20 orange-500">
-                              {role.name}
+                              {permission.name}
                             </Typography.Text>
 
                             <Checkbox
@@ -213,8 +301,8 @@ const UpdateRole = () => {
                               Tất cả
                             </Checkbox>
                             <Checkbox.Group
-                              options={role.items}
-                              value={checkedGroup[role.key] || []}
+                              options={permission.items}
+                              value={checkedGroup[permission.key] || []}
                               onChange={(checkedValues) =>
                                 handleCheckedGroup(groupIndex, checkedValues)
                               }
@@ -248,9 +336,10 @@ const UpdateRole = () => {
                   <Button
                     htmlType="submit"
                     className="bg-orange-400 btn-action"
+                    isDisable={loading}
                   >
                     <Typography.Text className="white bold-16-16">
-                      Cập nhật
+                      {loading ? "Loading..." : "Cập nhật"}
                     </Typography.Text>
                   </Button>
                 </Col>

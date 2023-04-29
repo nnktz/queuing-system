@@ -11,14 +11,9 @@ import Button from "../../../components/button";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { RootState } from "../../../core/state/store";
-import { AuthAction } from "../../../core/state/action-type/auth.type";
+import { AuthAction, USER } from "../../../core/state/action-type/auth.type";
 import { useSelector } from "react-redux";
-import {
-  getUserFromLocalStorage,
-  setError,
-  signin,
-} from "../../../core/state/actions/authActions";
-import { COLLECTIONS } from "../../../core/constants";
+import { setError, signin } from "../../../core/state/actions/authActions";
 
 function Login() {
   const navigate = useNavigate();
@@ -28,6 +23,7 @@ function Login() {
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const { error } = useSelector((state: RootState) => state.auth);
   const [loading, setLoading] = useState(false);
+  const login = localStorage.getItem(USER);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -61,12 +57,10 @@ function Login() {
   }, [authDispatch, error]);
 
   useEffect(() => {
-    authDispatch(getUserFromLocalStorage());
-    const user = localStorage.getItem(COLLECTIONS.USERS);
-    if (user) {
+    if (login) {
       navigate("/dashboard/ngay");
     }
-  }, [authDispatch, navigate]);
+  }, [authDispatch, login, navigate]);
 
   return (
     <div className="login bg">

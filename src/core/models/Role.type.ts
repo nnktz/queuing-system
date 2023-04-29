@@ -5,8 +5,8 @@ export interface Role {
   key: string;
   name: string;
   describe: string;
-  user: User[] | null;
-  permission: PermissionType[];
-  createAt?: any;
-  updateAt?: any;
+  users: User[] | null;
+  permissions: PermissionType[];
+  createAt: any;
+  updateAt: any;
 }

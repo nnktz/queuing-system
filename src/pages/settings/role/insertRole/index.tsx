@@ -1,30 +1,53 @@
 import { useEffect, useState } from "react";
 import "./InsertRole.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Checkbox, Col, Form, Layout, Row, Space, Typography } from "antd";
 import InputText from "../../../../components/inputs/text";
 import InputTextArea from "../../../../components/inputs/textArea";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
 import Button from "../../../../components/button";
-import { groupRole } from "./DataPermission";
+import { RootState } from "../../../../core/state/store";
+import { ThunkDispatch } from "redux-thunk";
+import { RoleAction } from "../../../../core/state/action-type/role.type";
+import { createRole } from "../../../../core/state/actions/roleAtions";
+import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import { AuthAction } from "../../../../core/state/action-type/auth.type";
+import {
+  setError,
+  setSuccess,
+} from "../../../../core/state/actions/authActions";
+import MyAlert from "../../../../components/alert";
 
 const { Content } = Layout;
+
+type CheckedGroup = { [key: string]: string[] };
 
 const InsertRole = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [form] = Form.useForm();
+  const { permissions } = useSelector((state: RootState) => state.role);
+  const { error, success } = useSelector((state: RootState) => state.auth);
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const permissionData =
+    permissions.map((permission) => permission.items) || [];
 
-  const [nameRole, setNameRole] = useState("");
-  const [describeRole, setDescribeRole] = useState("");
-  const [checkedGroup, setCheckedGroup] = useState<{ [key: string]: string[] }>(
-    {}
+  const [loading, setLoading] = useState(false);
+  const [name, setName] = useState("");
+  const [describe, setDescribe] = useState("");
+  const [checkedGroup, setCheckedGroup] = useState<CheckedGroup>(
+    permissions.reduce((acc, permission) => {
+      acc[permission.key] = [];
+      return acc;
+    }, {} as CheckedGroup)
   );
   const [checkedAllGroup, setCheckedAllGroup] = useState<boolean[]>(
-    groupRole.map(() => false)
+    permissions.map(() => false)
   );
-  const dataGroup = groupRole.map((role) => role.items) || [];
 
   const handleCheckAllGroup = (groupIndex: number, checked: boolean) => {
     const newCheckedAllGroup = [...checkedAllGroup];
@@ -33,14 +56,13 @@ const InsertRole = () => {
 
     const newCheckedGroup = { ...checkedGroup };
     if (checked) {
-      newCheckedGroup[groupRole[groupIndex].key] = dataGroup[groupIndex].map(
-        (item) => item.value
-      );
+      newCheckedGroup[permissions[groupIndex].key] = permissionData[
+        groupIndex
+      ].map((item) => item.value);
     } else {
-      delete newCheckedGroup[groupRole[groupIndex].key];
+      delete newCheckedGroup[permissions[groupIndex].key];
     }
     setCheckedGroup(newCheckedGroup);
-    console.log(checkedGroup);
   };
 
   const handleCheckedGroup = (
@@ -49,24 +71,60 @@ const InsertRole = () => {
   ) => {
     const newCheckedAllGroup = [...checkedAllGroup];
     newCheckedAllGroup[groupIndex] =
-      checkedValues.length === dataGroup[groupIndex].length;
+      checkedValues.length === permissionData[groupIndex].length;
     setCheckedAllGroup(newCheckedAllGroup);
 
     const newCheckedGroup = { ...checkedGroup };
-    newCheckedGroup[groupRole[groupIndex].key] = checkedValues as string[];
+    newCheckedGroup[permissions[groupIndex].key] = checkedValues as string[];
     setCheckedGroup(newCheckedGroup);
-    console.log(checkedGroup);
   };
 
   const handleNameRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setNameRole(event.target.value);
+    setName(event.target.value);
   };
 
   const handleDescribeRoleChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    setDescribeRole(event.target.value);
+    setDescribe(event.target.value);
   };
+
+  const submitHandler = async () => {
+    setLoading(true);
+    const newPermissions = permissions.map((permission) => {
+      return {
+        key: permission.key,
+        name: permission.name,
+        items: permission.items.filter((item) =>
+          checkedGroup[permission.key]?.includes(item.value)
+        ),
+      };
+    });
+    try {
+      await roleDispatch(
+        createRole({ name, describe, permissions: newPermissions }, () =>
+          setLoading(false)
+        )
+      );
+      setTimeout(() => {
+        navigate("..");
+      }, 1000);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (error) {
+        authDispatch(setError(""));
+      }
+      if (success) {
+        authDispatch(setSuccess(""));
+      }
+    };
+  }, [authDispatch, error, success]);
 
   useEffect(() => {
     const data = [
@@ -77,17 +135,15 @@ const InsertRole = () => {
         link: "cai-dat/quan-ly-vai-tro/them-vai-tro",
       },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
+    dispatch(updateBreadcrumbItems(data));
   }, [dispatch]);
 
   return (
     <Layout className="role-layout">
       <Content>
-        <Form form={form} scrollToFirstError>
+        {success && <MyAlert message={success} type="success" />}
+        {error && <MyAlert message={error} type="error" />}
+        <Form form={form} scrollToFirstError onFinish={submitHandler}>
           <Space direction="vertical" size={24} align="center">
             <div className="bg-white box-info-role shadow-box">
               <Typography.Text className="bold-20-20 orange-500">
@@ -109,7 +165,7 @@ const InsertRole = () => {
                   >
                     <InputText
                       placeholder="Nhập tên vai trò"
-                      value={nameRole}
+                      value={name}
                       onChange={handleNameRoleChange}
                       className="reg-16-16"
                       style={{ width: "100%" }}
@@ -123,7 +179,7 @@ const InsertRole = () => {
                   >
                     <InputTextArea
                       placeholder="Nhập mô tả"
-                      value={describeRole}
+                      value={describe}
                       onChange={handleDescribeRoleChange}
                       style={{ width: 560, height: 160, resize: "none" }}
                       className="reg-16-16"
@@ -163,10 +219,13 @@ const InsertRole = () => {
                   >
                     <div className="functional-group-box bg-orange-50">
                       <Space direction="vertical" style={{ padding: 24 }}>
-                        {groupRole.map((role, groupIndex) => (
-                          <div className="group-role-items" key={role.key}>
+                        {permissions.map((permission, groupIndex) => (
+                          <div
+                            className="group-role-items"
+                            key={permission.key}
+                          >
                             <Typography.Text className="bold-20-20 orange-500">
-                              {role.name}
+                              {permission.name}
                             </Typography.Text>
 
                             <Checkbox
@@ -183,8 +242,8 @@ const InsertRole = () => {
                               Tất cả
                             </Checkbox>
                             <Checkbox.Group
-                              options={role.items}
-                              value={checkedGroup[role.key] || []}
+                              options={permission.items}
+                              value={checkedGroup[permission.key] || []}
                               onChange={(checkedValues) =>
                                 handleCheckedGroup(groupIndex, checkedValues)
                               }
@@ -218,9 +277,10 @@ const InsertRole = () => {
                   <Button
                     htmlType="submit"
                     className="bg-orange-400 btn-action"
+                    isDisable={loading}
                   >
                     <Typography.Text className="white bold-16-16">
-                      Thêm
+                      {loading ? "Loading..." : "Thêm"}
                     </Typography.Text>
                   </Button>
                 </Col>

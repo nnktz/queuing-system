@@ -2,14 +2,17 @@ import { Space, Table, Typography } from "antd";
 import InputText from "../../../../components/inputs/text";
 import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Role } from "../../../../core/models/Role.type";
-import { DataRole } from "../DataRole";
 import ButtonCustom from "../../../../components/button/buttonCustom";
 import AddSquare from "../../../../assets/icons/add-square.svg";
 import columns from "./ColumnDataRole";
 import _debounce from "lodash/debounce";
+import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../../../core/state/store";
+import { RoleAction } from "../../../../core/state/action-type/role.type";
+import { getRoles } from "../../../../core/state/actions/roleAtions";
 
 interface DataType {
   key: string;
@@ -24,8 +27,10 @@ const RoleList = () => {
 
   const [search, setSearch] = useState("");
   const [data, setData] = useState<DataType[]>([]);
-  // const [roles] = useState<Role[]>(DataRole);
   const [filteredData, setFilteredData] = useState<DataType[]>(data);
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+  const { roles } = useSelector((state: RootState) => state.role);
 
   const handleSearch = _debounce((value: string) => {
     const filtered = data.filter((item) =>
@@ -43,27 +48,26 @@ const RoleList = () => {
     navigate("/cai-dat/quan-ly-vai-tro/them-vai-tro");
   };
 
-  // useEffect(() => {
-  //   const newData: DataType[] = roles.map((role) => ({
-  //     key: role.key,
-  //     name: role.name,
-  //     quantity: role.user.length,
-  //     describe: role.describe,
-  //   }));
-  //   setData(newData);
-  // }, [roles]);
+  useEffect(() => {
+    if (roles) {
+      const newData: DataType[] = roles.map((role) => ({
+        key: role.key,
+        name: role.name,
+        quantity: role.users?.length ?? 0,
+        describe: role.describe,
+      }));
+      setData(newData);
+    }
+  }, [roles]);
 
   useEffect(() => {
     const data = [
       { title: "Cài đặt hệ thống" },
       { title: "Quản lý vai trò", link: "cai-dat/quan-ly-vai-tro/danh-sach" },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch]);
+    dispatch(updateBreadcrumbItems(data));
+    roleDispatch(getRoles());
+  }, [dispatch, roleDispatch]);
 
   return (
     <>

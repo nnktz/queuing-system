@@ -8,12 +8,13 @@ import { useDispatch } from "react-redux";
 import { RootState } from "../../core/state/store";
 import { signout } from "../../core/state/actions/authActions";
 import { ThunkDispatch } from "redux-thunk";
-import { AuthAction } from "../../core/state/action-type/auth.type";
+import { AuthAction, USER } from "../../core/state/action-type/auth.type";
 import { useNavigate } from "react-router-dom";
 
 const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {
-  const dispatch = useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const navigate = useNavigate();
+  const dispatch = useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const login = localStorage.getItem(USER);
 
   const handleLogout = async () => {
     await dispatch(signout());
@@ -30,14 +31,19 @@ const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {
         defaultSelectedKeys={[defaultSelectedKey]}
         className="menubar"
       />
-      <div className="frame-269">
-        <Button handleClick={handleLogout} className="btn-logout bg-orange-50">
-          <Typography.Text className="auto-layout_btn-logout orange-500 semi-16-16">
-            <img src={Logout} alt="" className="" />
-            Đăng xuất
-          </Typography.Text>
-        </Button>
-      </div>
+      {login && (
+        <div className="frame-269">
+          <Button
+            handleClick={handleLogout}
+            className="btn-logout bg-orange-50"
+          >
+            <Typography.Text className="auto-layout_btn-logout orange-500 semi-16-16">
+              <img src={Logout} alt="" className="" />
+              Đăng xuất
+            </Typography.Text>
+          </Button>
+        </div>
+      )}
     </main>
   );
 };

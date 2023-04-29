@@ -5,6 +5,7 @@ import {
   SET_LOADING,
   SET_SUCCESS,
   SET_USER,
+  SET_USER_CURRENT,
   SIGN_OUT,
 } from "../action-type/auth.type";
 
@@ -18,11 +19,16 @@ const initialState: AuthState = {
 
 const authReducer = (state = initialState, action: AuthAction) => {
   switch (action.type) {
-    case SET_USER:
+    case SET_USER_CURRENT:
       return {
         ...state,
         user: action.payload,
         authenticated: true,
+      };
+    case SET_USER:
+      return {
+        ...state,
+        user: action.payload,
       };
     case SET_LOADING:
       return {

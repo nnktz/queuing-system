@@ -5,9 +5,11 @@ import {
   SET_LOADING,
   SET_SUCCESS,
   SET_USER,
+  SET_USER_CURRENT,
   SIGN_OUT,
   SignInData,
   SignUpData,
+  USER,
   User,
 } from "../action-type/auth.type";
 import { RootState } from "../store";
@@ -21,6 +23,15 @@ export const signup = (
 ): ThunkAction<void, RootState, null, AuthAction> => {
   return async (dispatch) => {
     try {
+      const existingUser = await db
+        .firestore()
+        .collection(COLLECTIONS.USERS)
+        .where("username", "==", data.username)
+        .get();
+      if (!existingUser.empty) {
+        dispatch(setError(`Tên đăng nhập ${data.username} đã tồn tại`));
+        return;
+      }
       const userRef = await db.firestore().collection(COLLECTIONS.USERS).doc();
       const key = userRef.id;
       const userData: User = {
@@ -36,10 +47,7 @@ export const signup = (
         updateAt: db.firestore.FieldValue.serverTimestamp(),
       };
       await userRef.set(userData);
-      dispatch({
-        type: SET_USER,
-        payload: userData,
-      });
+      dispatch(setSuccess("Thêm thành công"));
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -95,9 +103,9 @@ export const signin = (
         const user = userDoc.data() as User;
         const isValidPassword = user.password === data.password;
         if (isValidPassword) {
-          localStorage.setItem(COLLECTIONS.USERS, JSON.stringify(user));
+          localStorage.setItem(USER, JSON.stringify(user));
           dispatch({
-            type: SET_USER,
+            type: SET_USER_CURRENT,
             payload: user,
           });
           return user;
@@ -123,7 +131,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
     try {
       dispatch(setLoading(true));
       await db.auth().signOut();
-      localStorage.removeItem(COLLECTIONS.USERS);
+      localStorage.removeItem(USER);
       dispatch({
         type: SIGN_OUT,
       });
@@ -230,20 +238,17 @@ export const getEmail = (
   };
 };
 
-// TODO: Get user from localStorage
-export const getUserFromLocalStorage = (): ThunkAction<
-  void,
-  RootState,
-  null,
-  AuthAction
-> => {
-  return (dispatch) => {
-    const user = localStorage.getItem(COLLECTIONS.USERS);
-    if (user) {
+// TODO: Get user
+export const getUser = (): ThunkAction<void, RootState, null, AuthAction> => {
+  return async (dispatch) => {
+    const userStr = localStorage.getItem(USER);
+    if (userStr) {
+      const user = JSON.parse(userStr);
       dispatch({
-        type: SET_USER,
-        payload: JSON.parse(user),
+        type: SET_USER_CURRENT,
+        payload: user,
       });
+      return user;
     }
   };
 };

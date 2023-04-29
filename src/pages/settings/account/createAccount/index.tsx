@@ -15,7 +15,11 @@ import InputPassword from "../../../../components/inputs/password";
 import MyAlert from "../../../../components/alert";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../../core/state/store";
-import { setError, signup } from "../../../../core/state/actions/authActions";
+import {
+  setError,
+  setSuccess,
+  signup,
+} from "../../../../core/state/actions/authActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AuthAction } from "../../../../core/state/action-type/auth.type";
 import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
@@ -32,11 +36,10 @@ const CreateAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const roles = DataRole;
-  const { error } = useSelector((state: RootState) => state.auth);
+  const { error, success } = useSelector((state: RootState) => state.auth);
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
 
-  const [success, setSuccess] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -86,27 +89,6 @@ const CreateAccount = () => {
     setConfirmPassword(event.target.value);
   };
 
-  // const onFinish = async (values: IFormValues) => {
-  //   const { name, username, password, phone, email, role, status } = values;
-
-  //   try {
-  //     const response = await db.firestore().collection(COLLECTIONS.USERS).add({
-  //       name,
-  //       username,
-  //       password,
-  //       phone,
-  //       email,
-  //       role,
-  //       status,
-  //     });
-  //     setSuccess("Thành công");
-  //     console.log(response);
-  //   } catch (error) {
-  //     setError("Thất bại");
-  //     console.error("Lỗi khi thêm người dùng", error);
-  //   }
-  // };
-
   const submitHandler = () => {
     setLoading(true);
     authDispatch(
@@ -120,10 +102,7 @@ const CreateAccount = () => {
           status: selectedStatus,
           role: role,
         },
-        () => {
-          setLoading(false);
-          setSuccess("Thêm thành công");
-        }
+        () => setLoading(false)
       )
     );
   };
@@ -133,8 +112,11 @@ const CreateAccount = () => {
       if (error) {
         authDispatch(setError(""));
       }
+      if (success) {
+        authDispatch(setSuccess(""));
+      }
     };
-  }, [authDispatch, error]);
+  }, [authDispatch, error, success]);
 
   useEffect(() => {
     if (roles) {
@@ -155,20 +137,13 @@ const CreateAccount = () => {
         link: "cai-dat/quan-ly-tai-khoan/them-tai-khoan",
       },
     ];
-
     dispatch(updateBreadcrumbItems(data));
   }, [dispatch]);
 
   return (
     <Layout className="account-layout">
       <Content>
-        {success && (
-          <MyAlert
-            message={success}
-            type="success"
-            onclose={() => setSuccess("")}
-          />
-        )}
+        {success && <MyAlert message={success} type="success" />}
         {error && <MyAlert message={error} type="error" />}
         <Form scrollToFirstError onFinish={submitHandler}>
           <Space direction="vertical" size={46} align="center">

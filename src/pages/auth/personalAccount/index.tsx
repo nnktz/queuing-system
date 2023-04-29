@@ -1,11 +1,11 @@
 import { Typography } from "antd";
 import InputText from "../../../components/inputs/text";
 import "./PersonalAccount.css";
-import Camera from "../../../assets/icons/camera.svg";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateBreadcrumbItems } from "../../../core/state/actions/breadcrumbActions";
 import { RootState } from "../../../core/state/store";
+import CameraOutlined from "@ant-design/icons/lib/icons/CameraOutlined";
 
 const PersonalAccount = () => {
   const dispatch = useDispatch();
@@ -102,7 +102,7 @@ const PersonalAccount = () => {
         </Typography.Text>
         <div className="box-avatar">
           <div className="camera">
-            <img src={Camera} alt="" className="camera-icon" />
+            <CameraOutlined className="camera-icon white" />
             <div className="eclipse-8 bg-orange-500" />
           </div>
 

@@ -7,10 +7,12 @@ import breadcrumbReducer from "../reducers/breadcrumbReducer";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import authReducer from "../reducers/authReducer";
+import roleReducer from "../reducers/roleReducer";
 
 const rootReducer = combineReducers({
   breadcrumb: breadcrumbReducer,
   auth: authReducer,
+  role: roleReducer,
 });
 
 const store = createStore(

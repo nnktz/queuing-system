@@ -1,5 +1,7 @@
 import { RoleUser } from "./role.type";
 
+export const USER = "user";
+export const SET_USER_CURRENT = "SET_USER_CURRENT";
 export const SET_USER = "SET_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const SIGN_OUT = "SIGN_OUT";
@@ -45,6 +47,11 @@ export interface SignInData {
 }
 
 // TODO: Actions
+interface SetUserCurrentAction {
+  type: typeof SET_USER_CURRENT;
+  payload: User;
+}
+
 interface SetUserAction {
   type: typeof SET_USER;
   payload: User;
@@ -75,6 +82,7 @@ interface SetTokenAction {
 }
 
 export type AuthAction =
+  | SetUserCurrentAction
   | SetUserAction
   | SetLoadingAction
   | SignOutAction

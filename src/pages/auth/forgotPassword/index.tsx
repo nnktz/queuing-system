@@ -10,16 +10,14 @@ import InputPassword from "../../../components/inputs/password";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../core/state/store";
 import { ThunkDispatch } from "redux-thunk";
-import { AuthAction } from "../../../core/state/action-type/auth.type";
+import { AuthAction, USER } from "../../../core/state/action-type/auth.type";
 import {
   getEmail,
-  getUserFromLocalStorage,
   resetPassword,
   setError,
   setSuccess,
 } from "../../../core/state/actions/authActions";
 import MyAlert from "../../../components/alert";
-import { COLLECTIONS } from "../../../core/constants";
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -33,6 +31,7 @@ function ForgotPassword() {
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const [resetSuccess, setResetSuccess] = useState(false);
+  const login = localStorage.getItem(USER);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -93,12 +92,10 @@ function ForgotPassword() {
   }, [authDispatch, error, success]);
 
   useEffect(() => {
-    authDispatch(getUserFromLocalStorage());
-    const user = localStorage.getItem(COLLECTIONS.USERS);
-    if (user) {
+    if (login) {
       navigate("/dashboard/ngay");
     }
-  }, [authDispatch, navigate]);
+  }, [authDispatch, login, navigate]);
 
   return (
     <div className="forgot bg">

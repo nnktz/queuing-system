@@ -1,6 +1,11 @@
 import { Typography } from "antd";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../../core/state/store";
+import { RoleAction } from "../../../core/state/action-type/role.type";
+import { getPermissions } from "../../../core/state/actions/roleAtions";
 
 const titleStyles: React.CSSProperties = {
   position: "absolute",
@@ -12,6 +17,12 @@ const titleStyles: React.CSSProperties = {
 
 const Role = () => {
   const navigate = useNavigate();
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+
+  useEffect(() => {
+    roleDispatch(getPermissions());
+  }, [roleDispatch]);
 
   useEffect(() => {
     if (
