@@ -1,17 +1,8 @@
 import { Typography } from "antd";
 import { ColumnsType } from "antd/es/table";
+import { IDataType } from ".";
 
-interface DataType {
-  key: string;
-  username: string;
-  name: string;
-  phone: string;
-  email: string;
-  role: string;
-  status: string;
-}
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<IDataType> = [
   {
     title: "Tên đăng nhập",
     dataIndex: "username",

@@ -9,10 +9,11 @@ import {
 import { RootState } from "../store";
 import db from "../../../config/firebase";
 import { COLLECTIONS } from "../../constants";
-import { Role } from "../../models/Role.type";
-import { SET_ERROR, User } from "../action-type/auth.type";
+import { Role } from "../../models/Role";
+import { SET_ERROR } from "../action-type/auth.type";
 import { setError, setSuccess } from "./authActions";
 import { PermissionType } from "../../models/Permission.type";
+import { User } from "../../models/User";
 
 // TODO: Create role
 export const createRole = (
@@ -30,7 +31,7 @@ export const createRole = (
         users: null,
         permissions: data.permissions,
         createAt: db.firestore.FieldValue.serverTimestamp(),
-        updateAt: db.firestore.FieldValue.serverTimestamp(),
+        updatedAt: db.firestore.FieldValue.serverTimestamp(),
       };
       await roleRef.set(roleData);
       dispatch({
@@ -53,13 +54,26 @@ export const createRole = (
 
 // TODO: Add user in role
 export const addUserInRole = (
-  user: User,
+  username: string,
   roleKey: string,
   successMsg: string,
   onError: () => void
 ): ThunkAction<void, RootState, null, RoleAction> => {
   return async (dispatch) => {
     try {
+      const userQuery = await db
+        .firestore()
+        .collection(COLLECTIONS.USERS)
+        .where("username", "==", username)
+        .get();
+      if (userQuery.empty) {
+        dispatch(
+          setError(`Không tìm thấy người dùng với tên đăng nhập ${username}`)
+        );
+        return;
+      }
+      const userDoc = userQuery.docs[0];
+      const user = userDoc.data() as User;
       const roleRef = db.firestore().collection(COLLECTIONS.ROLES).doc(roleKey);
       const roleDoc = await roleRef.get();
       if (!roleDoc.exists) {
@@ -77,6 +91,89 @@ export const addUserInRole = (
         type: SET_ROLE,
         payload: updatedRoleData,
       });
+      dispatch(setSuccess(successMsg));
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+        onError();
+        dispatch({
+          type: SET_ERROR,
+          payload: error.message,
+        });
+      }
+    }
+  };
+};
+
+// TODO: Update user in role
+export const updateUserInRole = (
+  userKey: string,
+  roleKey: string,
+  successMsg: string,
+  onError: () => void
+): ThunkAction<void, RootState, null, RoleAction> => {
+  return async (dispatch) => {
+    try {
+      // Kiểm tra xem role hiện tại đã chứa user với userKey hiện tại hay chưa
+      const roleRef = db.firestore().collection(COLLECTIONS.ROLES).doc(roleKey);
+      const roleDoc = await roleRef.get();
+      if (!roleDoc.exists) {
+        dispatch(setError("Vai trò không tồn tại"));
+        return;
+      }
+      const roleData = roleDoc.data() as Role;
+      const userExists = roleData.users?.some((user) => user.key === userKey);
+
+      // Nếu user chưa tồn tại trong role, thêm thông tin của user vào role
+      if (!userExists) {
+        const userRef = db
+          .firestore()
+          .collection(COLLECTIONS.USERS)
+          .doc(userKey);
+        const userDoc = await userRef.get();
+        if (!userDoc.exists) {
+          dispatch(setError("Người dùng không tồn tại"));
+          return;
+        }
+        const userData = userDoc.data() as User;
+        const updatedRoleData = {
+          ...roleData,
+          users: [...(roleData.users || []), userData],
+          updatedAt: db.firestore.FieldValue.serverTimestamp(),
+        };
+        await roleRef.update(updatedRoleData);
+        dispatch({
+          type: SET_ROLE,
+          payload: updatedRoleData,
+        });
+      } else {
+        return;
+      }
+
+      // Kiểm tra các roles khác để xoá user đó khỏi role không thuộc rolekey của user
+      const otherRolesRef = db
+        .firestore()
+        .collection(COLLECTIONS.ROLES)
+        .where("key", "!=", roleKey);
+      const otherRolesSnapshot = await otherRolesRef.get();
+      const otherRolesData = otherRolesSnapshot.docs.map(
+        (doc) => doc.data() as Role
+      );
+      const otherRolesWithUser = otherRolesData.filter((role) =>
+        role.users?.some((user) => user.key === userKey)
+      );
+      for (const role of otherRolesWithUser) {
+        const updatedRoleData = {
+          ...role,
+          users: role.users?.filter((user) => user.key !== userKey),
+          updatedAt: db.firestore.FieldValue.serverTimestamp(),
+        };
+        await db
+          .firestore()
+          .collection(COLLECTIONS.ROLES)
+          .doc(role.key)
+          .update(updatedRoleData);
+      }
       dispatch(setSuccess(successMsg));
     } catch (error) {
       if (error instanceof Error) {
@@ -142,14 +239,10 @@ export const getRoles = (): ThunkAction<void, RootState, null, RoleAction> => {
         role.key = doc.id;
         return role;
       });
-      localStorage.setItem(COLLECTIONS.ROLES, JSON.stringify(rolesData));
-      const roles = localStorage.getItem(COLLECTIONS.ROLES);
-      if (roles) {
-        dispatch({
-          type: SET_ROLES,
-          payload: JSON.parse(roles),
-        });
-      }
+      dispatch({
+        type: SET_ROLES,
+        payload: rolesData,
+      });
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);

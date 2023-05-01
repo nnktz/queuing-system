@@ -9,7 +9,6 @@ import {
   DropDownCategoryDevice,
   SelectArray,
 } from "../../../../components/dropdown";
-import { DataRole } from "../../role/DataRole";
 import { optionStatus } from "../../../../components/dropdown/ItemDropdown";
 import InputPassword from "../../../../components/inputs/password";
 import MyAlert from "../../../../components/alert";
@@ -23,7 +22,16 @@ import {
 import { ThunkDispatch } from "redux-thunk";
 import { AuthAction } from "../../../../core/state/action-type/auth.type";
 import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
-import { RoleUser } from "../../../../core/state/action-type/role.type";
+import {
+  RoleAction,
+  RoleUser,
+} from "../../../../core/state/action-type/role.type";
+import {
+  addUserInRole,
+  getRoles,
+} from "../../../../core/state/actions/roleAtions";
+import { AuditLogAction } from "../../../../core/state/action-type/auditLog.type";
+import { createAuditLog } from "../../../../core/state/actions/auditLogActions";
 
 const { Content } = Layout;
 
@@ -35,10 +43,14 @@ interface IRoleSelect {
 const CreateAccount = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const roles = DataRole;
+  const { roles } = useSelector((state: RootState) => state.role);
   const { error, success } = useSelector((state: RootState) => state.auth);
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+  const auditLogDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuditLogAction>>();
 
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
@@ -55,8 +67,14 @@ const CreateAccount = () => {
   const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const roleKey = event.target.value as string;
     setSelectedRole(roleKey);
-    const selectedRole = roles.find((role) => role.key === roleKey);
-    setRole(selectedRole);
+    const selectedRole = roles?.find((role) => role.key === roleKey);
+    const {
+      key = "",
+      name = "",
+      describe = "",
+      permissions = [],
+    } = selectedRole || {};
+    setRole({ key, name, describe, permissions });
   };
 
   const handleStatusChange = (value: string) => {
@@ -89,22 +107,38 @@ const CreateAccount = () => {
     setConfirmPassword(event.target.value);
   };
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     setLoading(true);
-    authDispatch(
-      signup(
-        {
-          username,
-          email,
-          password,
-          name,
-          phone,
-          status: selectedStatus,
-          role: role,
-        },
-        () => setLoading(false)
-      )
-    );
+    try {
+      await authDispatch(
+        signup(
+          {
+            username,
+            email,
+            password,
+            name,
+            phone,
+            status: selectedStatus,
+            role: role,
+          },
+          () => setLoading(false)
+        )
+      );
+      await auditLogDispatch(
+        createAuditLog(`Thêm tài khoản ${username}`, () => setLoading(false))
+      );
+      await roleDispatch(
+        addUserInRole(username, selectedRole, "Thêm thành công", () =>
+          setLoading(false)
+        )
+      );
+      await setTimeout(() => {
+        navigate("..");
+      }, 1000);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -138,7 +172,8 @@ const CreateAccount = () => {
       },
     ];
     dispatch(updateBreadcrumbItems(data));
-  }, [dispatch]);
+    roleDispatch(getRoles());
+  }, [dispatch, roleDispatch]);
 
   return (
     <Layout className="account-layout">

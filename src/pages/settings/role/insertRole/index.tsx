@@ -18,6 +18,8 @@ import {
   setSuccess,
 } from "../../../../core/state/actions/authActions";
 import MyAlert from "../../../../components/alert";
+import { AuditLogAction } from "../../../../core/state/action-type/auditLog.type";
+import { createAuditLog } from "../../../../core/state/actions/auditLogActions";
 
 const { Content } = Layout;
 
@@ -33,6 +35,8 @@ const InsertRole = () => {
     useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const auditLogDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuditLogAction>>();
   const permissionData =
     permissions.map((permission) => permission.items) || [];
 
@@ -105,6 +109,9 @@ const InsertRole = () => {
         createRole({ name, describe, permissions: newPermissions }, () =>
           setLoading(false)
         )
+      );
+      await auditLogDispatch(
+        createAuditLog(`Thêm vai trò ${name}`, () => setLoading(false))
       );
       setTimeout(() => {
         navigate("..");

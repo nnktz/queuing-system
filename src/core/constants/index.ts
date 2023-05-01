@@ -17,7 +17,7 @@ export interface ICollection {
   QUEUES: string;
   PERMISSIONS: string;
   ROLES: string;
-  AUDIT_LOG: string;
+  AUDIT_LOGS: string;
   CUSTOMERS: string;
 }
 
@@ -28,7 +28,7 @@ export const COLLECTIONS: ICollection = {
   QUEUES: "queues",
   PERMISSIONS: "permissions",
   ROLES: "roles",
-  AUDIT_LOG: "audit_log",
+  AUDIT_LOGS: "auditLogs",
   CUSTOMERS: "customers",
 };
 

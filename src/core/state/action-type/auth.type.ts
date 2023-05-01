@@ -1,8 +1,10 @@
+import { User } from "../../models/User";
 import { RoleUser } from "./role.type";
 
 export const USER = "user";
 export const SET_USER_CURRENT = "SET_USER_CURRENT";
 export const SET_USER = "SET_USER";
+export const SET_USERS = "SET_USERS";
 export const UPDATE_USER = "UPDATE_USER";
 export const SIGN_OUT = "SIGN_OUT";
 export const SET_LOADING = "SET_LOADING";
@@ -10,21 +12,10 @@ export const SET_ERROR = "SET_ERROR";
 export const SET_SUCCESS = "SET_SUCCESS";
 export const SET_TOKEN = "SET_TOKEN";
 
-export interface User {
-  key: string;
-  username: string;
-  password: string;
-  name: string;
-  email: string;
-  phone: string;
-  status: string;
-  role: RoleUser | undefined;
-  createAt: any;
-  updateAt: any;
-}
-
 export interface AuthState {
+  userCurrent: User | null;
   user: User | null;
+  users: User[] | null;
   authenticated: boolean;
   loading: boolean;
   error: string;
@@ -37,7 +28,7 @@ export interface SignUpData {
   name: string;
   email: string;
   phone: string;
-  role: RoleUser | undefined;
+  role?: RoleUser;
   status: string;
 }
 
@@ -55,6 +46,10 @@ interface SetUserCurrentAction {
 interface SetUserAction {
   type: typeof SET_USER;
   payload: User;
+}
+interface SetUsersAction {
+  type: typeof SET_USERS;
+  payload: User[];
 }
 
 interface SetLoadingAction {
@@ -84,6 +79,7 @@ interface SetTokenAction {
 export type AuthAction =
   | SetUserCurrentAction
   | SetUserAction
+  | SetUsersAction
   | SetLoadingAction
   | SignOutAction
   | SetErrorAction

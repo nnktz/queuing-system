@@ -2,17 +2,22 @@
 import { Col, Layout, Row, Space, Table, Typography } from "antd";
 import "./AccountList.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import AddSquare from "../../../../assets/icons/add-square.svg";
 import ButtonCustom from "../../../../components/button/buttonCustom";
 import { SearchOutlined } from "@ant-design/icons";
 import InputText from "../../../../components/inputs/text";
 import { DropDownArray } from "../../../../components/dropdown";
-import { DataRole } from "../../role/DataRole";
-import { DataAccount } from "../DataAccount";
 import columns from "./ColumnDataAccount";
 import _debounce from "lodash/debounce";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../../../core/state/store";
+import { RoleAction } from "../../../../core/state/action-type/role.type";
+import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import { getRoles } from "../../../../core/state/actions/roleAtions";
+import { getUsers } from "../../../../core/state/actions/authActions";
+import { AuthAction } from "../../../../core/state/action-type/auth.type";
 
 const { Content } = Layout;
 
@@ -25,7 +30,7 @@ interface RoleSelect {
   label: string;
 }
 
-interface DataType {
+export interface IDataType {
   key: string;
   username: string;
   name: string;
@@ -38,20 +43,24 @@ interface DataType {
 const AccountList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const roles = DataRole;
-  const accounts = DataAccount;
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+  const { roles } = useSelector((state: RootState) => state.role);
+  const { users } = useSelector((state: RootState) => state.auth);
 
   const [search, setSearch] = useState("");
   const [optionRole, setOptionRole] = useState<RoleSelect[]>([]);
-  const [data, setData] = useState<DataType[]>([]);
+  const [data, setData] = useState<IDataType[]>([]);
   const [selectedValues, setSelectedValues] = useState<SelectedValue>({
     role: "",
   });
-  const [filteredData, setFilteredData] = useState<DataType[]>(data);
+  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
 
   const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const roleKey = event.target.value as string;
-    const roleName = roles.find((item) => item.key === roleKey)?.name ?? "";
+    const roleName = roles?.find((item) => item.key === roleKey)?.name ?? "";
     setSelectedValues((prevSelectedValues) => ({
       ...prevSelectedValues,
       role: roleName,
@@ -102,19 +111,19 @@ const AccountList = () => {
       }));
       setOptionRole(newRole);
     }
-    if (accounts) {
-      const newData: DataType[] = accounts.map((account) => ({
-        key: account.key,
-        username: account.username,
-        name: account.name,
-        phone: account.phone,
-        email: account.email,
-        role: account.role.name,
-        status: account.status,
+    if (users) {
+      const newData: IDataType[] = users.map((user) => ({
+        key: user.key,
+        username: user.username,
+        name: user.name,
+        phone: user.phone,
+        email: user.email,
+        role: user.role?.name || "",
+        status: user.status,
       }));
       setData(newData);
     }
-  }, [accounts, roles]);
+  }, [users, roles]);
 
   useEffect(() => {
     const data = [
@@ -124,11 +133,9 @@ const AccountList = () => {
         link: "cai-dat/quan-ly-tai-khoan/danh-sach",
       },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
+    dispatch(updateBreadcrumbItems(data));
+    roleDispatch(getRoles());
+    authDispatch(getUsers());
   }, [dispatch]);
 
   return (

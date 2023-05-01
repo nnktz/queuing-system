@@ -22,6 +22,8 @@ import {
   setSuccess,
 } from "../../../../core/state/actions/authActions";
 import { AuthAction } from "../../../../core/state/action-type/auth.type";
+import { AuditLogAction } from "../../../../core/state/action-type/auditLog.type";
+import { createAuditLog } from "../../../../core/state/actions/auditLogActions";
 
 const { Content } = Layout;
 
@@ -32,12 +34,15 @@ const UpdateRole = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [form] = Form.useForm();
+  const [loading, setLoading] = useState(false);
   const { permissions, role } = useSelector((state: RootState) => state.role);
   const { error, success } = useSelector((state: RootState) => state.auth);
   const roleDispatch =
     useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const auditLogDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuditLogAction>>();
   const permissionData =
     permissions.map((permission) => permission.items) || [];
 
@@ -56,7 +61,6 @@ const UpdateRole = () => {
   const [checkedAllGroup, setCheckedAllGroup] = useState<boolean[]>(
     permissions.map(() => false)
   );
-  const [loading, setLoading] = useState(false);
 
   const handleCheckAllGroup = (groupIndex: number, checked: boolean) => {
     const newCheckedAllGroup = [...checkedAllGroup];
@@ -122,6 +126,12 @@ const UpdateRole = () => {
             () => setLoading(false)
           )
         );
+        await auditLogDispatch(
+          createAuditLog(
+            `Cập nhật thông tin vai trò ${form.getFieldValue("name")}`,
+            () => setLoading(false)
+          )
+        );
         setTimeout(() => {
           navigate("..");
         }, 1000);
@@ -153,12 +163,6 @@ const UpdateRole = () => {
       setCheckedGroup(newCheckedGroup);
     }
   }, [role]);
-
-  useEffect(() => {
-    if (id) {
-      roleDispatch(getRoleByKey(id));
-    }
-  }, [id, roleDispatch]);
 
   useEffect(() => {
     setDataRole();
@@ -197,7 +201,10 @@ const UpdateRole = () => {
       },
     ];
     dispatch(updateBreadcrumbItems(data));
-  }, [dispatch, id]);
+    if (id) {
+      roleDispatch(getRoleByKey(id));
+    }
+  }, [dispatch, id, roleDispatch]);
 
   return (
     <Layout className="role-layout">

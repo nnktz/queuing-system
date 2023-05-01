@@ -1,8 +1,7 @@
 import { PermissionType } from "../../models/Permission.type";
-import { Role } from "../../models/Role.type";
+import { Role } from "../../models/Role";
 import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "./auth.type";
 
-export const ROLE = "role";
 export const SET_ROLE = "SET_ROLE";
 export const SET_ROLES = "SET_ROLES";
 export const SET_PERMISSIONS = "SET_PERMISSIONS";

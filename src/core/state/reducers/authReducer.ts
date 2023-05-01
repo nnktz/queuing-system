@@ -5,12 +5,15 @@ import {
   SET_LOADING,
   SET_SUCCESS,
   SET_USER,
+  SET_USERS,
   SET_USER_CURRENT,
   SIGN_OUT,
 } from "../action-type/auth.type";
 
 const initialState: AuthState = {
+  userCurrent: null,
   user: null,
+  users: null,
   authenticated: false,
   loading: false,
   error: "",
@@ -22,13 +25,18 @@ const authReducer = (state = initialState, action: AuthAction) => {
     case SET_USER_CURRENT:
       return {
         ...state,
-        user: action.payload,
+        userCurrent: action.payload,
         authenticated: true,
       };
     case SET_USER:
       return {
         ...state,
         user: action.payload,
+      };
+    case SET_USERS:
+      return {
+        ...state,
+        users: action.payload,
       };
     case SET_LOADING:
       return {

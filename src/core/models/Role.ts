@@ -1,5 +1,5 @@
-import { User } from "../state/action-type/auth.type";
 import { PermissionType } from "./Permission.type";
+import { User } from "./User";
 
 export interface Role {
   key: string;
@@ -8,5 +8,5 @@ export interface Role {
   users: User[] | null;
   permissions: PermissionType[];
   createAt: any;
-  updateAt: any;
+  updatedAt: any;
 }

@@ -1,4 +1,5 @@
 import Alert from "antd/es/alert";
+import { useEffect, useState } from "react";
 
 const AlertStyles: React.CSSProperties = {
   position: "fixed",
@@ -14,16 +15,36 @@ interface AlertProps {
 }
 
 const MyAlert = ({ message, onclose, type }: AlertProps) => {
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    let timeoutId: number | undefined;
+    if (visible) {
+      timeoutId = window.setTimeout(() => {
+        setVisible(false);
+      }, 5000);
+    }
+    return () => {
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [visible]);
+
   return (
-    <div style={AlertStyles}>
-      <Alert
-        message={message}
-        type={type}
-        showIcon
-        onClose={onclose}
-        closable
-      />
-    </div>
+    <>
+      {visible && (
+        <div style={AlertStyles}>
+          <Alert
+            message={message}
+            type={type}
+            showIcon
+            onClose={onclose}
+            closable
+          />
+        </div>
+      )}
+    </>
   );
 };
 

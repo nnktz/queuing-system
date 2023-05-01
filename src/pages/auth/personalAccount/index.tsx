@@ -9,7 +9,7 @@ import CameraOutlined from "@ant-design/icons/lib/icons/CameraOutlined";
 
 const PersonalAccount = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { userCurrent } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {
     const data = [{ title: "Thông tin cá nhân", link: "tai-khoan-ca-nhan" }];
@@ -26,7 +26,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={user?.name}
+          value={userCurrent?.name}
           className="fill fill-username-name"
         />
       </div>
@@ -39,7 +39,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={user?.username}
+          value={userCurrent?.username}
           className="fill fill-username-name"
         />
       </div>
@@ -52,7 +52,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={user?.phone}
+          value={userCurrent?.phone}
           className="fill fill-phone-password"
         />
       </div>
@@ -65,7 +65,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={user?.password}
+          value={userCurrent?.password}
           className="fill fill-phone-password"
         />
       </div>
@@ -78,7 +78,7 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={user?.email}
+          value={userCurrent?.email}
           className="fill fill-email-role"
         />
       </div>
@@ -91,14 +91,14 @@ const PersonalAccount = () => {
         </div>
         <InputText
           disabled
-          value={user?.role?.name}
+          value={userCurrent?.role?.name}
           className="fill fill-email-role"
         />
       </div>
 
       <div className="info-avatar">
         <Typography.Text className="bold-24-24 gray-500 name-below-avatar">
-          {user?.name}
+          {userCurrent?.name}
         </Typography.Text>
         <div className="box-avatar">
           <div className="camera">

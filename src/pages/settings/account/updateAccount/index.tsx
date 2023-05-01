@@ -1,7 +1,6 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../createAccount/CreateAccount.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { DataRole } from "../../role/DataRole";
 import { useCallback, useEffect, useState } from "react";
 import { Col, Form, Layout, Row, Space, Typography } from "antd";
 import Button from "../../../../components/button";
@@ -12,7 +11,27 @@ import {
 import { optionStatus } from "../../../../components/dropdown/ItemDropdown";
 import InputPassword from "../../../../components/inputs/password";
 import InputText from "../../../../components/inputs/text";
-import { DataAccount } from "../DataAccount";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../../../core/state/store";
+import { AuthAction } from "../../../../core/state/action-type/auth.type";
+import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import {
+  getUserByKey,
+  setError,
+  setSuccess,
+  updateUser,
+} from "../../../../core/state/actions/authActions";
+import {
+  RoleAction,
+  RoleUser,
+} from "../../../../core/state/action-type/role.type";
+import MyAlert from "../../../../components/alert";
+import {
+  getRoles,
+  updateUserInRole,
+} from "../../../../core/state/actions/roleAtions";
+import { AuditLogAction } from "../../../../core/state/action-type/auditLog.type";
+import { createAuditLog } from "../../../../core/state/actions/auditLogActions";
 
 const { Content } = Layout;
 
@@ -26,61 +45,80 @@ const UpdateAccount = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [form] = Form.useForm();
-  const roles = DataRole;
-  const accounts = DataAccount;
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
+  const roleDispatch =
+    useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
+  const auditLogDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuditLogAction>>();
+  const { roles } = useSelector((state: RootState) => state.role);
+  const { error, success, user } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   const [optionRole, setOptionRole] = useState<IRoleSelect[]>([]);
-  const [selectedRole, setSelectedRole] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
+  const [role, setRole] = useState<RoleUser>();
+  const [loading, setLoading] = useState(false);
 
   const handleRoleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const roleKey = event.target.value as string;
-    setSelectedRole(roleKey);
-    console.log(selectedRole);
+    form.setFieldValue("role", roleKey);
+    const selectedRole = roles?.find((role) => role.key === roleKey);
+    const {
+      key = "",
+      name = "",
+      describe = "",
+      permissions = [],
+    } = selectedRole || {};
+    setRole({ key, name, describe, permissions });
   };
+  console.log(role);
 
   const handleStatusChange = (value: string) => {
-    setSelectedStatus(value);
+    form.setFieldValue("status", value);
   };
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form.setFieldValue("name", event.target.value);
+  };
 
-  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form.setFieldValue("phone", event.target.value);
+  };
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {};
+  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form.setFieldValue("email", event.target.value);
+  };
 
-  const handleUsernameChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {};
+  const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form.setFieldValue("username", event.target.value);
+  };
 
-  const handlePasswordChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {};
+  const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    form.setFieldValue("password", event.target.value);
+  };
 
   const handleConfirmPasswordChange = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {};
+  ) => {
+    form.setFieldValue("confirmPassword", event.target.value);
+  };
 
-  const getAccountByKey = useCallback(
-    (id: string) => {
-      const account = accounts.find((account) => account.key === id);
-      if (account) {
-        form.setFieldsValue({
-          name: account.name,
-          phone: account.phone,
-          email: account.email,
-          role: account.role.name,
-          username: account.username,
-          password: account.password,
-          confirmPassword: account.password,
-          status: account.status,
-        });
-      } else {
-        console.log(`Account with key ${id} not found`);
-      }
-    },
-    [form, accounts]
-  );
+  const setDataUser = useCallback(() => {
+    if (user) {
+      form.setFieldsValue({
+        name: user.name,
+        phone: user.phone,
+        email: user.email,
+        role: user.role?.key,
+        username: user.username,
+        password: user.password,
+        confirmPassword: user.password,
+        status: user.status,
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   useEffect(() => {
     if (roles) {
@@ -90,10 +128,79 @@ const UpdateAccount = () => {
       }));
       setOptionRole(newRole);
     }
-    if (id) {
-      getAccountByKey(id);
+    setDataUser();
+  }, [setDataUser, roles]);
+
+  useEffect(() => {
+    return () => {
+      if (error) {
+        authDispatch(setError(""));
+      }
+      if (success) {
+        authDispatch(setSuccess(""));
+      }
+    };
+  }, [authDispatch, error, success]);
+
+  const submitHandler = async () => {
+    setLoading(true);
+    try {
+      if (id) {
+        if (role === undefined) {
+          await authDispatch(
+            updateUser(
+              id,
+              {
+                name: form.getFieldValue("name"),
+                email: form.getFieldValue("email"),
+                phone: form.getFieldValue("phone"),
+                username: form.getFieldValue("username"),
+                password: form.getFieldValue("password"),
+                status: form.getFieldValue("status"),
+              },
+              () => setLoading(false)
+            )
+          );
+        } else {
+          await authDispatch(
+            updateUser(
+              id,
+              {
+                name: form.getFieldValue("name"),
+                email: form.getFieldValue("email"),
+                phone: form.getFieldValue("phone"),
+                username: form.getFieldValue("username"),
+                password: form.getFieldValue("password"),
+                role: role,
+                status: form.getFieldValue("status"),
+              },
+              () => setLoading(false)
+            )
+          );
+        }
+        await auditLogDispatch(
+          createAuditLog(
+            `Cập nhật thông tin tài khoản ${form.getFieldValue("username")}`,
+            () => setLoading(false)
+          )
+        );
+        await roleDispatch(
+          updateUserInRole(
+            id,
+            form.getFieldValue("role"),
+            "Cập nhật thành công",
+            () => setLoading(false)
+          )
+        );
+        await setTimeout(() => {
+          navigate("..");
+        }, 1000);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
     }
-  }, [getAccountByKey, id, roles]);
+  };
 
   useEffect(() => {
     const data = [
@@ -104,17 +211,19 @@ const UpdateAccount = () => {
         link: `cai-dat/quan-ly-tai-khoan/cap-nhat/${id}`,
       },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch, id]);
+    dispatch(updateBreadcrumbItems(data));
+    if (id) {
+      authDispatch(getUserByKey(id));
+    }
+    roleDispatch(getRoles());
+  }, [dispatch, id, authDispatch, roleDispatch]);
 
   return (
     <Layout className="account-layout">
       <Content>
-        <Form form={form} scrollToFirstError>
+        {success && <MyAlert message={success} type="success" />}
+        {error && <MyAlert message={error} type="error" />}
+        <Form form={form} scrollToFirstError onFinish={submitHandler}>
           <Space direction="vertical" size={46} align="center">
             <div className="bg-white account-box_info shadow-box">
               <Typography.Text className="bold-20-20 orange-500">
@@ -293,7 +402,6 @@ const UpdateAccount = () => {
                   >
                     <DropDownCategoryDevice
                       placeholder="Chọn trạng thái"
-                      value={selectedStatus}
                       options={optionStatus}
                       onChange={handleStatusChange}
                       style={{ width: "100%" }}
@@ -321,9 +429,10 @@ const UpdateAccount = () => {
                   <Button
                     htmlType="submit"
                     className="bg-orange-400 btn-action"
+                    isDisable={loading}
                   >
                     <Typography.Text className="white bold-16-16">
-                      Cập nhật
+                      {loading ? "Loading..." : "Cập nhật"}
                     </Typography.Text>
                   </Button>
                 </Col>

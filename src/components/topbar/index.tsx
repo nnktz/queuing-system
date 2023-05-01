@@ -15,7 +15,7 @@ const { Header } = Layout;
 
 const TopBar = () => {
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { userCurrent } = useSelector((state: RootState) => state.auth);
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const login = localStorage.getItem(USER);
@@ -55,7 +55,7 @@ const TopBar = () => {
                   Xin chào
                 </Typography.Text>
                 <Typography.Text className="gray-400 bold-16-16 name">
-                  {user?.name}
+                  {userCurrent?.name}
                 </Typography.Text>
               </div>
               <div

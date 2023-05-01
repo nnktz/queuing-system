@@ -8,11 +8,13 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import authReducer from "../reducers/authReducer";
 import roleReducer from "../reducers/roleReducer";
+import auditLogReducer from "../reducers/auditLogReducer";
 
 const rootReducer = combineReducers({
   breadcrumb: breadcrumbReducer,
   auth: authReducer,
   role: roleReducer,
+  auditLog: auditLogReducer,
 });
 
 const store = createStore(

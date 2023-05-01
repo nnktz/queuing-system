@@ -14,7 +14,7 @@ import { RootState } from "../../../../core/state/store";
 import { RoleAction } from "../../../../core/state/action-type/role.type";
 import { getRoles } from "../../../../core/state/actions/roleAtions";
 
-interface DataType {
+export interface IDataType {
   key: string;
   name: string;
   quantity: number;
@@ -26,8 +26,8 @@ const RoleList = () => {
   const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
-  const [data, setData] = useState<DataType[]>([]);
-  const [filteredData, setFilteredData] = useState<DataType[]>(data);
+  const [data, setData] = useState<IDataType[]>([]);
+  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
   const roleDispatch =
     useDispatch<ThunkDispatch<RootState, null, RoleAction>>();
   const { roles } = useSelector((state: RootState) => state.role);
@@ -41,7 +41,7 @@ const RoleList = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
-    handleSearch(event.target.value);
+    handleSearch(search);
   };
 
   const handleInsertRole = () => {
@@ -50,7 +50,7 @@ const RoleList = () => {
 
   useEffect(() => {
     if (roles) {
-      const newData: DataType[] = roles.map((role) => ({
+      const newData: IDataType[] = roles.map((role) => ({
         key: role.key,
         name: role.name,
         quantity: role.users?.length ?? 0,
