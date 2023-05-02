@@ -4,7 +4,14 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { QueueType } from "../../../core/models/Queue.type";
 import { DataQueue } from "../DataQueue";
-import { Col, Row, Space, Table, Typography } from "antd";
+import {
+  Col,
+  Row,
+  Space,
+  Table,
+  TablePaginationConfig,
+  Typography,
+} from "antd";
 import columns from "./ColumnDataQueue";
 import { DropDownArray } from "../../../components/dropdown";
 import {
@@ -18,6 +25,7 @@ import InputText from "../../../components/inputs/text";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import AddSquare from "../../../assets/icons/add-square.svg";
+import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 
 interface SelectedValues {
   service: string;
@@ -83,6 +91,15 @@ const QueueList = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+  };
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, any>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+  ) => {
+    navigate(`/cap-so/danh-sach?page=${pagination.current}`);
   };
 
   useEffect(() => {
@@ -244,10 +261,15 @@ const QueueList = () => {
       <Row gutter={24}>
         <Col>
           <Table
+            bordered
             className="table-queue-list"
             columns={columns}
             dataSource={filteredData.length > 0 ? filteredData : data}
             pagination={{ pageSize: 9 }}
+            rowClassName={(record, index) =>
+              index % 2 === 0 ? "bg-white" : "bg-orange-50"
+            }
+            onChange={handleTableChange}
           />
         </Col>
         <Col>

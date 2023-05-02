@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet, useNavigate } from "react-router-dom";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../core/state/store";
-import { RoleAction } from "../../../core/state/action-type/role.type";
-import { getPermissions } from "../../../core/state/actions/roleAtions";
+import { RootState } from "../../../core/store";
+import { RoleAction } from "../../../core/store/action-type/role.type";
+import { getPermissions } from "../../../core/store/actions/roleAtions";
 
 const titleStyles: React.CSSProperties = {
   position: "absolute",

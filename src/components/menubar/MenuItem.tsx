@@ -7,7 +7,7 @@ import HeatMapOutlined from "@ant-design/icons/lib/icons/HeatMapOutlined";
 import WechatOutlined from "@ant-design/icons/lib/icons/WechatOutlined";
 import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import SettingOutlined from "@ant-design/icons/lib/icons/SettingOutlined";
-import { USER } from "../../core/state/action-type/auth.type";
+import { USER } from "../../core/store/action-type/auth.type";
 
 const login = localStorage.getItem(USER);
 

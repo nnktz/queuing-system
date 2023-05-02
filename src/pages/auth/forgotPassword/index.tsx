@@ -8,15 +8,15 @@ import InputText from "../../../components/inputs/text";
 import Frame from "../../../assets/images/Frame.svg";
 import InputPassword from "../../../components/inputs/password";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../../core/state/store";
+import { RootState } from "../../../core/store";
 import { ThunkDispatch } from "redux-thunk";
-import { AuthAction, USER } from "../../../core/state/action-type/auth.type";
+import { AuthAction, USER } from "../../../core/store/action-type/auth.type";
 import {
   getEmail,
   resetPassword,
   setError,
   setSuccess,
-} from "../../../core/state/actions/authActions";
+} from "../../../core/store/actions/authActions";
 import MyAlert from "../../../components/alert";
 
 function ForgotPassword() {

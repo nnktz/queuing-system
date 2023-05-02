@@ -12,26 +12,26 @@ import { optionStatus } from "../../../../components/dropdown/ItemDropdown";
 import InputPassword from "../../../../components/inputs/password";
 import InputText from "../../../../components/inputs/text";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../../core/state/store";
-import { AuthAction } from "../../../../core/state/action-type/auth.type";
-import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import { RootState } from "../../../../core/store";
+import { AuthAction } from "../../../../core/store/action-type/auth.type";
+import { updateBreadcrumbItems } from "../../../../core/store/actions/breadcrumbActions";
 import {
   getUserByKey,
   setError,
   setSuccess,
   updateUser,
-} from "../../../../core/state/actions/authActions";
+} from "../../../../core/store/actions/authActions";
 import {
   RoleAction,
   RoleUser,
-} from "../../../../core/state/action-type/role.type";
+} from "../../../../core/store/action-type/role.type";
 import MyAlert from "../../../../components/alert";
 import {
   getRoles,
   updateUserInRole,
-} from "../../../../core/state/actions/roleAtions";
-import { AuditLogAction } from "../../../../core/state/action-type/auditLog.type";
-import { createAuditLog } from "../../../../core/state/actions/auditLogActions";
+} from "../../../../core/store/actions/roleAtions";
+import { AuditLogAction } from "../../../../core/store/action-type/auditLog.type";
+import { createAuditLog } from "../../../../core/store/actions/auditLogActions";
 
 const { Content } = Layout;
 

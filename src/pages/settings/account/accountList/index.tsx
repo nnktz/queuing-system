@@ -1,5 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Col, Layout, Row, Space, Table, Typography } from "antd";
+import {
+  Col,
+  Layout,
+  Row,
+  Space,
+  Table,
+  TablePaginationConfig,
+  Typography,
+} from "antd";
 import "./AccountList.css";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,12 +20,13 @@ import { DropDownArray } from "../../../../components/dropdown";
 import columns from "./ColumnDataAccount";
 import _debounce from "lodash/debounce";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../../core/state/store";
-import { RoleAction } from "../../../../core/state/action-type/role.type";
-import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
-import { getRoles } from "../../../../core/state/actions/roleAtions";
-import { getUsers } from "../../../../core/state/actions/authActions";
-import { AuthAction } from "../../../../core/state/action-type/auth.type";
+import { RootState } from "../../../../core/store";
+import { RoleAction } from "../../../../core/store/action-type/role.type";
+import { updateBreadcrumbItems } from "../../../../core/store/actions/breadcrumbActions";
+import { getRoles } from "../../../../core/store/actions/roleAtions";
+import { getUsers } from "../../../../core/store/actions/authActions";
+import { AuthAction } from "../../../../core/store/action-type/auth.type";
+import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 
 const { Content } = Layout;
 
@@ -73,6 +82,15 @@ const AccountList = () => {
 
   const handleCreateAccount = () => {
     navigate("/cai-dat/quan-ly-tai-khoan/them-tai-khoan");
+  };
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, any>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+  ) => {
+    navigate(`/cai-dat/quan-ly-tai-khoan/danh-sach?page=${pagination.current}`);
   };
 
   const handleFiltering = useCallback(
@@ -177,10 +195,15 @@ const AccountList = () => {
           <Row gutter={24}>
             <Col>
               <Table
+                bordered
                 columns={columns}
                 dataSource={filteredData.length > 0 ? filteredData : data}
                 pagination={{ pageSize: 9 }}
                 className="table-account-list"
+                rowClassName={(record, index) =>
+                  index % 2 === 0 ? "bg-white" : "bg-orange-50"
+                }
+                onChange={handleTableChange}
               />
             </Col>
             <Col>

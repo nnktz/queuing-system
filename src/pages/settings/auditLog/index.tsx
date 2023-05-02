@@ -2,7 +2,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./AuditLog.css";
 import { useCallback, useEffect, useState } from "react";
-import { Col, Layout, Row, Space, Table, Typography } from "antd";
+import {
+  Col,
+  Layout,
+  Row,
+  Space,
+  Table,
+  TablePaginationConfig,
+  Typography,
+} from "antd";
 import InputText from "../../../components/inputs/text";
 import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
@@ -10,18 +18,20 @@ import columns from "./ColumnDataAuditLog";
 import _debounce from "lodash/debounce";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
-import { RootState } from "../../../core/state/store";
+import { RootState } from "../../../core/store";
 import { ThunkDispatch } from "redux-thunk";
-import { AuditLogAction } from "../../../core/state/action-type/auditLog.type";
-import { updateBreadcrumbItems } from "../../../core/state/actions/breadcrumbActions";
-import { getAuditLogs } from "../../../core/state/actions/auditLogActions";
+import { AuditLogAction } from "../../../core/store/action-type/auditLog.type";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { getAuditLogs } from "../../../core/store/actions/auditLogActions";
+import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
+import { useNavigate } from "react-router-dom";
 
 const { Content } = Layout;
 dayjs.extend(isBetween);
 
 export interface IDataType {
   key: string;
-  impact_time: Date;
+  impact_time: any;
   ip_address: string;
   note: string;
   username: string;
@@ -29,6 +39,7 @@ export interface IDataType {
 
 const AuditLog = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { auditLogs } = useSelector((state: RootState) => state.auditLog);
   const auditLogDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuditLogAction>>();
@@ -48,6 +59,15 @@ const AuditLog = () => {
       setStartDate(dates[0].startOf("day").toDate());
       setEndDate(dates[1].endOf("day").toDate());
     }
+  };
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, any>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+  ) => {
+    navigate(`/cai-dat/nhat-ky-hoat-dong?page=${pagination.current}`);
   };
 
   const handleSearchFiltering = useCallback(
@@ -85,7 +105,7 @@ const AuditLog = () => {
     if (auditLogs) {
       const newData: IDataType[] = auditLogs.map((log) => ({
         key: log.key,
-        impact_time: log.createAt.toDate(),
+        impact_time: new Date(log.createAt.toMillis()),
         ip_address: log.ip_address,
         note: log.note,
         username: log.user.username,
@@ -140,9 +160,14 @@ const AuditLog = () => {
           </Space>
 
           <Table
+            bordered
             columns={columns}
             dataSource={filteredData.length > 0 ? filteredData : data}
             className="table-adit-log"
+            rowClassName={(record, index) =>
+              index % 2 === 0 ? "bg-white" : "bg-orange-50"
+            }
+            onChange={handleTableChange}
           />
         </Space>
       </Content>

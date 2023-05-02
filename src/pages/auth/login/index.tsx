@@ -10,10 +10,10 @@ import { ExclamationCircleOutlined } from "@ant-design/icons";
 import Button from "../../../components/button";
 import { useDispatch } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../core/state/store";
-import { AuthAction, USER } from "../../../core/state/action-type/auth.type";
+import { RootState } from "../../../core/store";
+import { AuthAction, USER } from "../../../core/store/action-type/auth.type";
 import { useSelector } from "react-redux";
-import { setError, signin } from "../../../core/state/actions/authActions";
+import { setError, signin } from "../../../core/store/actions/authActions";
 
 function Login() {
   const navigate = useNavigate();

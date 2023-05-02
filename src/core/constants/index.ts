@@ -32,4 +32,5 @@ export const COLLECTIONS: ICollection = {
   CUSTOMERS: "customers",
 };
 
-export const SECRET_KEY = "nhatnguyen24082001deptrainhatvutruktz119hihi";
+export const SECRET_KEY =
+  "(.)nhatnguyen@24/08/2001?deptrainhatvutru:vktz119XDhihi##";

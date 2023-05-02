@@ -1,4 +1,4 @@
-import { RoleUser } from "../state/action-type/role.type";
+import { RoleUser } from "../store/action-type/role.type";
 
 export interface User {
   key: string;

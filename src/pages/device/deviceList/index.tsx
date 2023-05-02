@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import "./DeviceList.css";
-import { Table, Typography } from "antd";
+import { Table, TablePaginationConfig, Typography } from "antd";
 import { DropDownStatus } from "../../../components/dropdown";
 import {
   optionStatusActive,
@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { DeviceType } from "../../../core/models/Device.type";
 import { DataDevice } from "../DataDevice";
 import columns from "./ColumnDataDevice";
+import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 
 interface SelectedValues {
   active: string;
@@ -51,6 +52,15 @@ const DeviceList = () => {
 
   const handleViewMore = (record: DeviceType) => {
     console.log(record);
+  };
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, any>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+  ) => {
+    navigate(`/thiet-bi/danh-sach?page=${pagination.current}`);
   };
 
   useEffect(() => {
@@ -160,11 +170,16 @@ const DeviceList = () => {
       />
 
       <Table
+        bordered
         className="table-device-list"
         columns={columns}
         dataSource={filteredData.length > 0 ? filteredData : data}
         pagination={{ pageSize: 9 }}
         onRow={(record) => ({ onClick: () => handleViewMore(record) })}
+        rowClassName={(record, index) =>
+          index % 2 === 0 ? "bg-white" : "bg-orange-50"
+        }
+        onChange={handleTableChange}
       />
     </>
   );

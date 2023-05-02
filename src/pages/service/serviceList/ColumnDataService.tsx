@@ -1,9 +1,9 @@
 import { ColumnsType } from "antd/es/table";
-import { ServiceType } from "../../../core/models/Service.type";
 import { Typography } from "antd";
 import "./ServiceList.css";
+import { IDataType } from ".";
 
-const columns: ColumnsType<ServiceType> = [
+const columns: ColumnsType<IDataType> = [
   {
     title: "Mã dịch vụ",
     dataIndex: "key",

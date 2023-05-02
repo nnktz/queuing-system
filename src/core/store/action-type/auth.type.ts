@@ -47,6 +47,7 @@ interface SetUserAction {
   type: typeof SET_USER;
   payload: User;
 }
+
 interface SetUsersAction {
   type: typeof SET_USERS;
   payload: User[];

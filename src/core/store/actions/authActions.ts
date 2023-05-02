@@ -12,7 +12,7 @@ import {
   SignUpData,
   USER,
 } from "../action-type/auth.type";
-import { RootState } from "../store";
+import { RootState } from "..";
 import db from "../../../config/firebase";
 import { COLLECTIONS } from "../../constants";
 import { User } from "../../models/User";

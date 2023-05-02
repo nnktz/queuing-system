@@ -1,22 +1,29 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./DetailService.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Divider, Row, Space, Table, Typography } from "antd";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import EditSquare from "../../../assets/icons/Edit Square.svg";
 import BackSquare from "../../../assets/icons/back-square.svg";
-import { ServiceType } from "../../../core/models/Service.type";
-import { DataService } from "../DataService";
 import InputText from "../../../components/inputs/text";
 import { DropDownStatus } from "../../../components/dropdown";
 import { optionStatusServiceQueue } from "../../../components/dropdown/ItemDropdown";
 import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
 import { SearchOutlined } from "@ant-design/icons";
-import { QueueType } from "../../../core/models/Queue.type";
 import columns from "./ColumDataQueueService";
+import { RootState } from "../../../core/store";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { ServiceAction } from "../../../core/store/action-type/service.type";
+import { ThunkDispatch } from "redux-thunk";
+import { getServiceByKey } from "../../../core/store/actions/serviceActions";
 
 interface SelectedValues {
+  status: string;
+}
+
+export interface IDataType {
+  key: number;
   status: string;
 }
 
@@ -24,21 +31,18 @@ const DetailService = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const services = DataService;
-  const [data, setData] = useState<QueueType[]>([]);
-  const [dataService, setDataService] = useState<ServiceType | null>(null);
+  const { service } = useSelector((state: RootState) => state.service);
+  const serviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, ServiceAction>>();
+  const [data, setData] = useState<IDataType[]>([]);
   const [selectedValues, setSelectedValues] = useState<SelectedValues>({
     status: "",
   });
   const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState<QueueType[]>(data);
+  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
 
   const handleEditService = () => {
     navigate(`/dich-vu/danh-sach/chi-tiet/cap-nhat/${id}`);
-  };
-
-  const handleBackServiceList = () => {
-    navigate(`/dich-vu/danh-sach`);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,70 +53,46 @@ const DetailService = () => {
     setSelectedValues((prev) => ({ ...prev, status: value }));
   };
 
-  const getServiceByKey = useCallback(
-    (id: string) => {
-      const service = services.find((service) => service.key === id);
-      if (service) {
-        setDataService(service);
-      } else {
-        console.log(`Service with key ${id} not found`);
-      }
-    },
-    [services]
-  );
-
   useEffect(() => {
     const newData = data.filter((item) => {
       if (selectedValues.status) {
         return (
           (selectedValues.status === "all" ||
             item.status === selectedValues.status) &&
-          item.id.toString().toLowerCase().includes(search.toLowerCase())
+          item.key.toString().toLowerCase().includes(search.toLowerCase())
         );
       } else {
-        return item.id.toString().toLowerCase().includes(search.toLowerCase());
+        return item.key.toString().toLowerCase().includes(search.toLowerCase());
       }
     });
     setFilteredData(newData);
   }, [selectedValues.status, data, search]);
 
   useEffect(() => {
-    const newData =
-      dataService &&
-      dataService.queue.map((queue) => ({
-        id: queue.id,
-        service: queue.service,
-        start_time: queue.start_time,
-        end_time: queue.end_time,
-        device: queue.device,
+    if (service) {
+      const newData: IDataType[] = service.queue.map((queue) => ({
+        key: queue.id,
         status: queue.status,
-        customer: queue.customer,
       }));
-    if (newData === null) {
-      // handle the case where newData is null
-    } else {
-      setData(newData);
+      if (newData === null) {
+        // handle the case where newData is null
+      } else {
+        setData(newData);
+      }
     }
-  }, [dataService]);
-
-  useEffect(() => {
-    if (id) {
-      getServiceByKey(id);
-    }
-  }, [getServiceByKey, id]);
+  }, [service]);
 
   useEffect(() => {
     const data = [
-      { title: "Dịch vụ", link: "dich-vu/danh-sach" },
+      { title: "Dịch vụ" },
       { title: "Danh sách dịch vụ", link: "dich-vu/danh-sach" },
       { title: "Chi tiết", link: `dich-vu/danh-sach/chi-tiet/${id}` },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch, id]);
+    dispatch(updateBreadcrumbItems(data));
+    if (id) {
+      serviceDispatch(getServiceByKey(id));
+    }
+  }, [dispatch, id, serviceDispatch]);
 
   return (
     <Space size={24} className="detail-service-box" align="start">
@@ -133,7 +113,7 @@ const DetailService = () => {
                 </Col>
                 <Col>
                   <Typography.Text className="reg-16-16 gray-400">
-                    {dataService?.key}
+                    {service?.key}
                   </Typography.Text>
                 </Col>
               </Row>
@@ -145,7 +125,7 @@ const DetailService = () => {
                 </Col>
                 <Col>
                   <Typography.Text className="reg-16-16 gray-400">
-                    {dataService?.name}
+                    {service?.name}
                   </Typography.Text>
                 </Col>
               </Row>
@@ -157,7 +137,7 @@ const DetailService = () => {
                 </Col>
                 <Col>
                   <Typography.Text className="reg-16-16 gray-400 detail-describe">
-                    {dataService?.describe}
+                    {service?.describe}
                   </Typography.Text>
                 </Col>
               </Row>
@@ -267,6 +247,7 @@ const DetailService = () => {
           </Row>
           <Row>
             <Table
+              bordered
               className="table-queue-service pink-shadow"
               columns={columns}
               dataSource={filteredData.length > 0 ? filteredData : data}
@@ -286,7 +267,7 @@ const DetailService = () => {
         <ButtonCustom
           title="Quay lại"
           imageURL={BackSquare}
-          onClick={handleBackServiceList}
+          onClick={() => navigate(`/dich-vu/danh-sach`)}
           className="btn-back-service-list"
         />
       </Col>

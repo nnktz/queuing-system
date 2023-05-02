@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import "./Report.css";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Layout, Row, Space, Typography } from "antd";
+import { Layout, Row, Space, TablePaginationConfig, Typography } from "antd";
 import DatePickerWithRange from "../../components/datePicker/DatePickerWithRange";
 import ProTable from "@ant-design/pro-table";
 import ButtonCustom from "../../components/button/buttonCustom";
@@ -15,6 +15,7 @@ import * as XLSX from "xlsx";
 import dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 import _debounce from "lodash/debounce";
+import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 
 const { Content } = Layout;
 dayjs.extend(isBetween);
@@ -70,6 +71,15 @@ const Report = () => {
     }, 300),
     [data, startDate, endDate]
   );
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, any>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+  ) => {
+    navigate(`/bao-cao/lap-bao-cao?page=${pagination.current}`);
+  };
 
   useEffect(() => {
     if (queues) {
@@ -128,6 +138,7 @@ const Report = () => {
           <Row>
             <Space size={24} align="start">
               <ProTable
+                bordered
                 tableClassName="report-table pink-shadow"
                 dataSource={filteredData.length > 0 ? filteredData : data}
                 columns={columns}
@@ -137,6 +148,10 @@ const Report = () => {
                 }}
                 search={false}
                 toolBarRender={false}
+                rowClassName={(record, index) =>
+                  index % 2 === 0 ? "bg-white" : "bg-orange-50"
+                }
+                onChange={handleTableChange}
               />
 
               <ButtonCustom

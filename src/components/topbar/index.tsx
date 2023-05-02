@@ -5,10 +5,10 @@ import { BellOutlined } from "@ant-design/icons";
 import NotificationPopover from "../notification";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../core/state/store";
+import { RootState } from "../../core/store";
 import { ThunkDispatch } from "redux-thunk";
-import { AuthAction, USER } from "../../core/state/action-type/auth.type";
-import { getUser, setLoading } from "../../core/state/actions/authActions";
+import { AuthAction, USER } from "../../core/store/action-type/auth.type";
+import { getUser, setLoading } from "../../core/store/actions/authActions";
 import { useEffect } from "react";
 
 const { Header } = Layout;

@@ -5,10 +5,10 @@ import "./Menubar.css";
 import Button from "../button";
 import { MenuProps } from "./Menu.type";
 import { useDispatch } from "react-redux";
-import { RootState } from "../../core/state/store";
-import { signout } from "../../core/state/actions/authActions";
+import { RootState } from "../../core/store";
+import { signout } from "../../core/store/actions/authActions";
 import { ThunkDispatch } from "redux-thunk";
-import { AuthAction, USER } from "../../core/state/action-type/auth.type";
+import { AuthAction, USER } from "../../core/store/action-type/auth.type";
 import { useNavigate } from "react-router-dom";
 
 const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {

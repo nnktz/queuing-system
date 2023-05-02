@@ -8,22 +8,22 @@ import InputText from "../../../../components/inputs/text";
 import InputTextArea from "../../../../components/inputs/textArea";
 import Button from "../../../../components/button";
 import { CheckboxValueType } from "antd/lib/checkbox/Group";
-import { RootState } from "../../../../core/state/store";
-import { RoleAction } from "../../../../core/state/action-type/role.type";
+import { RootState } from "../../../../core/store";
+import { RoleAction } from "../../../../core/store/action-type/role.type";
 import { ThunkDispatch } from "redux-thunk";
 import {
   getRoleByKey,
   updateRole,
-} from "../../../../core/state/actions/roleAtions";
-import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+} from "../../../../core/store/actions/roleAtions";
+import { updateBreadcrumbItems } from "../../../../core/store/actions/breadcrumbActions";
 import MyAlert from "../../../../components/alert";
 import {
   setError,
   setSuccess,
-} from "../../../../core/state/actions/authActions";
-import { AuthAction } from "../../../../core/state/action-type/auth.type";
-import { AuditLogAction } from "../../../../core/state/action-type/auditLog.type";
-import { createAuditLog } from "../../../../core/state/actions/auditLogActions";
+} from "../../../../core/store/actions/authActions";
+import { AuthAction } from "../../../../core/store/action-type/auth.type";
+import { AuditLogAction } from "../../../../core/store/action-type/auditLog.type";
+import { createAuditLog } from "../../../../core/store/actions/auditLogActions";
 
 const { Content } = Layout;
 

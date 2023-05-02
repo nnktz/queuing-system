@@ -3,8 +3,8 @@ import InputText from "../../../components/inputs/text";
 import "./PersonalAccount.css";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateBreadcrumbItems } from "../../../core/state/actions/breadcrumbActions";
-import { RootState } from "../../../core/state/store";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { RootState } from "../../../core/store";
 import CameraOutlined from "@ant-design/icons/lib/icons/CameraOutlined";
 
 const PersonalAccount = () => {

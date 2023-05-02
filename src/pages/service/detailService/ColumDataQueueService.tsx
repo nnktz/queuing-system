@@ -1,13 +1,13 @@
 import { ColumnsType } from "antd/es/table";
 import { Typography } from "antd";
 import "./DetailService.css";
-import { QueueType } from "../../../core/models/Queue.type";
+import { IDataType } from ".";
 
-const columns: ColumnsType<QueueType> = [
+const columns: ColumnsType<IDataType> = [
   {
     title: "Số thứ tự",
-    dataIndex: "id",
-    key: "id",
+    dataIndex: "key",
+    key: "key",
     render: (id: number) => (
       <div className="queue-service-key">
         <Typography.Text className="reg-14-14 gray-400">{id}</Typography.Text>

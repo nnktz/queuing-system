@@ -6,7 +6,7 @@ import {
   SET_ROLE,
   SET_ROLES,
 } from "../action-type/role.type";
-import { RootState } from "../store";
+import { RootState } from "..";
 import db from "../../../config/firebase";
 import { COLLECTIONS } from "../../constants";
 import { Role } from "../../models/Role";

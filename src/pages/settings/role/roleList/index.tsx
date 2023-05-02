@@ -1,4 +1,4 @@
-import { Space, Table, Typography } from "antd";
+import { Space, Table, TablePaginationConfig, Typography } from "antd";
 import InputText from "../../../../components/inputs/text";
 import { SearchOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
@@ -8,11 +8,12 @@ import ButtonCustom from "../../../../components/button/buttonCustom";
 import AddSquare from "../../../../assets/icons/add-square.svg";
 import columns from "./ColumnDataRole";
 import _debounce from "lodash/debounce";
-import { updateBreadcrumbItems } from "../../../../core/state/actions/breadcrumbActions";
+import { updateBreadcrumbItems } from "../../../../core/store/actions/breadcrumbActions";
 import { ThunkDispatch } from "redux-thunk";
-import { RootState } from "../../../../core/state/store";
-import { RoleAction } from "../../../../core/state/action-type/role.type";
-import { getRoles } from "../../../../core/state/actions/roleAtions";
+import { RootState } from "../../../../core/store";
+import { RoleAction } from "../../../../core/store/action-type/role.type";
+import { getRoles } from "../../../../core/store/actions/roleAtions";
+import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
 
 export interface IDataType {
   key: string;
@@ -46,6 +47,15 @@ const RoleList = () => {
 
   const handleInsertRole = () => {
     navigate("/cai-dat/quan-ly-vai-tro/them-vai-tro");
+  };
+
+  const handleTableChange = (
+    pagination: TablePaginationConfig,
+    filters: Record<string, any>,
+    sorter: SorterResult<any> | SorterResult<any>[],
+    extra: TableCurrentDataSource<any>
+  ) => {
+    navigate(`/cai-dat/quan-ly-vai-tro/danh-sach?page=${pagination.current}`);
   };
 
   useEffect(() => {
@@ -88,9 +98,14 @@ const RoleList = () => {
 
       <Space size={24} align="start" className="role-list">
         <Table
-          className="table-role-list shadow-box"
+          bordered
+          className="table-role-list"
           columns={columns}
           dataSource={filteredData.length > 0 ? filteredData : data}
+          rowClassName={(record, index) =>
+            index % 2 === 0 ? "bg-white" : "bg-orange-50"
+          }
+          onChange={handleTableChange}
         />
         <ButtonCustom
           title="Thêm vai trò"

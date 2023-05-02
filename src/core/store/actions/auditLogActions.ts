@@ -4,7 +4,7 @@ import {
   SET_AUDIT_LOGS,
 } from "./../action-type/auditLog.type";
 import { ThunkAction } from "redux-thunk";
-import { RootState } from "../store";
+import { RootState } from "..";
 import db from "../../../config/firebase";
 import { AuditLog } from "../../models/AuditLog";
 import { COLLECTIONS } from "../../constants";
@@ -23,6 +23,7 @@ export const getAuditLogs = (): ThunkAction<
       const auditLogsRef = await db
         .firestore()
         .collection(COLLECTIONS.AUDIT_LOGS)
+        .orderBy("createAt", "desc")
         .get();
       const auditLogsData = auditLogsRef.docs.map((doc) => {
         const auditLog = doc.data() as AuditLog;
