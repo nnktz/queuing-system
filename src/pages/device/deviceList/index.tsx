@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useCallback, useEffect, useState } from "react";
 import "./DeviceList.css";
 import { Table, TablePaginationConfig, Typography } from "antd";
 import { DropDownStatus } from "../../../components/dropdown";
@@ -12,37 +12,57 @@ import { SearchOutlined } from "@ant-design/icons";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import AddSquare from "../../../assets/icons/add-square.svg";
 import { useNavigate } from "react-router-dom";
-import { DeviceType } from "../../../core/models/Device.type";
-import { DataDevice } from "../DataDevice";
+import { Device } from "../../../core/models/Device";
 import columns from "./ColumnDataDevice";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
+import _debounce from "lodash/debounce";
+import { RootState } from "../../../core/store";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { DeviceAction } from "../../../core/store/action-type/device.type";
+import { ThunkDispatch } from "redux-thunk";
+import { getDevices } from "../../../core/store/actions/deviceActions";
 
 interface SelectedValues {
   active: string;
   connection: string;
 }
 
+export interface IDataType {
+  key: string;
+  name: string;
+  ip_address: string;
+  status_active: string;
+  status_connection: string;
+  service_use: string;
+  username: string;
+  password: string;
+  category: string;
+}
+
 const DeviceList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { devices } = useSelector((state: RootState) => state.device);
+  const deviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, DeviceAction>>();
+
   const [search, setSearch] = useState("");
-  const [data, setData] = useState<DeviceType[]>([]);
-  const [devices] = useState<DeviceType[]>(DataDevice);
+  const [data, setData] = useState<IDataType[]>([]);
+  const [active, setActive] = useState("");
+  const [connection, setConnection] = useState("");
   const [selectedValues, setSelectedValues] = useState<SelectedValues>({
     active: "",
     connection: "",
   });
-  const [filteredData, setFilteredData] = useState<DeviceType[]>(data);
-
-  const handleAddDevice = () => {
-    navigate("them-thiet-bi");
-  };
+  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
 
   const handleStatusActiveChange = (value: string) => {
+    setActive(value);
     setSelectedValues((prev) => ({ ...prev, active: value }));
   };
 
   const handleStatusConnectionChange = (value: string) => {
+    setConnection(value);
     setSelectedValues((prev) => ({ ...prev, connection: value }));
   };
 
@@ -50,8 +70,8 @@ const DeviceList = () => {
     setSearch(event.target.value);
   };
 
-  const handleViewMore = (record: DeviceType) => {
-    console.log(record);
+  const handleViewMore = (record: Device) => {
+    // console.log(record);
   };
 
   const handleTableChange = (
@@ -63,61 +83,69 @@ const DeviceList = () => {
     navigate(`/thiet-bi/danh-sach?page=${pagination.current}`);
   };
 
-  useEffect(() => {
-    const newData = data.filter((item) => {
-      if (selectedValues.active && selectedValues.connection) {
-        return (
-          (selectedValues.active === "all" ||
-            item.status_active === selectedValues.active) &&
-          (selectedValues.connection === "all" ||
-            item.status_connection === selectedValues.connection) &&
-          item.key.toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.active) {
-        return (
-          (selectedValues.active === "all" ||
-            item.status_active === selectedValues.active) &&
-          item.key.toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.connection) {
-        return (
-          (selectedValues.connection === "all" ||
-            item.status_connection === selectedValues.connection) &&
-          item.key.toLowerCase().includes(search.toLowerCase())
-        );
-      } else {
-        return item.key.toLowerCase().includes(search.toLowerCase());
-      }
-    });
-    setFilteredData(newData);
-  }, [selectedValues, data, search]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleFiltering = useCallback(
+    _debounce(() => {
+      const newData = data.filter((item) => {
+        if (selectedValues.active && selectedValues.connection) {
+          return (
+            (selectedValues.active === "all" ||
+              item.status_active === selectedValues.active) &&
+            (selectedValues.connection === "all" ||
+              item.status_connection === selectedValues.connection) &&
+            item.key.toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.active) {
+          return (
+            (selectedValues.active === "all" ||
+              item.status_active === selectedValues.active) &&
+            item.key.toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.connection) {
+          return (
+            (selectedValues.connection === "all" ||
+              item.status_connection === selectedValues.connection) &&
+            item.key.toLowerCase().includes(search.toLowerCase())
+          );
+        } else {
+          return item.key.toLowerCase().includes(search.toLowerCase());
+        }
+      });
+      setFilteredData(newData);
+    }, 300),
+    [selectedValues, data, search]
+  );
 
   useEffect(() => {
-    const newData = devices.map((device) => ({
-      key: device.key,
-      name: device.name,
-      ip_address: device.ip_address,
-      status_active: device.status_active,
-      status_connection: device.status_connection,
-      service_use: device.service_use,
-      category: device.category,
-      username: device.username,
-      password: device.password,
-    }));
-    setData(newData);
+    handleFiltering();
+  }, [handleFiltering]);
+
+  useEffect(() => {
+    if (devices) {
+      const newData: IDataType[] = devices.map((device) => ({
+        key: device.key,
+        name: device.name,
+        ip_address: device.ip_address,
+        status_active: device.status_active,
+        status_connection: device.status_connection,
+        service_use:
+          device.service_use.map((service) => service.label).join(", ") + ".",
+        category: device.category.label,
+        username: device.username,
+        password: device.password,
+      }));
+      setData(newData);
+    }
   }, [devices]);
 
   useEffect(() => {
     const data = [
-      { title: "Thiết bị", link: "thiet-bi/danh-sach" },
+      { title: "Thiết bị" },
       { title: "Danh sách thiết bị", link: "thiet-bi/danh-sach" },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch]);
+    dispatch(updateBreadcrumbItems(data));
+    deviceDispatch(getDevices());
+  }, [deviceDispatch, dispatch]);
 
   return (
     <>
@@ -131,6 +159,7 @@ const DeviceList = () => {
         </Typography.Text>
 
         <DropDownStatus
+          value={active}
           options={optionStatusActive}
           onChange={handleStatusActiveChange}
         />
@@ -142,6 +171,7 @@ const DeviceList = () => {
         </Typography.Text>
 
         <DropDownStatus
+          value={connection}
           options={optionStatusConnection}
           onChange={handleStatusConnectionChange}
         />
@@ -166,7 +196,7 @@ const DeviceList = () => {
         title="Thêm thiết bị"
         className="add-device-btn"
         imageURL={AddSquare}
-        onClick={handleAddDevice}
+        onClick={() => navigate("them-thiet-bi")}
       />
 
       <Table

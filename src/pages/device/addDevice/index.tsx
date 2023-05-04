@@ -1,35 +1,72 @@
 import "./AddDevice.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Form, Typography } from "antd";
 import Button from "../../../components/button";
 import { useNavigate } from "react-router-dom";
 import InputText from "../../../components/inputs/text";
-import { DropDownCategoryDevice } from "../../../components/dropdown";
-import { optionCategoryDevice } from "../../../components/dropdown/ItemDropdown";
+import {
+  DropDownCategoryDevice,
+  DropDownServiceUseDevice,
+} from "../../../components/dropdown";
+import {
+  DeviceAction,
+  DeviceOptionData,
+} from "../../../core/store/action-type/device.type";
+import { RootState } from "../../../core/store";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { ThunkDispatch } from "redux-thunk";
+import { AuditLogAction } from "../../../core/store/action-type/auditLog.type";
+import { ServiceAction } from "../../../core/store/action-type/service.type";
+import { getServiceActivation } from "../../../core/store/actions/serviceActions";
+import { AuthAction } from "../../../core/store/action-type/auth.type";
+import { setError, setSuccess } from "../../../core/store/actions/authActions";
+import {
+  createDevice,
+  getDeviceCategories,
+} from "../../../core/store/actions/deviceActions";
+import MyAlert from "../../../components/alert";
+import { createAuditLog } from "../../../core/store/actions/auditLogActions";
+import { DeviceCategory } from "../../../core/models/DeviceCategory";
 
 const AddDevice = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { services } = useSelector((state: RootState) => state.service);
+  const { categories } = useSelector((state: RootState) => state.device);
+  const { error, success } = useSelector((state: RootState) => state.auth);
+  const auditLogDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuditLogAction>>();
+  const serviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, ServiceAction>>();
+  const deviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, DeviceAction>>();
+  const authDispatch =
+    useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
 
-  const [keyDevice, setKeyDevice] = useState("");
-  const [nameDevice, setNameDevice] = useState("");
+  const [key, setKey] = useState("");
+  const [name, setName] = useState("");
   const [ipAddress, setIPAddress] = useState("");
-  const [serviceUse, setServiceUse] = useState("");
+  const [selectedService, setSelectedService] = useState<string[]>();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
+  const [category, setCategory] = useState<DeviceCategory>();
+  const [serviceUse, setServiceUse] = useState<DeviceOptionData[]>([]);
+  const [serviceData, setServiceData] = useState<DeviceOptionData[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [createSuccess, setCreateSuccess] = useState(false);
 
   const handleKeyDeviceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setKeyDevice(event.target.value);
+    setKey(event.target.value);
   };
 
   const handleNameDeviceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setNameDevice(event.target.value);
+    setName(event.target.value);
   };
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -46,28 +83,96 @@ const AddDevice = () => {
     setPassword(event.target.value);
   };
 
-  const handleServiceUseChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setServiceUse(event.target.value);
+  const handleSelectedServiceChange = (values: string[]) => {
+    setSelectedService(values);
+    if (services) {
+      const selectedServices = services
+        .filter((service) => values.includes(service.key))
+        .map((service) => ({
+          value: service.key,
+          label: service.name,
+        }));
+      setServiceUse(selectedServices);
+    }
   };
 
-  const handleSelectedChange = (value: string) => {
-    setSelectedValue(value);
+  const handleSelectedChange = (key: string) => {
+    setSelectedValue(key);
+    const selectedCategory = categories?.find(
+      (category) => category.value === key
+    );
+    const { value = "", label = "" } = selectedCategory || {};
+    setCategory({ value, label });
+  };
+
+  const submitHandler = async () => {
+    setLoading(true);
+    try {
+      if (category) {
+        await authDispatch(
+          createDevice(
+            {
+              key,
+              name,
+              username,
+              password,
+              ip_address: ipAddress,
+              service_use: serviceUse,
+              category,
+            },
+            () => setLoading(false)
+          )
+        );
+        setCreateSuccess(true);
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
   };
 
   useEffect(() => {
+    if (createSuccess) {
+      auditLogDispatch(
+        createAuditLog(`Thêm thiết bị ${key}`, () => setLoading(false))
+      );
+      setTimeout(() => {
+        navigate("..");
+      }, 1000);
+    }
+  }, [auditLogDispatch, createSuccess, key, navigate]);
+
+  useEffect(() => {
+    if (services) {
+      const newData: DeviceOptionData[] = services.map((service) => ({
+        value: service.key,
+        label: service.name,
+      }));
+      setServiceData(newData);
+    }
+  }, [services]);
+
+  useEffect(() => {
+    return () => {
+      if (error) {
+        authDispatch(setError(""));
+      }
+      if (success) {
+        authDispatch(setSuccess(""));
+      }
+    };
+  }, [authDispatch, error, success]);
+
+  useEffect(() => {
     const data = [
-      { title: "Thiết bị", link: "thiet-bi/danh-sach" },
+      { title: "Thiết bị" },
       { title: "Danh sách thiết bị", link: "thiet-bi/danh-sach" },
       { title: "Thêm thiết bị", link: "thiet-bi/danh-sach/them-thiet-bi" },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch]);
+    dispatch(updateBreadcrumbItems(data));
+    serviceDispatch(getServiceActivation());
+    deviceDispatch(getDeviceCategories());
+  }, [deviceDispatch, dispatch, serviceDispatch]);
 
   return (
     <>
@@ -75,7 +180,14 @@ const AddDevice = () => {
         Quản lý thiết bị
       </Typography.Text>
 
-      <Form scrollToFirstError className="shadow-box bg-white add-device-box">
+      {success && <MyAlert message={success} type="success" />}
+      {error && <MyAlert message={error} type="error" />}
+
+      <Form
+        scrollToFirstError
+        className="shadow-box bg-white add-device-box"
+        onFinish={submitHandler}
+      >
         <Typography.Title
           level={4}
           className="bold-20-20 orange-500 add-device-box_title"
@@ -97,7 +209,7 @@ const AddDevice = () => {
         >
           <InputText
             placeholder="Nhập mã thiết bị"
-            value={keyDevice}
+            value={key}
             onChange={handleKeyDeviceChange}
             style={{ width: "100%" }}
             className="reg-16-16"
@@ -118,7 +230,7 @@ const AddDevice = () => {
         >
           <DropDownCategoryDevice
             placeholder="Chọn loại thiết bị"
-            options={optionCategoryDevice}
+            options={categories}
             onChange={handleSelectedChange}
             value={selectedValue}
           />
@@ -138,7 +250,7 @@ const AddDevice = () => {
         >
           <InputText
             placeholder="Nhập tên thiết bị"
-            value={nameDevice}
+            value={name}
             onChange={handleNameDeviceChange}
             style={{ width: "100%" }}
             className="reg-16-16"
@@ -220,12 +332,12 @@ const AddDevice = () => {
           ]}
           className="service-use-device"
         >
-          <InputText
-            placeholder="Nhập dịch vụ sử dụng"
-            value={serviceUse}
-            onChange={handleServiceUseChange}
-            style={{ width: "100%" }}
-            className="reg-16-16"
+          <DropDownServiceUseDevice
+            mode="tags"
+            placeholder="Chọn dịch vụ sử dụng"
+            value={selectedService}
+            options={serviceData}
+            onChange={handleSelectedServiceChange}
           />
         </Form.Item>
 
@@ -254,10 +366,10 @@ const AddDevice = () => {
             <Button
               htmlType="submit"
               className="bg-orange-400 btn-device"
-              handleClick={() => navigate("..")}
+              isDisable={loading}
             >
               <Typography.Text className="white bold-16-16">
-                Thêm thiết bị
+                {loading ? "Loading..." : "Thêm thiết bị"}
               </Typography.Text>
             </Button>
           </div>

@@ -1,54 +1,37 @@
 import { Typography } from "antd";
 import "./DetailDevice.css";
-import { DataDevice } from "../DataDevice";
-import { DeviceType } from "../../../core/models/Device.type";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import EditSquare from "../../../assets/icons/Edit Square.svg";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { RootState } from "../../../core/store";
+import { ThunkDispatch } from "redux-thunk";
+import { DeviceAction } from "../../../core/store/action-type/device.type";
+import { getDeviceByKey } from "../../../core/store/actions/deviceActions";
 
 const DetailDevice = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
-  const devices = DataDevice;
-  const [dataDevice, setDataDevice] = useState<DeviceType | null>(null);
+  const { device } = useSelector((state: RootState) => state.device);
+  const deviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, DeviceAction>>();
 
   const handleEditDevice = () => {
     navigate(`/thiet-bi/danh-sach/cap-nhat/${id}`);
   };
 
-  const getDeviceByKey = useCallback(
-    (id: string) => {
-      const device = devices.find((device) => device.key === id);
-      if (device) {
-        setDataDevice(device);
-      } else {
-        console.log(`Device with key ${id} not found`);
-      }
-    },
-    [devices]
-  );
-
-  useEffect(() => {
-    if (id) {
-      getDeviceByKey(id);
-    }
-  }, [getDeviceByKey, id]);
-
   useEffect(() => {
     const data = [
-      { title: "Thiết bị", link: "thiet-bi/danh-sach" },
+      { title: "Thiết bị" },
       { title: "Danh sách thiết bị", link: "thiet-bi/danh-sach" },
       { title: "Chi tiết thiết bị", link: `thiet-bi/danh-sach/chi-tiet/${id}` },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch, id]);
+    dispatch(updateBreadcrumbItems(data));
+    id && deviceDispatch(getDeviceByKey(id));
+  }, [deviceDispatch, dispatch, id]);
 
   return (
     <>
@@ -71,7 +54,7 @@ const DetailDevice = () => {
                 Mã thiết bị:
               </Typography.Text>
               <Typography.Text className="reg-16-16 gray-400 info-detail-device">
-                {dataDevice?.key}
+                {device?.key}
               </Typography.Text>
             </div>
 
@@ -80,7 +63,7 @@ const DetailDevice = () => {
                 Tên thiết bị:
               </Typography.Text>
               <Typography.Text className="reg-16-16 gray-400 info-detail-device">
-                {dataDevice?.name}
+                {device?.name}
               </Typography.Text>
             </div>
 
@@ -89,7 +72,7 @@ const DetailDevice = () => {
                 Địa chỉ IP:
               </Typography.Text>
               <Typography.Text className="reg-16-16 gray-400 info-detail-device">
-                {dataDevice?.ip_address}
+                {device?.ip_address}
               </Typography.Text>
             </div>
           </div>
@@ -100,7 +83,7 @@ const DetailDevice = () => {
                 Loại thiết bị:
               </Typography.Text>
               <Typography.Text className="reg-16-16 gray-400 info-detail-device">
-                {dataDevice?.category}
+                {device?.category.label}
               </Typography.Text>
             </div>
 
@@ -109,7 +92,7 @@ const DetailDevice = () => {
                 Tên đăng nhập:
               </Typography.Text>
               <Typography.Text className="reg-16-16 gray-400 info-detail-device">
-                {dataDevice?.username}
+                {device?.username}
               </Typography.Text>
             </div>
 
@@ -118,7 +101,7 @@ const DetailDevice = () => {
                 Mật khẩu:
               </Typography.Text>
               <Typography.Text className="reg-16-16 gray-400 info-detail-device">
-                {dataDevice?.password}
+                {device?.password}
               </Typography.Text>
             </div>
           </div>
@@ -132,7 +115,8 @@ const DetailDevice = () => {
             className="reg-16-16 gray-400"
             style={{ marginTop: 6 }}
           >
-            {dataDevice?.service_use}
+            {device?.service_use.map((service) => service.label).join(", ") +
+              "."}
           </Typography.Text>
         </div>
       </main>

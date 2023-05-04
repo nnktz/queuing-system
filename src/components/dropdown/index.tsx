@@ -102,9 +102,11 @@ export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
 
 interface DropdownServiceProps {
   options: OptionStatus[];
-  onChange: (value: string) => void;
+  onChange: (value: string[], option: any) => void;
   placeholder?: string;
   className?: string;
+  value?: string[];
+  style?: React.CSSProperties;
   mode: "multiple" | "tags" | undefined;
 }
 
@@ -114,9 +116,11 @@ export const DropDownServiceUseDevice: React.FC<DropdownServiceProps> = ({
   placeholder,
   className,
   mode,
+  value,
+  style,
 }) => {
-  const handleChange = (value: string) => {
-    onChange(value);
+  const handleChange = (values: string[], options: any) => {
+    onChange(values, options);
   };
 
   return (
@@ -125,6 +129,8 @@ export const DropDownServiceUseDevice: React.FC<DropdownServiceProps> = ({
       placeholder={placeholder}
       onChange={handleChange}
       suffixIcon={false}
+      style={style}
+      value={value}
     >
       {options.map((option) => (
         <Option key={option.value} value={option.value}>

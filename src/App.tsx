@@ -56,18 +56,18 @@ function App() {
           <Route path="/" element={<Layout />}>
             <Route path="tai-khoan-ca-nhan" element={<PersonalAccount />} />
             <Route path="dashboard" element={<DashBoard />}>
-              <Route path="ngay" element={<Days />} />
+              <Route index path="ngay" element={<Days />} />
               <Route path="tuan" element={<Weeks />} />
               <Route path="thang" element={<Months />} />
             </Route>
             <Route path="thiet-bi" element={<Device />}>
-              <Route path="danh-sach" element={<DeviceList />} />
+              <Route index path="danh-sach" element={<DeviceList />} />
               <Route path="danh-sach/them-thiet-bi" element={<AddDevice />} />
               <Route path="danh-sach/chi-tiet/:id" element={<DetailDevice />} />
               <Route path="danh-sach/cap-nhat/:id" element={<UpdateDevice />} />
             </Route>
             <Route path="dich-vu" element={<Service />}>
-              <Route path="danh-sach" element={<ServiceList />} />
+              <Route index path="danh-sach" element={<ServiceList />} />
               <Route path="danh-sach/them-dich-vu" element={<AddService />} />
               <Route path="danh-sach/chi-tiet">
                 <Route path=":id" element={<DetailService />} />
@@ -75,21 +75,21 @@ function App() {
               </Route>
             </Route>
             <Route path="cap-so" element={<Queue />}>
-              <Route path="danh-sach" element={<QueueList />} />
+              <Route index path="danh-sach" element={<QueueList />} />
               <Route path="danh-sach/cap-so-moi" element={<NewQueue />} />
               <Route path="danh-sach/chi-tiet/:id" element={<DetailQueue />} />
             </Route>
             <Route path="bao-cao" element={<Report />}>
-              <Route path="lap-bao-cao" element={<Report />} />
+              <Route index path="lap-bao-cao" element={<Report />} />
             </Route>
             <Route path="cai-dat">
               <Route path="quan-ly-vai-tro" element={<Role />}>
-                <Route path="danh-sach" element={<RoleList />} />
+                <Route index path="danh-sach" element={<RoleList />} />
                 <Route path="them-vai-tro" element={<InsertRole />} />
                 <Route path="cap-nhat/:id" element={<UpdateRole />} />
               </Route>
               <Route path="quan-ly-tai-khoan" element={<Account />}>
-                <Route path="danh-sach" element={<AccountList />} />
+                <Route index path="danh-sach" element={<AccountList />} />
                 <Route path="them-tai-khoan" element={<CreateAccount />} />
                 <Route path="cap-nhat/:id" element={<UpdateAccount />} />
               </Route>

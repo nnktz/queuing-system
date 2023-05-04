@@ -122,3 +122,21 @@
   line-height: 24px;
   color: #282739;
 }
+
+.ant-select-show-search:where(
+    .css-dev-only-do-not-override-1vtf12y
+  ).ant-select:not(.ant-select-customize-input)
+  .ant-select-selector {
+  height: 44px;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-multiple
+  .ant-select-selection-item {
+  background: #ffac6a;
+}
+
+:where(.css-dev-only-do-not-override-1vtf12y).ant-select-multiple
+  .ant-select-selection-item-remove {
+  height: 20px;
+  width: 20px;
+}

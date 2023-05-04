@@ -34,7 +34,7 @@ const UpdateService = () => {
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const [loading, setLoading] = useState(false);
-  const [createSuccess, setCreateSuccess] = useState(false);
+  const [updateSuccess, setUpdateSuccess] = useState(false);
 
   const handleKeyServiceChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -80,7 +80,7 @@ const UpdateService = () => {
             () => setLoading(false)
           )
         );
-        setCreateSuccess(true);
+        setUpdateSuccess(true);
       }
     } catch (error) {
       setLoading(false);
@@ -92,7 +92,7 @@ const UpdateService = () => {
 
   useEffect(() => {
     if (id) {
-      if (createSuccess) {
+      if (updateSuccess) {
         auditLogDispatch(
           createAuditLog(
             `Cập nhật thông tin dịch vụ ${form.getFieldValue("key")}`,
@@ -105,7 +105,7 @@ const UpdateService = () => {
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [auditLogDispatch, createSuccess, id, navigate]);
+  }, [auditLogDispatch, updateSuccess, id, navigate]);
 
   useEffect(() => {
     setDataService();

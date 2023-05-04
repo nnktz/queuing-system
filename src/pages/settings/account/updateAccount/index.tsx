@@ -72,7 +72,6 @@ const UpdateAccount = () => {
     } = selectedRole || {};
     setRole({ key, name, describe, permissions });
   };
-  console.log(role);
 
   const handleStatusChange = (value: string) => {
     form.setFieldValue("status", value);

@@ -19,6 +19,7 @@ export interface ICollection {
   ROLES: string;
   AUDIT_LOGS: string;
   CUSTOMERS: string;
+  DEVICE_CATEGORIES: string;
 }
 
 export const COLLECTIONS: ICollection = {
@@ -30,6 +31,7 @@ export const COLLECTIONS: ICollection = {
   ROLES: "roles",
   AUDIT_LOGS: "auditLogs",
   CUSTOMERS: "customers",
+  DEVICE_CATEGORIES: "deviceCategories",
 };
 
 export const SECRET_KEY =

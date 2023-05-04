@@ -10,6 +10,7 @@ import authReducer from "./reducers/authReducer";
 import roleReducer from "./reducers/roleReducer";
 import auditLogReducer from "./reducers/auditLogReducer";
 import serviceReducer from "./reducers/serviceReduce";
+import deviceReducer from "./reducers/deviceReducer";
 
 const rootReducer = combineReducers({
   breadcrumb: breadcrumbReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   role: roleReducer,
   auditLog: auditLogReducer,
   service: serviceReducer,
+  device: deviceReducer,
 });
 
 const store = createStore(

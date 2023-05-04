@@ -1,8 +1,8 @@
 import { ColumnsType } from "antd/es/table";
-import { DeviceType } from "../../../core/models/Device.type";
 import { Modal, Typography } from "antd";
 import "./DeviceList.css";
 import { useState } from "react";
+import { IDataType } from ".";
 
 const ServiceModal = ({ service }: { service: string }) => {
   const [visible, setVisible] = useState(false);
@@ -48,7 +48,7 @@ const ServiceModal = ({ service }: { service: string }) => {
   );
 };
 
-const columns: ColumnsType<DeviceType> = [
+const columns: ColumnsType<IDataType> = [
   {
     title: "Mã thiết bị",
     dataIndex: "key",

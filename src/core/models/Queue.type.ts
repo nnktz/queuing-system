@@ -1,5 +1,5 @@
 import { CustomerType } from "./Customer.type";
-import { DeviceType } from "./Device.type";
+import { Device } from "./Device";
 import { Service } from "./Service";
 
 export interface QueueType {
@@ -8,6 +8,6 @@ export interface QueueType {
   service: Service;
   start_time: Date;
   end_time: Date;
-  device: DeviceType;
+  device: Device;
   status: string;
 }
