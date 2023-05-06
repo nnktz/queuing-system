@@ -10,7 +10,7 @@ import {
 import { DataQueue } from "../queue/DataQueue";
 
 interface DataType {
-  key: number;
+  key: string;
   customer: string | null;
   service: string;
   start_time: Date;

@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./QueueList.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { QueueType } from "../../../core/models/Queue.type";
-import { DataQueue } from "../DataQueue";
 import {
   Col,
   Row,
@@ -14,11 +12,7 @@ import {
 } from "antd";
 import columns from "./ColumnDataQueue";
 import { DropDownArray } from "../../../components/dropdown";
-import {
-  optionDeviceQueue,
-  optionService,
-  optionStatusQueue,
-} from "../../../components/dropdown/ItemDropdown";
+import { optionStatusQueue } from "../../../components/dropdown/ItemDropdown";
 import { DropDownStatus } from "../../../components/dropdown";
 import DatePickerWithRange from "../../../components/datePicker/DatePickerWithRange";
 import InputText from "../../../components/inputs/text";
@@ -26,6 +20,21 @@ import SearchOutlined from "@ant-design/icons/lib/icons/SearchOutlined";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import AddSquare from "../../../assets/icons/add-square.svg";
 import { SorterResult, TableCurrentDataSource } from "antd/lib/table/interface";
+import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
+import { QueueAction } from "../../../core/store/action-type/queue.type";
+import { RootState } from "../../../core/store";
+import { ThunkDispatch } from "redux-thunk";
+import { getQueues } from "../../../core/store/actions/queueActions";
+import { ServiceAction } from "../../../core/store/action-type/service.type";
+import { DeviceAction } from "../../../core/store/action-type/device.type";
+import _debounce from "lodash/debounce";
+import { getServices } from "../../../core/store/actions/serviceActions";
+import { getDevices } from "../../../core/store/actions/deviceActions";
+import { IOption } from "../../../components/dropdown/dropdown.type";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+
+dayjs.extend(isBetween);
 
 interface SelectedValues {
   service: string;
@@ -33,12 +42,12 @@ interface SelectedValues {
   device: string;
 }
 
-interface DataType {
-  key: number;
+export interface IDataType {
+  key: string;
   customer: string | null;
   service: string;
-  start_time: Date;
-  end_time: Date;
+  start_time: any;
+  end_time: any;
   device: string;
   status: string;
 }
@@ -46,27 +55,35 @@ interface DataType {
 const QueueList = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { queues } = useSelector((state: RootState) => state.queue);
+  const { services } = useSelector((state: RootState) => state.service);
+  const { devices } = useSelector((state: RootState) => state.device);
+  const queueDispatch =
+    useDispatch<ThunkDispatch<RootState, null, QueueAction>>();
+  const serviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, ServiceAction>>();
+  const deviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, DeviceAction>>();
 
   const [search, setSearch] = useState("");
-  const [data, setData] = useState<DataType[]>([]);
-  const [queues] = useState<QueueType[]>(DataQueue);
+  const [data, setData] = useState<IDataType[]>([]);
   const [selectedValues, setSelectedValues] = useState<SelectedValues>({
     service: "",
     status: "",
     device: "",
   });
-  const [filteredData, setFilteredData] = useState<DataType[]>(data);
-
-  const handleNewQueue = () => {
-    navigate("cap-so-moi");
-  };
+  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
+  const [serviceData, setServiceData] = useState<IOption[]>([]);
+  const [deviceData, setDeviceData] = useState<IOption[]>([]);
+  const [startDate, setStartDate] = useState(dayjs().startOf("day").toDate());
+  const [endDate, setEndDate] = useState(dayjs().endOf("day").toDate());
 
   const handleServiceChange = (
     event: React.ChangeEvent<{ value: unknown }>
   ) => {
     const serviceId = event.target.value as string;
     const serviceName =
-      optionService.find((item) => item.value === serviceId)?.label ?? "";
+      services?.find((item) => item.key === serviceId)?.name ?? "";
 
     setSelectedValues((prevSelectedValues) => ({
       ...prevSelectedValues,
@@ -81,7 +98,7 @@ const QueueList = () => {
   const handleDeviceChange = (event: React.ChangeEvent<{ value: unknown }>) => {
     const deviceId = event.target.value as string;
     const deviceName =
-      optionDeviceQueue.find((item) => item.value === deviceId)?.label ?? "";
+      devices?.find((item) => item.key === deviceId)?.name ?? "";
 
     setSelectedValues((prevSelectedValues) => ({
       ...prevSelectedValues,
@@ -93,6 +110,13 @@ const QueueList = () => {
     setSearch(event.target.value);
   };
 
+  const handleDateChange = (dates: any, dateStrings: [string, string]) => {
+    if (dates) {
+      setStartDate(dates[0].startOf("day").toDate());
+      setEndDate(dates[1].endOf("day").toDate());
+    }
+  };
+
   const handleTableChange = (
     pagination: TablePaginationConfig,
     filters: Record<string, any>,
@@ -102,95 +126,153 @@ const QueueList = () => {
     navigate(`/cap-so/danh-sach?page=${pagination.current}`);
   };
 
-  useEffect(() => {
-    const newData = data.filter((item) => {
-      if (
-        selectedValues.status &&
-        selectedValues.device &&
-        selectedValues.service
-      ) {
-        return (
-          (selectedValues.status === "all" ||
-            item.status === selectedValues.status) &&
-          (selectedValues.device === "all" ||
-            item.device === selectedValues.device) &&
-          (selectedValues.service === "all" ||
-            item.service === selectedValues.service) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.status && selectedValues.device) {
-        return (
-          (selectedValues.status === "all" ||
-            item.status === selectedValues.status) &&
-          (selectedValues.device === "all" ||
-            item.device === selectedValues.device) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.status && selectedValues.service) {
-        return (
-          (selectedValues.status === "all" ||
-            item.status === selectedValues.status) &&
-          (selectedValues.service === "all" ||
-            item.service === selectedValues.service) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.device && selectedValues.service) {
-        return (
-          (selectedValues.device === "all" ||
-            item.device === selectedValues.device) &&
-          (selectedValues.service === "all" ||
-            item.service === selectedValues.service) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.status) {
-        return (
-          (selectedValues.status === "all" ||
-            item.status === selectedValues.status) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.device) {
-        return (
-          (selectedValues.device === "all" ||
-            item.device === selectedValues.device) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else if (selectedValues.service) {
-        return (
-          (selectedValues.service === "all" ||
-            item.service === selectedValues.service) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else {
-        return item.key.toString().toLowerCase().includes(search.toLowerCase());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleDataFiltering = useCallback(
+    _debounce(() => {
+      const newData = data.filter((item) => {
+        if (
+          selectedValues.status &&
+          selectedValues.device &&
+          selectedValues.service
+        ) {
+          return (
+            (selectedValues.status === "all" ||
+              item.status === selectedValues.status) &&
+            (selectedValues.device === "all" ||
+              item.device === selectedValues.device) &&
+            (selectedValues.service === "all" ||
+              item.service === selectedValues.service) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.status && selectedValues.device) {
+          return (
+            (selectedValues.status === "all" ||
+              item.status === selectedValues.status) &&
+            (selectedValues.device === "all" ||
+              item.device === selectedValues.device) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.status && selectedValues.service) {
+          return (
+            (selectedValues.status === "all" ||
+              item.status === selectedValues.status) &&
+            (selectedValues.service === "all" ||
+              item.service === selectedValues.service) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.device && selectedValues.service) {
+          return (
+            (selectedValues.device === "all" ||
+              item.device === selectedValues.device) &&
+            (selectedValues.service === "all" ||
+              item.service === selectedValues.service) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.status) {
+          return (
+            (selectedValues.status === "all" ||
+              item.status === selectedValues.status) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.device) {
+          return (
+            (selectedValues.device === "all" ||
+              item.device === selectedValues.device) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else if (selectedValues.service) {
+          return (
+            (selectedValues.service === "all" ||
+              item.service === selectedValues.service) &&
+            item.key.toString().toLowerCase().includes(search.toLowerCase())
+          );
+        } else {
+          return item.key
+            .toString()
+            .toLowerCase()
+            .includes(search.toLowerCase());
+        }
+      });
+      setFilteredData(newData.length > 0 ? newData : []);
+    }, 300),
+    [selectedValues, data, search]
+  );
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleDateFiltering = useCallback(
+    _debounce(() => {
+      let newData = data;
+
+      if (startDate && endDate) {
+        newData = newData.filter((item) => {
+          const itemStartDate = dayjs(item.start_time);
+          const itemEndDate = dayjs(item.end_time);
+
+          return (
+            itemStartDate.isBetween(startDate, endDate, null, "[]") &&
+            itemEndDate.isBetween(startDate, endDate, null, "[]")
+          );
+        });
       }
-    });
-    setFilteredData(newData.length > 0 ? newData : []);
-  }, [selectedValues, data, search]);
+
+      setFilteredData(newData);
+    }, 300),
+    [data, startDate, endDate]
+  );
 
   useEffect(() => {
-    const newData: DataType[] = queues.map((queue) => ({
-      key: queue.id,
-      customer: queue.customer?.name ?? null,
-      service: queue.service.name,
-      start_time: queue.start_time,
-      end_time: queue.end_time,
-      device: queue.device.name,
-      status: queue.status,
-    }));
-    setData(newData);
+    handleDataFiltering();
+  }, [handleDataFiltering]);
+
+  useEffect(() => {
+    handleDateFiltering();
+  }, [handleDateFiltering]);
+
+  useEffect(() => {
+    if (queues) {
+      const newData: IDataType[] = queues.map((queue) => ({
+        key: queue.id,
+        customer: queue.customer?.name ?? "null",
+        service: queue.service.label,
+        start_time: queue.createAt.toDate(),
+        end_time: queue.end_time.toDate(),
+        device: queue.device.name,
+        status: queue.status,
+      }));
+      setData(newData);
+    }
   }, [queues]);
 
   useEffect(() => {
+    if (services) {
+      const newData: IOption[] = services.map((service) => ({
+        value: service.key,
+        label: service.name,
+      }));
+      setServiceData(newData);
+    }
+  }, [services]);
+
+  useEffect(() => {
+    if (devices) {
+      const newData: IOption[] = devices.map((service) => ({
+        value: service.key,
+        label: service.name,
+      }));
+      setDeviceData(newData);
+    }
+  }, [devices]);
+
+  useEffect(() => {
     const data = [
-      { title: "Cấp số", link: "cap-so/danh-sach" },
+      { title: "Cấp số" },
       { title: "Danh sách cấp số", link: "cap-so/danh-sach" },
     ];
-
-    dispatch({
-      type: "UPDATE_BREADCRUMB_ITEMS",
-      payload: { items: data },
-    });
-  }, [dispatch]);
+    dispatch(updateBreadcrumbItems(data));
+    queueDispatch(getQueues());
+    serviceDispatch(getServices());
+    deviceDispatch(getDevices());
+  }, [deviceDispatch, dispatch, queueDispatch, serviceDispatch]);
 
   return (
     <Space direction="vertical" size={16} className="queue-list">
@@ -201,7 +283,7 @@ const QueueList = () => {
               Tên dịch vụ
             </Typography.Text>
             <DropDownArray
-              options={optionService}
+              options={serviceData}
               onChange={handleServiceChange}
               style={{ width: 154 }}
               className="reg-14-14 gray-500"
@@ -227,7 +309,7 @@ const QueueList = () => {
               Nguồn cấp
             </Typography.Text>
             <DropDownArray
-              options={optionDeviceQueue}
+              options={deviceData}
               onChange={handleDeviceChange}
               style={{ width: 154 }}
               className="reg-14-14 gray-500"
@@ -239,7 +321,10 @@ const QueueList = () => {
             <Typography.Text className="semi-16-16 gray-500">
               Chọn thời gian
             </Typography.Text>
-            <DatePickerWithRange className="list-queue-date-picker" />
+            <DatePickerWithRange
+              className="list-queue-date-picker"
+              onChange={handleDateChange}
+            />
           </Space>
         </Col>
         <Col>
@@ -276,7 +361,7 @@ const QueueList = () => {
           <ButtonCustom
             title="Cấp số mới"
             imageURL={AddSquare}
-            onClick={handleNewQueue}
+            onClick={() => navigate("cap-so-moi")}
           />
         </Col>
       </Row>

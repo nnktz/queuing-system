@@ -59,6 +59,10 @@ export const signup = (
         updatedAt: db.firestore.FieldValue.serverTimestamp(),
       };
       await userRef.set(userData);
+      dispatch({
+        type: SET_USER,
+        payload: userData,
+      });
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
@@ -112,6 +116,10 @@ export const signin = (
       if (!querySnapshot.empty) {
         const userDoc = querySnapshot.docs[0];
         const user = userDoc.data() as User;
+        if (user.status === "inactive") {
+          dispatch(setError("Tài khoản đã ngưng hoạt động"));
+          return;
+        }
         const isValidPassword = user.password === data.password;
         if (isValidPassword) {
           localStorage.setItem(USER, JSON.stringify(user));
@@ -213,7 +221,7 @@ export const resetPassword = (
       }
       await usersRef.doc(userDoc.id).update({
         password: password,
-        updateAt: db.firestore.FieldValue.serverTimestamp(),
+        updatedAt: db.firestore.FieldValue.serverTimestamp(),
       });
       dispatch(setSuccess(successMsg));
     } catch (error) {
@@ -281,7 +289,7 @@ export const updateUser = (
         .collection(COLLECTIONS.USERS)
         .doc(key)
         .update(newData);
-      await getUserByKey(key);
+      await dispatch(getUserByKey(key));
       dispatch(setSuccess("Cập nhật thành công"));
     } catch (error) {
       if (error instanceof Error) {

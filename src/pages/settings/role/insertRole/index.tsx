@@ -266,33 +266,31 @@ const InsertRole = () => {
               </Space>
             </div>
 
-            <Form.Item>
-              <Row gutter={32}>
-                <Col>
-                  <Button
-                    style={{ border: "1.5px solid #FF9138" }}
-                    className="bg-orange-50 btn-action"
-                    handleClick={() => navigate("..")}
-                  >
-                    <Typography.Text className="orange-400 bold-16-16">
-                      Huỷ bỏ
-                    </Typography.Text>
-                  </Button>
-                </Col>
+            <Row gutter={32}>
+              <Col>
+                <Button
+                  style={{ border: "1.5px solid #FF9138" }}
+                  className="bg-orange-50 btn-action"
+                  handleClick={() => navigate("..")}
+                >
+                  <Typography.Text className="orange-400 bold-16-16">
+                    Huỷ bỏ
+                  </Typography.Text>
+                </Button>
+              </Col>
 
-                <Col>
-                  <Button
-                    htmlType="submit"
-                    className="bg-orange-400 btn-action"
-                    isDisable={loading}
-                  >
-                    <Typography.Text className="white bold-16-16">
-                      {loading ? "Loading..." : "Thêm"}
-                    </Typography.Text>
-                  </Button>
-                </Col>
-              </Row>
-            </Form.Item>
+              <Col>
+                <Button
+                  htmlType="submit"
+                  className="bg-orange-400 btn-action"
+                  isDisable={loading}
+                >
+                  <Typography.Text className="white bold-16-16">
+                    {loading ? "Loading..." : "Thêm"}
+                  </Typography.Text>
+                </Button>
+              </Col>
+            </Row>
           </Space>
         </Form>
       </Content>

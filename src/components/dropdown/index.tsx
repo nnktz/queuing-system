@@ -2,7 +2,7 @@ import { Button, Dropdown, Select, Typography } from "antd";
 import ChevronDown from "../../assets/icons/fi_chevron-down.svg";
 import "./DropDown.css";
 import { items } from "./ItemDropdown";
-import { OptionStatus } from "./dropdown.type";
+import { IOption } from "./dropdown.type";
 import { CaretDownOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
@@ -33,7 +33,7 @@ export const DropDownStatistical = (props: any) => {
 };
 
 interface DropdownStatusProps {
-  options: OptionStatus[];
+  options: IOption[];
   onChange: (value: string) => void;
   placeholder?: string;
   value?: string;
@@ -101,7 +101,7 @@ export const DropDownCategoryDevice: React.FC<DropdownStatusProps> = ({
 };
 
 interface DropdownServiceProps {
-  options: OptionStatus[];
+  options: IOption[];
   onChange: (value: string[], option: any) => void;
   placeholder?: string;
   className?: string;
@@ -144,7 +144,7 @@ export const DropDownServiceUseDevice: React.FC<DropdownServiceProps> = ({
 };
 
 interface DropDownArrayProps {
-  options: OptionStatus[];
+  options: IOption[];
   onChange: (event: React.ChangeEvent<{ value: unknown }>) => void;
   style?: React.CSSProperties;
   className?: string;

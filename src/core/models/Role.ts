@@ -1,4 +1,4 @@
-import { PermissionType } from "./Permission.type";
+import { Permission } from "./Permission";
 import { User } from "./User";
 
 export interface Role {
@@ -6,7 +6,7 @@ export interface Role {
   name: string;
   describe: string;
   users: User[] | null;
-  permissions: PermissionType[];
+  permissions: Permission[];
   createAt: any;
   updatedAt: any;
 }

@@ -102,7 +102,7 @@ export const createService = (
         name: data.name,
         describe: data.describe,
         status_active: "active",
-        queue: [],
+        queues: [],
         createAt: db.firestore.FieldValue.serverTimestamp(),
         updatedAt: db.firestore.FieldValue.serverTimestamp(),
       };
@@ -186,7 +186,7 @@ export const updateService = (
             .delete();
 
           // Lấy dữ liệu từ document mới
-          await getServiceByKey(newData.key);
+          await dispatch(getServiceByKey(newData.key));
         } else {
           // Nếu không thay đổi key thì cập nhật dữ liệu trong document cũ
           await db
@@ -200,9 +200,28 @@ export const updateService = (
             });
 
           // Lấy dữ liệu từ document cũ
-          await getServiceByKey(oldKey);
+          await dispatch(getServiceByKey(oldKey));
         }
 
+        // Update hàng đợi
+        const queueRefs = await db
+          .firestore()
+          .collection(COLLECTIONS.QUEUES)
+          .where("service.value", "==", oldKey)
+          .get();
+        // Kiểm tra có hàng đợi nào chứa key device không
+        if (queueRefs.size > 0) {
+          const batch = db.firestore().batch();
+          queueRefs.forEach((doc) => {
+            batch.update(doc.ref, {
+              service: {
+                value: newData.key,
+                label: newData.name,
+              },
+            });
+          });
+          await batch.commit();
+        }
         dispatch(setSuccess("Cập nhật thành công"));
       }
     } catch (error) {

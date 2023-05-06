@@ -1,5 +1,5 @@
+import { IOption } from "../../../components/dropdown/dropdown.type";
 import { Device } from "../../models/Device";
-import { DeviceCategory } from "../../models/DeviceCategory";
 import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "./auth.type";
 
 export const SET_DEVICE = "SET_DEVICE";
@@ -9,7 +9,7 @@ export const SET_CATEGORIES = "SET_CATEGORIES";
 export interface DeviceState {
   device: Device | null;
   devices: Device[] | null;
-  categories: DeviceCategory[];
+  categories: IOption[];
   loading: boolean;
   error: string;
   success: string;
@@ -19,15 +19,10 @@ export interface DeviceData {
   key: string;
   name: string;
   ip_address: string;
-  service_use: DeviceOptionData[];
+  service_use: IOption[];
   username: string;
   password: string;
-  category: DeviceCategory;
-}
-
-export interface DeviceOptionData {
-  value: string;
-  label: string;
+  category: IOption;
 }
 
 // TODO: Actions
@@ -43,7 +38,7 @@ interface SetDevicesAction {
 
 interface SetCategoriesAction {
   type: typeof SET_CATEGORIES;
-  payload: DeviceCategory[];
+  payload: IOption[];
 }
 
 interface SetLoadingAction {

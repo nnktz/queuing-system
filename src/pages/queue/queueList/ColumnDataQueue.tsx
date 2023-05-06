@@ -2,18 +2,9 @@ import { ColumnsType } from "antd/es/table";
 import { Typography } from "antd";
 import "./QueueList.css";
 import { format } from "date-fns";
+import { IDataType } from ".";
 
-interface DataType {
-  key: number;
-  customer: string | null;
-  service: string;
-  start_time: Date;
-  end_time: Date;
-  device: string;
-  status: string;
-}
-
-const columns: ColumnsType<DataType> = [
+const columns: ColumnsType<IDataType> = [
   {
     title: "STT",
     dataIndex: "key",

@@ -57,7 +57,7 @@ const ServiceList = () => {
     sorter: SorterResult<any> | SorterResult<any>[],
     extra: TableCurrentDataSource<any>
   ) => {
-    navigate(`/thiet-bi/danh-sach?page=${pagination.current}`);
+    navigate(`/dich-vu/danh-sach?page=${pagination.current}`);
   };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

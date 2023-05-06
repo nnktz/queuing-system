@@ -57,7 +57,7 @@
   border-radius: 8px;
 }
 
-.queue-service-key {
+.service-queue-key {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -67,7 +67,7 @@
   height: 49px;
 }
 
-.queue-service-status {
+.service-queue-status {
   display: flex;
   flex-direction: row;
   align-items: center;

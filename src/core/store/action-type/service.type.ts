@@ -1,4 +1,3 @@
-import { QueueType } from "../../models/Queue.type";
 import { Service } from "../../models/Service";
 import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "./auth.type";
 
@@ -13,11 +12,18 @@ export interface ServiceState {
   success: string;
 }
 
+export interface ServiceQueueData {
+  key: string;
+  status: string;
+  start_time: any;
+  end_time: any;
+}
+
 export interface ServiceData {
   key: string;
   name: string;
   describe: string;
-  queue?: QueueType[];
+  queues?: ServiceQueueData[];
 }
 
 // TODO: Actions

@@ -9,10 +9,7 @@ import {
   DropDownCategoryDevice,
   DropDownServiceUseDevice,
 } from "../../../components/dropdown";
-import {
-  DeviceAction,
-  DeviceOptionData,
-} from "../../../core/store/action-type/device.type";
+import { DeviceAction } from "../../../core/store/action-type/device.type";
 import { RootState } from "../../../core/store";
 import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
 import { ThunkDispatch } from "redux-thunk";
@@ -27,7 +24,7 @@ import {
 } from "../../../core/store/actions/deviceActions";
 import MyAlert from "../../../components/alert";
 import { createAuditLog } from "../../../core/store/actions/auditLogActions";
-import { DeviceCategory } from "../../../core/models/DeviceCategory";
+import { IOption } from "../../../components/dropdown/dropdown.type";
 
 const AddDevice = () => {
   const dispatch = useDispatch();
@@ -51,9 +48,9 @@ const AddDevice = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [selectedValue, setSelectedValue] = useState("");
-  const [category, setCategory] = useState<DeviceCategory>();
-  const [serviceUse, setServiceUse] = useState<DeviceOptionData[]>([]);
-  const [serviceData, setServiceData] = useState<DeviceOptionData[]>([]);
+  const [category, setCategory] = useState<IOption>();
+  const [serviceUse, setServiceUse] = useState<IOption[]>([]);
+  const [serviceData, setServiceData] = useState<IOption[]>([]);
   const [loading, setLoading] = useState(false);
   const [createSuccess, setCreateSuccess] = useState(false);
 
@@ -144,7 +141,7 @@ const AddDevice = () => {
 
   useEffect(() => {
     if (services) {
-      const newData: DeviceOptionData[] = services.map((service) => ({
+      const newData: IOption[] = services.map((service) => ({
         value: service.key,
         label: service.name,
       }));

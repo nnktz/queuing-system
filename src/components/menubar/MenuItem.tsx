@@ -1,15 +1,12 @@
 import { Typography } from "antd";
 import { Link } from "react-router-dom";
-import More_Vertical from "../../assets/icons/fi_more-vertical.svg";
 import AppstoreOutlined from "@ant-design/icons/lib/icons/AppstoreOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
 import HeatMapOutlined from "@ant-design/icons/lib/icons/HeatMapOutlined";
 import WechatOutlined from "@ant-design/icons/lib/icons/WechatOutlined";
 import ContainerOutlined from "@ant-design/icons/lib/icons/ContainerOutlined";
 import SettingOutlined from "@ant-design/icons/lib/icons/SettingOutlined";
-import { USER } from "../../core/store/action-type/auth.type";
-
-const login = localStorage.getItem(USER);
+import MoreOutlined from "@ant-design/icons/lib/icons/MoreOutlined";
 
 const dashboardItem = {
   key: "dashboard",
@@ -104,20 +101,19 @@ const settingItem = {
   label: (
     <Typography.Text className="gray-300 semi-16-16">
       Cài đặt hệ thống
-      <img
-        src={More_Vertical}
-        alt=""
-        style={{ verticalAlign: "-0.325em" }}
-        height={20}
-        width={20}
-      />
+      <MoreOutlined style={{ verticalAlign: "-0.3em" }} size={20} />
     </Typography.Text>
   ),
   children: [roleItem, accountItem, auditLogItem],
 };
 
-const menuItems = login
-  ? [dashboardItem, deviceItem, serviceItem, queueItem, reportItem, settingItem]
-  : [queueNotLoggedInItem];
+export const menuItemsLoggedIn = [
+  dashboardItem,
+  deviceItem,
+  serviceItem,
+  queueItem,
+  reportItem,
+  settingItem,
+];
 
-export default menuItems;
+export const menuItemNotLoggedIn = [queueNotLoggedInItem];

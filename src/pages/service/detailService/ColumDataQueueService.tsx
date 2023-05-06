@@ -1,15 +1,15 @@
 import { ColumnsType } from "antd/es/table";
 import { Typography } from "antd";
 import "./DetailService.css";
-import { IDataType } from ".";
+import { ServiceQueueData } from "../../../core/store/action-type/service.type";
 
-const columns: ColumnsType<IDataType> = [
+const columns: ColumnsType<ServiceQueueData> = [
   {
     title: "Số thứ tự",
     dataIndex: "key",
     key: "key",
     render: (id: number) => (
-      <div className="queue-service-key">
+      <div className="service-queue-key">
         <Typography.Text className="reg-14-14 gray-400">{id}</Typography.Text>
       </div>
     ),
@@ -19,7 +19,7 @@ const columns: ColumnsType<IDataType> = [
     dataIndex: "status",
     key: "status",
     render: (status: string) => (
-      <div className="queue-service-status">
+      <div className="service-queue-status">
         {status === "finished" ? (
           <>
             <div className="status-eclipse bg-green" />

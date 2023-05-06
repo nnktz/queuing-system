@@ -37,146 +37,147 @@
   vertical-align: -0.25em !important;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light {
+.ant-menu-light {
   color: #a9a9b0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
+.ant-menu-light
   .ant-menu-item:hover:not(.ant-menu-item-selected):not(
     .ant-menu-submenu-selected
   ) {
   color: #ff9138;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
+.ant-menu-light
   .ant-menu-submenu-title:hover:not(.ant-menu-item-selected):not(
     .ant-menu-submenu-selected
   ) {
   color: #a9a9b0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
-  .ant-menu-submenu-title {
+.ant-menu-vertical .ant-menu-submenu-title {
   padding-inline-end: 0;
 }
 
-:where(
-    .css-dev-only-do-not-override-1vtf12y
-  ).ant-menu-light.ant-menu-root.ant-menu-vertical {
+.ant-menu-light.ant-menu-root.ant-menu-vertical {
   border-inline-end: 0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
-  .ant-menu-submenu-title {
+.ant-menu-vertical .ant-menu-submenu-title {
   padding-inline: 10px;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu
-  .ant-menu-item
-  .ant-menu-item-icon {
+.ant-menu .ant-menu-item .ant-menu-item-icon {
   vertical-align: -0.325em;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu
-  .ant-menu-submenu-title
-  .ant-menu-item-icon {
+.ant-menu .ant-menu-submenu-title .ant-menu-item-icon {
   vertical-align: -0.325em;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
-  .ant-menu-item-selected {
+.ant-menu-light .ant-menu-item-selected {
   background-color: #ff7506;
   color: #ffffff !important;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu .ant-menu-item {
+.ant-menu .ant-menu-item {
   border-radius: 0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical .ant-menu-item {
+.ant-menu-vertical .ant-menu-item {
   margin-inline: 0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
-  .ant-menu-item-selected
-  a {
+.ant-menu-light .ant-menu-item-selected a {
   color: #ffffff !important;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light .ant-menu-item a,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
-  > .ant-menu
-  .ant-menu-item
-  a {
+.ant-menu-light .ant-menu-item a,
+.ant-menu-light > .ant-menu .ant-menu-item a {
   color: #7e7d88;
 }
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
-  > .ant-menu
-  .ant-menu-item
-  a:hover {
+.ant-menu-light > .ant-menu .ant-menu-item a:hover {
   color: #ff9138;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
-  .ant-menu-item
-  a:hover {
+.ant-menu-light .ant-menu-item a:hover {
   color: #ff9138;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical .ant-menu-item {
+.ant-menu-vertical .ant-menu-item {
   width: 100%;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-submenu-popup
+.ant-menu-submenu-popup
   .ant-menu-vertical.ant-menu-sub:not([class*="-active"]) {
   overflow-y: hidden;
   position: relative;
   width: 200px;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light:not(
-    .ant-menu-horizontal
-  )
+.ant-menu-light:not(.ant-menu-horizontal)
   .ant-menu-item:not(.ant-menu-item-selected):active,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
+.ant-menu-light
   > .ant-menu:not(.ant-menu-horizontal)
   .ant-menu-item:not(.ant-menu-item-selected):active {
   background-color: #ff7506;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-submenu-popup
-  .ant-menu-vertical
-  .ant-menu-item {
+.ant-menu-submenu-popup .ant-menu-vertical .ant-menu-item {
   margin-inline: 0;
   width: 100%;
   margin-block: 0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu .ant-menu-submenu-title {
+.ant-menu .ant-menu-submenu-title {
   border-radius: 0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
-  .ant-menu-submenu-title {
+.ant-menu-vertical .ant-menu-submenu-title {
   width: 100%;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-inline .ant-menu-item,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical .ant-menu-item,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-inline
-  .ant-menu-submenu-title,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-vertical
-  .ant-menu-submenu-title {
+.ant-menu-inline .ant-menu-item,
+.ant-menu-vertical .ant-menu-item,
+.ant-menu-inline .ant-menu-submenu-title,
+.ant-menu-vertical .ant-menu-submenu-title {
   margin-inline: 0;
-
   padding-left: 14px;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
-  .ant-menu-item-selected,
-:where(.css-dev-only-do-not-override-1vtf12y).ant-menu-light
+.ant-menu-light
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title
+  .ant-typography {
+  color: #ffffff;
+}
+
+.ant-menu-light
+  .ant-menu-submenu-title:hover:not(.ant-menu-item-selected):not(
+    .ant-menu-submenu-selected
+  ) {
+  color: #ff9138;
+}
+
+.ant-menu-light
+  .ant-menu-submenu-title:hover:not(.ant-menu-item-selected):not(
+    .ant-menu-submenu-selected
+  )
+  .ant-typography {
+  color: #ff9138;
+}
+
+.ant-menu-light .ant-menu-submenu-selected > .ant-menu-submenu-title,
+.ant-menu-light
   > .ant-menu
-  .ant-menu-item-selected {
+  .ant-menu-submenu-selected
+  > .ant-menu-submenu-title {
+  color: #ffffff;
+  background-color: #ff9138;
+}
+
+.ant-menu-light .ant-menu-item-selected,
+.ant-menu-light > .ant-menu .ant-menu-item-selected {
   background-color: #ff9138;
 }
 

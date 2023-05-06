@@ -1,15 +1,3 @@
-export interface IAction {
-  GET: string;
-  UPDATE: string;
-  ADD: string;
-}
-
-export const ACTION_MODAl: IAction = {
-  GET: "GET",
-  UPDATE: "UPDATE",
-  ADD: "ADD",
-};
-
 export interface ICollection {
   USERS: string;
   DEVICES: string;

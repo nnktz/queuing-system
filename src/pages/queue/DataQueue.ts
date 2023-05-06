@@ -1,6 +1,6 @@
-import { QueueType } from "../../core/models/Queue.type";
+import { Queue } from "../../core/models/Queue";
 
-export const DataQueue: QueueType[] = [
+export const DataQueue: Queue[] = [
   // {
   //   id: 2010001,
   //   customer: {

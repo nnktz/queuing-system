@@ -14,6 +14,7 @@ import { RootState } from "../../../core/store";
 import { AuthAction, USER } from "../../../core/store/action-type/auth.type";
 import { useSelector } from "react-redux";
 import { setError, signin } from "../../../core/store/actions/authActions";
+import MyAlert from "../../../components/alert";
 
 function Login() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function Login() {
       const user = await authDispatch(
         signin({ username, password }, () => setLoading(false))
       );
-
+      setLoading(false);
       if (user !== undefined) {
         navigate("/dashboard/ngay");
       }
@@ -64,6 +65,7 @@ function Login() {
 
   return (
     <div className="login bg">
+      {error && <MyAlert message={error} type="error" />}
       <Typography.Text className="big-title orange-500 text-center reg-36-36">
         QUẢN LÝ XẾP HÀNG
       </Typography.Text>

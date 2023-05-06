@@ -9,10 +9,7 @@ import {
   DropDownServiceUseDevice,
 } from "../../../components/dropdown";
 import Button from "../../../components/button";
-import {
-  DeviceAction,
-  DeviceOptionData,
-} from "../../../core/store/action-type/device.type";
+import { DeviceAction } from "../../../core/store/action-type/device.type";
 import { AuditLogAction } from "../../../core/store/action-type/auditLog.type";
 import { RootState } from "../../../core/store";
 import { ThunkDispatch } from "redux-thunk";
@@ -28,6 +25,7 @@ import {
 import { setError, setSuccess } from "../../../core/store/actions/authActions";
 import MyAlert from "../../../components/alert";
 import { createAuditLog } from "../../../core/store/actions/auditLogActions";
+import { IOption } from "../../../components/dropdown/dropdown.type";
 
 const UpdateDevice = () => {
   const dispatch = useDispatch();
@@ -47,7 +45,7 @@ const UpdateDevice = () => {
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
 
-  const [serviceData, setServiceData] = useState<DeviceOptionData[]>([]);
+  const [serviceData, setServiceData] = useState<IOption[]>([]);
   const [loading, setLoading] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
 
@@ -160,7 +158,7 @@ const UpdateDevice = () => {
 
   useEffect(() => {
     if (services) {
-      const newData: DeviceOptionData[] = services.map((service) => ({
+      const newData: IOption[] = services.map((service) => ({
         value: service.key,
         label: service.name,
       }));

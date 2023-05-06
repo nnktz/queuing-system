@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from "react-redux";
 import "./AuditLog.css";
 import { useCallback, useEffect, useState } from "react";
@@ -49,6 +48,7 @@ const AuditLog = () => {
   const [filteredData, setFilteredData] = useState<IDataType[]>(data);
   const [startDate, setStartDate] = useState(dayjs().startOf("day").toDate());
   const [endDate, setEndDate] = useState(dayjs().endOf("day").toDate());
+  const [isFiltering, setIsFiltering] = useState(false);
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
@@ -58,6 +58,9 @@ const AuditLog = () => {
     if (dates) {
       setStartDate(dates[0].startOf("day").toDate());
       setEndDate(dates[1].endOf("day").toDate());
+      setIsFiltering(true);
+    } else {
+      setIsFiltering(false);
     }
   };
 
@@ -70,6 +73,7 @@ const AuditLog = () => {
     navigate(`/cai-dat/nhat-ky-hoat-dong?page=${pagination.current}`);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSearchFiltering = useCallback(
     _debounce(() => {
       let newData = data;
@@ -85,17 +89,17 @@ const AuditLog = () => {
     [data, search]
   );
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleDateFiltering = useCallback(
     _debounce(() => {
       let newData = data;
 
-      if (startDate && endDate) {
+      if (isFiltering) {
         newData = newData.filter((item) => {
           const itemDate = dayjs(item.impact_time);
           return itemDate.isBetween(startDate, endDate, null, "[]");
         });
       }
-
       setFilteredData(newData.length > 0 ? newData : []);
     }, 300),
     [data, startDate, endDate]
@@ -108,7 +112,7 @@ const AuditLog = () => {
         impact_time: new Date(log.createAt.toMillis()),
         ip_address: log.ip_address,
         note: log.note,
-        username: log.user.username,
+        username: log.system ? "Hệ thống" : log.user?.username || "",
       }));
       setData(newData);
     }
@@ -116,8 +120,11 @@ const AuditLog = () => {
 
   useEffect(() => {
     handleSearchFiltering();
+  }, [handleSearchFiltering]);
+
+  useEffect(() => {
     handleDateFiltering();
-  }, [handleDateFiltering, handleSearchFiltering]);
+  }, [handleDateFiltering]);
 
   useEffect(() => {
     const data = [
@@ -126,7 +133,7 @@ const AuditLog = () => {
     ];
     dispatch(updateBreadcrumbItems(data));
     auditLogDispatch(getAuditLogs());
-  }, [dispatch]);
+  }, [auditLogDispatch, dispatch]);
 
   return (
     <Layout className="audit-log_layout">

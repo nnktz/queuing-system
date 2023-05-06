@@ -112,9 +112,7 @@
   opacity: 0.8;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-form-item
-  .ant-form-item-label
-  > label {
+.ant-form-item .ant-form-item-label > label {
   font-family: "Nunito";
   font-style: normal;
   font-weight: 600;
@@ -127,16 +125,14 @@
     .css-dev-only-do-not-override-1vtf12y
   ).ant-select:not(.ant-select-customize-input)
   .ant-select-selector {
-  height: 44px;
+  min-height: 44px;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-select-multiple
-  .ant-select-selection-item {
+.ant-select-multiple .ant-select-selection-item {
   background: #ffac6a;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-select-multiple
-  .ant-select-selection-item-remove {
+.ant-select-multiple .ant-select-selection-item-remove {
   height: 20px;
   width: 20px;
 }

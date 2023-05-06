@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./DetailService.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Col, Divider, Row, Space, Table, Typography } from "antd";
 import ButtonCustom from "../../../components/button/buttonCustom";
 import EditSquare from "../../../assets/icons/Edit Square.svg";
@@ -14,16 +14,19 @@ import { SearchOutlined } from "@ant-design/icons";
 import columns from "./ColumDataQueueService";
 import { RootState } from "../../../core/store";
 import { updateBreadcrumbItems } from "../../../core/store/actions/breadcrumbActions";
-import { ServiceAction } from "../../../core/store/action-type/service.type";
+import {
+  ServiceAction,
+  ServiceQueueData,
+} from "../../../core/store/action-type/service.type";
 import { ThunkDispatch } from "redux-thunk";
 import { getServiceByKey } from "../../../core/store/actions/serviceActions";
+import _debounce from "lodash/debounce";
+import dayjs from "dayjs";
+import isBetween from "dayjs/plugin/isBetween";
+
+dayjs.extend(isBetween);
 
 interface SelectedValues {
-  status: string;
-}
-
-export interface IDataType {
-  key: number;
   status: string;
 }
 
@@ -34,12 +37,15 @@ const DetailService = () => {
   const { service } = useSelector((state: RootState) => state.service);
   const serviceDispatch =
     useDispatch<ThunkDispatch<RootState, null, ServiceAction>>();
-  const [data, setData] = useState<IDataType[]>([]);
+
   const [selectedValues, setSelectedValues] = useState<SelectedValues>({
     status: "",
   });
   const [search, setSearch] = useState("");
-  const [filteredData, setFilteredData] = useState<IDataType[]>(data);
+  const [data, setData] = useState<ServiceQueueData[]>([]);
+  const [filteredData, setFilteredData] = useState<ServiceQueueData[]>(data);
+  const [startDate, setStartDate] = useState(dayjs().startOf("day").toDate());
+  const [endDate, setEndDate] = useState(dayjs().endOf("day").toDate());
 
   const handleEditService = () => {
     navigate(`/dich-vu/danh-sach/chi-tiet/cap-nhat/${id}`);
@@ -53,26 +59,72 @@ const DetailService = () => {
     setSelectedValues((prev) => ({ ...prev, status: value }));
   };
 
-  useEffect(() => {
-    const newData = data.filter((item) => {
-      if (selectedValues.status) {
-        return (
-          (selectedValues.status === "all" ||
-            item.status === selectedValues.status) &&
-          item.key.toString().toLowerCase().includes(search.toLowerCase())
-        );
-      } else {
-        return item.key.toString().toLowerCase().includes(search.toLowerCase());
+  const handleDateChange = (dates: any, dateStrings: [string, string]) => {
+    if (dates) {
+      setStartDate(dates[0].startOf("day").toDate());
+      setEndDate(dates[1].endOf("day").toDate());
+    }
+  };
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleDateFiltering = useCallback(
+    _debounce(() => {
+      let newData = data;
+      if (startDate && endDate) {
+        newData = newData.filter((item) => {
+          const itemStartDate = dayjs(item.start_time);
+          const itemEndDate = dayjs(item.end_time);
+
+          return (
+            itemStartDate.isBetween(startDate, endDate, null, "[]") &&
+            itemEndDate.isBetween(startDate, endDate, null, "[]")
+          );
+        });
       }
-    });
-    setFilteredData(newData);
-  }, [selectedValues.status, data, search]);
+      setFilteredData(newData);
+    }, 300),
+    [data, startDate, endDate]
+  );
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleSearchFiltering = useCallback(
+    _debounce(() => {
+      if (data) {
+        const newData = data.filter((item) => {
+          if (selectedValues.status) {
+            return (
+              (selectedValues.status === "all" ||
+                item.status === selectedValues.status) &&
+              item.key.toString().toLowerCase().includes(search.toLowerCase())
+            );
+          } else {
+            return item.key
+              .toString()
+              .toLowerCase()
+              .includes(search.toLowerCase());
+          }
+        });
+        setFilteredData(newData);
+      }
+    }, 300),
+    [selectedValues.status, data, search]
+  );
+
+  useEffect(() => {
+    handleDateFiltering();
+  }, [handleDateFiltering]);
+
+  useEffect(() => {
+    handleSearchFiltering();
+  }, [handleSearchFiltering]);
 
   useEffect(() => {
     if (service) {
-      const newData: IDataType[] = service.queue.map((queue) => ({
-        key: queue.id,
+      const newData: ServiceQueueData[] = service.queues?.map((queue) => ({
+        key: queue.key,
         status: queue.status,
+        start_time: queue.start_time.toDate(),
+        end_time: queue.end_time.toDate(),
       }));
       if (newData === null) {
         // handle the case where newData is null
@@ -225,7 +277,10 @@ const DetailService = () => {
                   <Typography.Text className="semi-16-16 gray-500">
                     Chọn thời gian
                   </Typography.Text>
-                  <DatePickerWithRange className="detail-service-date-picker" />
+                  <DatePickerWithRange
+                    className="detail-service-date-picker"
+                    onChange={handleDateChange}
+                  />
                 </Space>
               </Col>
               <Col>

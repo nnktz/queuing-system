@@ -12,7 +12,7 @@ import { COLLECTIONS } from "../../constants";
 import { Role } from "../../models/Role";
 import { SET_ERROR } from "../action-type/auth.type";
 import { setError, setSuccess } from "./authActions";
-import { PermissionType } from "../../models/Permission.type";
+import { Permission } from "../../models/Permission";
 import { User } from "../../models/User";
 
 // TODO: Create role
@@ -202,7 +202,7 @@ export const getPermissions = (): ThunkAction<
         .collection(COLLECTIONS.PERMISSIONS)
         .get();
       const permissionsData = permissionsRef.docs.map((doc) => {
-        const permission = doc.data() as PermissionType;
+        const permission = doc.data() as Permission;
         permission.key = doc.id;
         return permission;
       });
@@ -291,12 +291,41 @@ export const updateRole = (
         ...data,
         updatedAt: db.firestore.FieldValue.serverTimestamp(),
       };
+
+      // Step 1: Update role with data
       await db
         .firestore()
         .collection(COLLECTIONS.ROLES)
         .doc(key)
         .update(newData);
-      await getRoleByKey(key);
+
+      // Step 2: Get users with same role key and update their role data
+      const querySnapshot = await db
+        .firestore()
+        .collection(COLLECTIONS.USERS)
+        .where("role.key", "==", key)
+        .get();
+      const usersToUpdate = querySnapshot.docs.map((doc) => doc.data() as User);
+      const updatedUsers = usersToUpdate.map((user) => ({
+        ...user,
+        role: {
+          key,
+          ...data,
+        },
+      }));
+      const userUpdatePromises = updatedUsers.map((user) =>
+        db.firestore().collection(COLLECTIONS.USERS).doc(user.key).update(user)
+      );
+      await Promise.all(userUpdatePromises);
+
+      // Step 3: Update role with updated user data
+      await db
+        .firestore()
+        .collection(COLLECTIONS.ROLES)
+        .doc(key)
+        .update({ users: updatedUsers });
+
+      await dispatch(getRoleByKey(key));
       dispatch(setSuccess("Cập nhật thành công"));
     } catch (error) {
       if (error instanceof Error) {

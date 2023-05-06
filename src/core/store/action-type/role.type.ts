@@ -1,4 +1,4 @@
-import { PermissionType } from "../../models/Permission.type";
+import { Permission } from "../../models/Permission";
 import { Role } from "../../models/Role";
 import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "./auth.type";
 
@@ -10,13 +10,13 @@ export interface RoleUser {
   key: string;
   name: string;
   describe: string;
-  permissions: PermissionType[];
+  permissions: Permission[];
 }
 
 export interface RoleState {
   role: Role | null;
   roles: Role[] | null;
-  permissions: PermissionType[];
+  permissions: Permission[];
   loading: boolean;
   error: string;
   success: string;
@@ -25,7 +25,7 @@ export interface RoleState {
 export interface RoleData {
   name: string;
   describe: string;
-  permissions: PermissionType[];
+  permissions: Permission[];
 }
 
 // TODO: Actions
@@ -41,7 +41,7 @@ interface SetRolesAction {
 
 interface SetPermissionsAction {
   type: typeof SET_PERMISSIONS;
-  payload: PermissionType[];
+  payload: Permission[];
 }
 
 interface SetLoadingAction {

@@ -12,7 +12,8 @@ import { COLLECTIONS } from "../../constants";
 import { Device } from "../../models/Device";
 import { SET_ERROR } from "../action-type/auth.type";
 import { setError, setSuccess } from "./authActions";
-import { DeviceCategory } from "../../models/DeviceCategory";
+import { Queue } from "../../models/Queue";
+import { IOption } from "../../../components/dropdown/dropdown.type";
 
 // TODO: Get devices
 export const getDevices = (): ThunkAction<
@@ -111,7 +112,7 @@ export const getDeviceCategories = (): ThunkAction<
         .collection(COLLECTIONS.DEVICE_CATEGORIES)
         .get();
       const categoriesData = categoriesRef.docs.map((doc) => {
-        const category = doc.data() as DeviceCategory;
+        const category = doc.data() as IOption;
         category.value = doc.id;
         return category;
       });
@@ -192,7 +193,7 @@ export const updateDevice = (
             .delete();
 
           // Lấy dữ liệu từ document mới
-          await getDeviceByKey(newData.key);
+          await dispatch(getDeviceByKey(newData.key));
         } else {
           // Nếu không thay đổi key thì cập nhật dữ liệu trong document cũ
           await db
@@ -206,9 +207,32 @@ export const updateDevice = (
             });
 
           // Lấy dữ liệu từ document cũ
-          await getDeviceByKey(oldKey);
+          await dispatch(getDeviceByKey(oldKey));
         }
 
+        // Kiểm tra nếu có hàng đợi chứa key của thiết bị thì cập nhật hàng đợi
+        const queueRefs = await db
+          .firestore()
+          .collection(COLLECTIONS.QUEUES)
+          .where("device.key", "==", oldKey)
+          .get();
+        if (queueRefs.size > 0) {
+          const deviceData = {
+            key: newData.key,
+            name: newData.name,
+          };
+          queueRefs.forEach(async (doc) => {
+            const queueData = doc.data() as Queue;
+            await db
+              .firestore()
+              .collection(COLLECTIONS.QUEUES)
+              .doc(doc.id)
+              .set({
+                ...queueData,
+                device: deviceData,
+              });
+          });
+        }
         dispatch(setSuccess("Cập nhật thành công"));
       }
     } catch (error) {

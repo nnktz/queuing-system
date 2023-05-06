@@ -49,7 +49,7 @@ export const getAuditLogs = (): ThunkAction<
 // TODO: Create audit log
 export const createAuditLog = (
   msg: string,
-  onError: () => void
+  onError?: () => void
 ): ThunkAction<void, RootState, null, AuditLogAction> => {
   return async (dispatch) => {
     try {
@@ -65,6 +65,7 @@ export const createAuditLog = (
         const auditLogData: AuditLog = {
           key,
           user: user,
+          system: false,
           note: msg,
           ip_address: ipAddress as string,
           createAt: db.firestore.FieldValue.serverTimestamp(),
@@ -78,7 +79,45 @@ export const createAuditLog = (
     } catch (error) {
       if (error instanceof Error) {
         console.log(error);
-        onError();
+        onError?.();
+        dispatch({
+          type: SET_ERROR,
+          payload: error.message,
+        });
+      }
+    }
+  };
+};
+
+// TODO: Create audit log without logging
+export const createAuditLogWithoutLogging = (
+  msg: string,
+  onError?: () => void
+): ThunkAction<void, RootState, null, AuditLogAction> => {
+  return async (dispatch) => {
+    try {
+      const auditLogRef = await db
+        .firestore()
+        .collection(COLLECTIONS.AUDIT_LOGS)
+        .doc();
+      const key = auditLogRef.id;
+      const ipAddress = await getIPAddress();
+      const auditLogData: AuditLog = {
+        key,
+        system: true,
+        note: msg,
+        ip_address: ipAddress as string,
+        createAt: db.firestore.FieldValue.serverTimestamp(),
+      };
+      await auditLogRef.set(auditLogData);
+      dispatch({
+        type: SET_AUDIT_LOG,
+        payload: auditLogData,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error);
+        onError?.();
         dispatch({
           type: SET_ERROR,
           payload: error.message,

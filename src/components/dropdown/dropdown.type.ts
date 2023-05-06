@@ -1,4 +1,4 @@
-export interface OptionStatus {
+export interface IOption {
   label: string;
   value: string;
 }

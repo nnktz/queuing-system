@@ -41,24 +41,24 @@
   padding: 16px 0;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-content {
+.ant-modal .ant-modal-content {
   padding: 0 !important;
   border-radius: 24px;
   width: 469px;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-space-vertical {
+.ant-space-vertical {
   width: 100%;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-body {
+.ant-modal .ant-modal-body {
   width: 100%;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close {
+.ant-modal .ant-modal-close {
   color: #ff9138;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-modal .ant-modal-close:hover {
+.ant-modal .ant-modal-close:hover {
   color: #ff7506;
 }

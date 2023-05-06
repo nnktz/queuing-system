@@ -1,8 +1,10 @@
 import Menubar from "../menubar";
-import menuItems from "../menubar/MenuItem";
 import TopBar from "../topbar";
 import { Outlet, useParams } from "react-router-dom";
 import { Layout as LayoutAntd } from "antd";
+import { USER } from "../../core/store/action-type/auth.type";
+import { useEffect, useState } from "react";
+import { menuItemNotLoggedIn, menuItemsLoggedIn } from "../menubar/MenuItem";
 
 const LayoutStyles = {
   position: "relative",
@@ -14,9 +16,12 @@ const LayoutStyles = {
 const Layout = () => {
   const { id } = useParams();
   const currentPath = window.location.pathname;
+  const [login, setLogin] = useState(localStorage.getItem(USER));
+  useEffect(() => {
+    setLogin(localStorage.getItem(USER));
+  }, []);
 
   let defaultSelectedKey = "";
-
   switch (currentPath) {
     case "/":
       defaultSelectedKey = "dashboard";
@@ -100,7 +105,10 @@ const Layout = () => {
 
   return (
     <LayoutAntd style={LayoutStyles}>
-      <Menubar menuItems={menuItems} defaultSelectedKey={defaultSelectedKey} />
+      <Menubar
+        menuItems={login ? menuItemsLoggedIn : menuItemNotLoggedIn}
+        defaultSelectedKey={defaultSelectedKey}
+      />
       <TopBar />
       <Outlet />
     </LayoutAntd>
