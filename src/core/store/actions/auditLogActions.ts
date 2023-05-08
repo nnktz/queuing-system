@@ -58,7 +58,7 @@ export const createAuditLog = (
         .collection(COLLECTIONS.AUDIT_LOGS)
         .doc();
       const key = auditLogRef.id;
-      const userStr = localStorage.getItem(USER);
+      const userStr = sessionStorage.getItem(USER);
       const ipAddress = await getIPAddress();
       if (userStr) {
         const user = JSON.parse(userStr);

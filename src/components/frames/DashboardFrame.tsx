@@ -5,7 +5,7 @@ type DashboardFrameProps = {
     container?: React.CSSProperties;
     eclipse?: React.CSSProperties;
   };
-  icon: string;
+  icon: React.ReactNode;
 };
 
 const DashboardFrame = ({ styles = {}, icon }: DashboardFrameProps) => {
@@ -13,7 +13,7 @@ const DashboardFrame = ({ styles = {}, icon }: DashboardFrameProps) => {
 
   return (
     <div className="dashboard-frame" style={{ ...container }}>
-      <img src={icon} alt="" className="dashboard-icon" />
+      {icon}
       <div className="eclipse-10" style={{ ...eclipse }} />
     </div>
   );

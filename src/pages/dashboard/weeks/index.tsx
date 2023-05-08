@@ -2,6 +2,7 @@ import { Typography } from "antd";
 import "../Dashboard.css";
 import { DropDownStatistical } from "../../../components/dropdown";
 import { Area } from "@ant-design/plots";
+import { currentMonth, currentYear } from "../Current";
 
 const dataWeek = [
   { week: "1", value: 2200 },
@@ -38,7 +39,7 @@ const Weeks = () => {
         Bảng thống kê theo tuần
       </Typography.Text>
       <Typography.Text className="reg-14-14 gray-200 statistical-subtitle">
-        Tháng 11/2021
+        Tháng {currentMonth}/{currentYear}
       </Typography.Text>
 
       <div className="dropdown-box">

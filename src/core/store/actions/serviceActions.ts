@@ -3,6 +3,8 @@ import { RootState } from "..";
 import {
   SET_SERVICE,
   SET_SERVICES,
+  SET_SERVICES_ACTIVE,
+  SET_SERVICES_INACTIVE,
   ServiceAction,
   ServiceData,
 } from "../action-type/service.type";
@@ -233,6 +235,56 @@ export const updateService = (
           payload: error.message,
         });
       }
+    }
+  };
+};
+
+// TODO: get quantity services active
+export const getQuantityServicesActive = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  ServiceAction
+> => {
+  return async (dispatch) => {
+    try {
+      const servicesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.SERVICES)
+        .where("status_active", "==", "active")
+        .get();
+      const quantity = servicesRef.size;
+      dispatch({
+        type: SET_SERVICES_ACTIVE,
+        payload: quantity,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// TODO: get quantity services inactive
+export const getQuantityServicesInactive = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  ServiceAction
+> => {
+  return async (dispatch) => {
+    try {
+      const servicesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.SERVICES)
+        .where("status_active", "==", "inactive")
+        .get();
+      const quantity = servicesRef.size;
+      dispatch({
+        type: SET_SERVICES_INACTIVE,
+        payload: quantity,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 };

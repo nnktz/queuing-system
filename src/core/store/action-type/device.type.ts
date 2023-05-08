@@ -5,10 +5,14 @@ import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "./auth.type";
 export const SET_DEVICE = "SET_DEVICE";
 export const SET_DEVICES = "SET_DEVICES";
 export const SET_CATEGORIES = "SET_CATEGORIES";
+export const SET_DEVICES_ACTIVE = "SET_DEVICES_ACTIVE";
+export const SET_DEVICES_INACTIVE = "SET_DEVICES_INACTIVE";
 
 export interface DeviceState {
   device: Device | null;
   devices: Device[] | null;
+  devicesActive: number;
+  devicesInactive: number;
   categories: IOption[];
   loading: boolean;
   error: string;
@@ -36,6 +40,16 @@ interface SetDevicesAction {
   payload: Device[];
 }
 
+interface SetDevicesActiveAction {
+  type: typeof SET_DEVICES_ACTIVE;
+  payload: number;
+}
+
+interface SetDevicesInactiveAction {
+  type: typeof SET_DEVICES_INACTIVE;
+  payload: number;
+}
+
 interface SetCategoriesAction {
   type: typeof SET_CATEGORIES;
   payload: IOption[];
@@ -59,6 +73,8 @@ interface SetSuccessAction {
 export type DeviceAction =
   | SetDeviceAction
   | SetDevicesAction
+  | SetDevicesActiveAction
+  | SetDevicesInactiveAction
   | SetCategoriesAction
   | SetLoadingAction
   | SetErrorAction

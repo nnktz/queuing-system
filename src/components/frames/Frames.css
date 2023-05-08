@@ -14,11 +14,3 @@
   left: 0px;
   top: 0px;
 }
-
-.dashboard-icon {
-  position: absolute;
-  width: 24px;
-  height: 24px;
-  left: calc(50% - 24px / 2);
-  top: calc(50% - 24px / 2);
-}

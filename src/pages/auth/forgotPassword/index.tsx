@@ -31,7 +31,7 @@ function ForgotPassword() {
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const [resetSuccess, setResetSuccess] = useState(false);
-  const login = localStorage.getItem(USER);
+  const login = sessionStorage.getItem(USER);
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -50,9 +50,9 @@ function ForgotPassword() {
   const handleContinue = async () => {
     setLoading(true);
     const emailExists = await authDispatch(getEmail(email));
+    setLoading(false);
     if (typeof emailExists !== "undefined") {
       setIsEmail(emailExists);
-      setLoading(false);
     }
   };
 

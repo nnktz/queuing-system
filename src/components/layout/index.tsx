@@ -17,8 +17,9 @@ const Layout = () => {
   const { id } = useParams();
   const currentPath = window.location.pathname;
   const [login, setLogin] = useState(localStorage.getItem(USER));
+
   useEffect(() => {
-    setLogin(localStorage.getItem(USER));
+    setLogin(sessionStorage.getItem(USER));
   }, []);
 
   let defaultSelectedKey = "";

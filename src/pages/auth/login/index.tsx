@@ -24,7 +24,7 @@ function Login() {
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
   const { error } = useSelector((state: RootState) => state.auth);
   const [loading, setLoading] = useState(false);
-  const login = localStorage.getItem(USER);
+  const login = sessionStorage.getItem(USER);
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);

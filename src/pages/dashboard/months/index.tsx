@@ -2,6 +2,7 @@ import { Typography } from "antd";
 import "../Dashboard.css";
 import { DropDownStatistical } from "../../../components/dropdown";
 import { Area } from "@ant-design/plots";
+import { currentYear } from "../Current";
 
 const dataMonth = [
   { month: "1", value: 2800 },
@@ -46,7 +47,7 @@ const Months = () => {
         Bảng thống kê theo tháng
       </Typography.Text>
       <Typography.Text className="reg-14-14 gray-200 statistical-subtitle">
-        Năm 2021
+        Năm {currentYear}
       </Typography.Text>
 
       <div className="dropdown-box">

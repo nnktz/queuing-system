@@ -18,7 +18,7 @@ const TopBar = () => {
   const { userCurrent } = useSelector((state: RootState) => state.auth);
   const authDispatch =
     useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
-  const login = localStorage.getItem(USER);
+  const login = sessionStorage.getItem(USER);
 
   useEffect(() => {
     authDispatch(setLoading(true));

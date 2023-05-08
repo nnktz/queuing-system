@@ -5,11 +5,15 @@ import {
   SET_CATEGORIES,
   SET_DEVICE,
   SET_DEVICES,
+  SET_DEVICES_ACTIVE,
+  SET_DEVICES_INACTIVE,
 } from "../action-type/device.type";
 
 const initialState: DeviceState = {
   device: null,
   devices: null,
+  devicesActive: 0,
+  devicesInactive: 0,
   categories: [],
   loading: false,
   error: "",
@@ -27,6 +31,16 @@ const deviceReducer = (state = initialState, action: DeviceAction) => {
       return {
         ...state,
         devices: action.payload,
+      };
+    case SET_DEVICES_ACTIVE:
+      return {
+        ...state,
+        devicesActive: action.payload,
+      };
+    case SET_DEVICES_INACTIVE:
+      return {
+        ...state,
+        devicesInactive: action.payload,
       };
     case SET_CATEGORIES:
       return {

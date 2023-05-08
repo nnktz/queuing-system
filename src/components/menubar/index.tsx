@@ -1,5 +1,4 @@
 import LogoAlta from "../../assets/images/Logo alta.svg";
-import Logout from "../../assets/icons/fi_log-out.svg";
 import { Menu, Typography } from "antd";
 import "./Menubar.css";
 import Button from "../button";
@@ -10,11 +9,12 @@ import { signout } from "../../core/store/actions/authActions";
 import { ThunkDispatch } from "redux-thunk";
 import { AuthAction, USER } from "../../core/store/action-type/auth.type";
 import { useNavigate } from "react-router-dom";
+import LogoutOutlined from "@ant-design/icons/lib/icons/LogoutOutlined";
 
 const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<ThunkDispatch<RootState, null, AuthAction>>();
-  const login = localStorage.getItem(USER);
+  const login = sessionStorage.getItem(USER);
 
   const handleLogout = async () => {
     await dispatch(signout());
@@ -38,7 +38,7 @@ const Menubar = ({ menuItems, defaultSelectedKey }: MenuProps) => {
             className="btn-logout bg-orange-50"
           >
             <Typography.Text className="auto-layout_btn-logout orange-500 semi-16-16">
-              <img src={Logout} alt="" className="" />
+              <LogoutOutlined />
               Đăng xuất
             </Typography.Text>
           </Button>

@@ -5,23 +5,105 @@ import { useNavigate } from "react-router-dom";
 import WechatOutlined from "@ant-design/icons/lib/icons/WechatOutlined";
 import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined";
 import HeatMapOutlined from "@ant-design/icons/lib/icons/HeatMapOutlined";
+import { RootState } from "../../core/store";
+import { QueueAction } from "../../core/store/action-type/queue.type";
+import { useDispatch, useSelector } from "react-redux";
+import { ThunkDispatch } from "redux-thunk";
+import { useCallback, useEffect, useState } from "react";
+import {
+  getQuantityQueuesAbsent,
+  getQuantityQueuesFinished,
+  getQuantityQueuesProcessing,
+  getQueues,
+} from "../../core/store/actions/queueActions";
+import { ServiceAction } from "../../core/store/action-type/service.type";
+import {
+  getQuantityServicesActive,
+  getQuantityServicesInactive,
+  getServices,
+} from "../../core/store/actions/serviceActions";
+import { DeviceAction } from "../../core/store/action-type/device.type";
+import {
+  getDevices,
+  getQuantityDevicesActive,
+  getQuantityDevicesInactive,
+} from "../../core/store/actions/deviceActions";
 
 const { Content } = Layout;
 
 const OverviewBar = () => {
   const navigate = useNavigate();
+  const { queues, queuesAbsent, queuesFinished, queuesProcessing } =
+    useSelector((state: RootState) => state.queue);
+  const { services, servicesActive, servicesInActive } = useSelector(
+    (state: RootState) => state.service
+  );
+  const { devices, devicesActive, devicesInactive } = useSelector(
+    (state: RootState) => state.device
+  );
+  const queueDispatch =
+    useDispatch<ThunkDispatch<RootState, null, QueueAction>>();
+  const serviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, ServiceAction>>();
+  const deviceDispatch =
+    useDispatch<ThunkDispatch<RootState, null, DeviceAction>>();
 
-  const handleQueueClick = () => {
-    navigate("/cap-so");
-  };
+  const [queuePercentage, setQueuePercentage] = useState<number>(0);
+  const [devicePercentage, setDevicePercentage] = useState<number>(0);
+  const [servicePercentage, setServicePercentage] = useState<number>(0);
 
-  const handleServiceClick = () => {
-    navigate("/dich-vu");
-  };
+  const setDevicePercentageData = useCallback(() => {
+    if (devices) {
+      const totalDevices = devices.length;
+      const percentage = Math.floor(
+        ((totalDevices - devicesInactive) / totalDevices) * 100
+      );
+      setDevicePercentage(percentage);
+    }
+  }, [devices, devicesInactive]);
 
-  const handleDeviceClick = () => {
-    navigate("/thiet-bi");
-  };
+  const setQueuePercentageData = useCallback(() => {
+    if (queues) {
+      const totalQueues = queues.length;
+      const percentage = Math.floor(
+        ((totalQueues - queuesAbsent) / totalQueues) * 100
+      );
+      setQueuePercentage(percentage);
+    }
+  }, [queues, queuesAbsent]);
+
+  const setServicePercentageData = useCallback(() => {
+    if (services) {
+      const totalServices = services.length;
+      const percentage = Math.floor(
+        ((totalServices - servicesInActive) / totalServices) * 100
+      );
+      setServicePercentage(percentage);
+    }
+  }, [services, servicesInActive]);
+
+  useEffect(() => {
+    setQueuePercentageData();
+    setDevicePercentageData();
+    setServicePercentageData();
+  }, [
+    setDevicePercentageData,
+    setQueuePercentageData,
+    setServicePercentageData,
+  ]);
+
+  useEffect(() => {
+    queueDispatch(getQuantityQueuesAbsent());
+    queueDispatch(getQuantityQueuesProcessing());
+    queueDispatch(getQuantityQueuesFinished());
+    queueDispatch(getQueues());
+    serviceDispatch(getServices());
+    serviceDispatch(getQuantityServicesActive());
+    serviceDispatch(getQuantityServicesInactive());
+    deviceDispatch(getDevices());
+    deviceDispatch(getQuantityDevicesActive());
+    deviceDispatch(getQuantityDevicesInactive());
+  }, []);
 
   return (
     <Layout className="overviewbar bg-white">
@@ -33,20 +115,20 @@ const OverviewBar = () => {
 
           <div
             className="overview-device overview-box-item bg-white"
-            onClick={handleDeviceClick}
+            onClick={() => navigate("/thiet-bi")}
           >
             <Space size={42} className="overview-space">
               <Space size={12} align="center">
                 <Progress
                   type="circle"
-                  percent={90}
+                  percent={devicePercentage}
                   strokeColor="#FF7506"
                   size={60}
                 />
                 <div>
                   <Row>
                     <Typography.Text className="bold-24-24 gray-400">
-                      276
+                      {devices && devices.length.toLocaleString()}
                     </Typography.Text>
                   </Row>
                   <Row gutter={4}>
@@ -55,7 +137,7 @@ const OverviewBar = () => {
                     </Col>
                     <Col>
                       <Typography.Text className="bold-14-14 orange-500">
-                        Dịch vụ
+                        Thiết bị
                       </Typography.Text>
                     </Col>
                   </Row>
@@ -87,10 +169,10 @@ const OverviewBar = () => {
                 </Space>
                 <Space direction="vertical" style={{ marginTop: 3 }} size={7}>
                   <Typography.Text className="bold-14-14 orange-500">
-                    3.799
+                    {devicesActive}
                   </Typography.Text>
                   <Typography.Text className="bold-14-14 orange-500">
-                    422
+                    {devicesInactive}
                   </Typography.Text>
                 </Space>
               </Space>
@@ -99,20 +181,20 @@ const OverviewBar = () => {
 
           <div
             className="overview-service overview-box-item bg-white"
-            onClick={handleServiceClick}
+            onClick={() => navigate("/dich-vu")}
           >
             <Space size={42} className="overview-space">
               <Space size={12} align="center">
                 <Progress
                   type="circle"
-                  percent={76}
+                  percent={servicePercentage}
                   strokeColor="#4277FF"
                   size={60}
                 />
                 <div>
                   <Row>
                     <Typography.Text className="bold-24-24 gray-400">
-                      276
+                      {services && services.length.toLocaleString()}
                     </Typography.Text>
                   </Row>
                   <Row gutter={4}>
@@ -153,10 +235,10 @@ const OverviewBar = () => {
                 </Space>
                 <Space direction="vertical" style={{ marginTop: 3 }} size={7}>
                   <Typography.Text className="bold-14-14 blue">
-                    210
+                    {servicesActive}
                   </Typography.Text>
                   <Typography.Text className="bold-14-14 blue">
-                    66
+                    {servicesInActive}
                   </Typography.Text>
                 </Space>
               </Space>
@@ -165,20 +247,20 @@ const OverviewBar = () => {
 
           <div
             className="overview-queue overview-box-item bg-white"
-            onClick={handleQueueClick}
+            onClick={() => navigate("/cap-so")}
           >
             <Space size={42} className="overview-space">
               <Space size={12} align="center">
                 <Progress
                   type="circle"
-                  percent={86}
+                  percent={queuePercentage}
                   strokeColor="#35c75a"
                   size={60}
                 />
                 <div>
                   <Row>
                     <Typography.Text className="bold-24-24 gray-400">
-                      4.221
+                      {queues && queues.length.toLocaleString()}
                     </Typography.Text>
                   </Row>
                   <Row gutter={4}>
@@ -229,13 +311,13 @@ const OverviewBar = () => {
                 </Space>
                 <Space direction="vertical" style={{ marginTop: 3 }} size={7}>
                   <Typography.Text className="bold-14-14 green">
-                    3.721
+                    {queuesProcessing.toLocaleString()}
                   </Typography.Text>
                   <Typography.Text className="bold-14-14 green">
-                    468
+                    {queuesFinished.toLocaleString()}
                   </Typography.Text>
                   <Typography.Text className="bold-14-14 green">
-                    32
+                    {queuesAbsent.toLocaleString()}
                   </Typography.Text>
                 </Space>
               </Space>

@@ -6,6 +6,8 @@ import {
   SET_CATEGORIES,
   SET_DEVICE,
   SET_DEVICES,
+  SET_DEVICES_ACTIVE,
+  SET_DEVICES_INACTIVE,
 } from "../action-type/device.type";
 import db from "../../../config/firebase";
 import { COLLECTIONS } from "../../constants";
@@ -244,6 +246,56 @@ export const updateDevice = (
           payload: error.message,
         });
       }
+    }
+  };
+};
+
+// TODO: get quantity devices active
+export const getQuantityDevicesActive = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  DeviceAction
+> => {
+  return async (dispatch) => {
+    try {
+      const devicesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.DEVICES)
+        .where("status_active", "==", "active")
+        .get();
+      const quantity = devicesRef.size;
+      dispatch({
+        type: SET_DEVICES_ACTIVE,
+        payload: quantity,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// TODO: get quantity devices inactive
+export const getQuantityDevicesInactive = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  DeviceAction
+> => {
+  return async (dispatch) => {
+    try {
+      const devicesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.DEVICES)
+        .where("status_active", "==", "inactive")
+        .get();
+      const quantity = devicesRef.size;
+      dispatch({
+        type: SET_DEVICES_INACTIVE,
+        payload: quantity,
+      });
+    } catch (error) {
+      console.log(error);
     }
   };
 };

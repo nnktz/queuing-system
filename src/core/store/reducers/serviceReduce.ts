@@ -2,6 +2,8 @@ import { SET_ERROR, SET_LOADING, SET_SUCCESS } from "../action-type/auth.type";
 import {
   SET_SERVICE,
   SET_SERVICES,
+  SET_SERVICES_ACTIVE,
+  SET_SERVICES_INACTIVE,
   ServiceAction,
   ServiceState,
 } from "../action-type/service.type";
@@ -9,6 +11,8 @@ import {
 const initialState: ServiceState = {
   service: null,
   services: null,
+  servicesActive: 0,
+  servicesInActive: 0,
   loading: false,
   error: "",
   success: "",
@@ -25,6 +29,16 @@ const serviceReducer = (state = initialState, action: ServiceAction) => {
       return {
         ...state,
         services: action.payload,
+      };
+    case SET_SERVICES_ACTIVE:
+      return {
+        ...state,
+        servicesActive: action.payload,
+      };
+    case SET_SERVICES_INACTIVE:
+      return {
+        ...state,
+        servicesInActive: action.payload,
       };
     case SET_LOADING:
       return {

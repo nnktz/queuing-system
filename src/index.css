@@ -147,10 +147,6 @@ code {
   cursor: pointer;
 }
 
-.width-full {
-  width: 100% !important;
-}
-
 /* reg */
 .reg-36-36 {
   font-family: "Nunito";
@@ -327,6 +323,6 @@ code {
   border-radius: 16px;
 }
 
-:where(.css-dev-only-do-not-override-1vtf12y).ant-layout-header {
+.ant-layout-header {
   background: inherit;
 }

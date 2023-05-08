@@ -122,7 +122,7 @@ export const signin = (
         }
         const isValidPassword = user.password === data.password;
         if (isValidPassword) {
-          localStorage.setItem(USER, JSON.stringify(user));
+          sessionStorage.setItem(USER, JSON.stringify(user));
           dispatch({
             type: SET_USER_CURRENT,
             payload: user,
@@ -150,7 +150,7 @@ export const signout = (): ThunkAction<void, RootState, null, AuthAction> => {
     try {
       dispatch(setLoading(true));
       await db.auth().signOut();
-      localStorage.removeItem(USER);
+      sessionStorage.removeItem(USER);
       dispatch({
         type: SIGN_OUT,
       });
@@ -260,7 +260,7 @@ export const getEmail = (
 // TODO: Get user
 export const getUser = (): ThunkAction<void, RootState, null, AuthAction> => {
   return async (dispatch) => {
-    const userStr = localStorage.getItem(USER);
+    const userStr = sessionStorage.getItem(USER);
     if (userStr) {
       const user = JSON.parse(userStr);
       dispatch({

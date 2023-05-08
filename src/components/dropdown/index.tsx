@@ -1,9 +1,8 @@
 import { Button, Dropdown, Select, Typography } from "antd";
-import ChevronDown from "../../assets/icons/fi_chevron-down.svg";
 import "./DropDown.css";
 import { items } from "./ItemDropdown";
 import { IOption } from "./dropdown.type";
-import { CaretDownOutlined } from "@ant-design/icons";
+import CaretDownOutlined from "@ant-design/icons/lib/icons/CaretDownOutlined";
 
 const { Option } = Select;
 
@@ -20,13 +19,7 @@ export const DropDownStatistical = (props: any) => {
         <Typography.Text className="reg-16-16 gray-300">
           {props.name}
         </Typography.Text>
-        <img
-          src={ChevronDown}
-          alt=""
-          width={24}
-          height={24}
-          className="dropdown-icon"
-        />
+        <CaretDownOutlined style={{ fontSize: 24 }} className="orange-400" />
       </Button>
     </Dropdown>
   );

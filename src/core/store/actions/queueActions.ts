@@ -5,6 +5,9 @@ import {
   AddQueueData,
   SET_QUEUE,
   SET_QUEUES,
+  SET_QUEUES_ABSENT,
+  SET_QUEUES_FINISHED,
+  SET_QUEUES_PROCESSING,
 } from "../action-type/queue.type";
 import db from "../../../config/firebase";
 import { COLLECTIONS } from "../../constants";
@@ -141,6 +144,81 @@ export const getQueueById = (
           payload: queueData,
         });
       }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// TODO: get quantity queues absent
+export const getQuantityQueuesAbsent = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  QueueAction
+> => {
+  return async (dispatch) => {
+    try {
+      const queuesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.QUEUES)
+        .where("status", "==", "absent")
+        .get();
+      const quantity = queuesRef.size;
+      dispatch({
+        type: SET_QUEUES_ABSENT,
+        payload: quantity,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// TODO: get quantity queues finished
+export const getQuantityQueuesFinished = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  QueueAction
+> => {
+  return async (dispatch) => {
+    try {
+      const queuesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.QUEUES)
+        .where("status", "==", "finished")
+        .get();
+      const quantity = queuesRef.size;
+      dispatch({
+        type: SET_QUEUES_FINISHED,
+        payload: quantity,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+// TODO: get quantity queues processing
+export const getQuantityQueuesProcessing = (): ThunkAction<
+  void,
+  RootState,
+  null,
+  QueueAction
+> => {
+  return async (dispatch) => {
+    try {
+      const queuesRef = await db
+        .firestore()
+        .collection(COLLECTIONS.QUEUES)
+        .where("status", "==", "processing")
+        .get();
+      const quantity = queuesRef.size;
+      dispatch({
+        type: SET_QUEUES_PROCESSING,
+        payload: quantity,
+      });
     } catch (error) {
       console.log(error);
     }

@@ -1,6 +1,11 @@
 import { Typography } from "antd";
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { ThunkDispatch } from "redux-thunk";
+import { RootState } from "../../core/store";
+import { QueueAction } from "../../core/store/action-type/queue.type";
+import { useDispatch } from "react-redux";
+import { getQueues } from "../../core/store/actions/queueActions";
 
 const titleStyles = {
   position: "absolute",
@@ -12,6 +17,8 @@ const titleStyles = {
 
 const Queue = () => {
   const navigate = useNavigate();
+  const queueDispatch =
+    useDispatch<ThunkDispatch<RootState, null, QueueAction>>();
 
   useEffect(() => {
     if (
@@ -20,7 +27,8 @@ const Queue = () => {
     ) {
       navigate("danh-sach");
     }
-  }, [navigate]);
+    queueDispatch(getQueues());
+  }, [navigate, queueDispatch]);
 
   return (
     <>

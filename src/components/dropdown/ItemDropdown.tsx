@@ -33,11 +33,6 @@ export const optionStatusConnection: IOption[] = [
   { value: "disconnect", label: "Mất kết nối" },
 ];
 
-export const optionCategoryDevice: IOption[] = [
-  { value: "kiosk", label: "Kiosk" },
-  { value: "displayCounter", label: "Display counter" },
-];
-
 export const optionStatusServiceQueue: IOption[] = [
   { value: "all", label: "Tất cả" },
   { value: "finished", label: "Đã hoàn thành" },
@@ -50,18 +45,4 @@ export const optionStatusQueue: IOption[] = [
   { value: "finished", label: "Đã sử dụng" },
   { value: "processing", label: "Đang chờ" },
   { value: "absent", label: "Bỏ qua" },
-];
-
-export const optionService: IOption[] = [
-  { value: "timMach", label: "Khám tim mạch" },
-  { value: "sanPhuKhoa", label: "Khám sản - Phụ khoa" },
-  { value: "rangHamMat", label: "Khám răng hàm mặt" },
-  { value: "taiMuiHong", label: "Khám tai mũi họng" },
-  { value: "hoHop", label: "Khám hô hấp" },
-  { value: "tongQuat", label: "Khám tổng quát" },
-];
-
-export const optionDeviceQueue: IOption[] = [
-  { value: "KIO_01", label: "Kiosk" },
-  { value: "KIO_02", label: "Hệ thống" },
 ];

@@ -4,11 +4,17 @@ import {
   QueueState,
   SET_QUEUE,
   SET_QUEUES,
+  SET_QUEUES_ABSENT,
+  SET_QUEUES_FINISHED,
+  SET_QUEUES_PROCESSING,
 } from "../action-type/queue.type";
 
 const initialState: QueueState = {
   queue: null,
   queues: null,
+  queuesAbsent: 0,
+  queuesFinished: 0,
+  queuesProcessing: 0,
   loading: false,
   error: "",
   success: "",
@@ -25,6 +31,21 @@ const queueReducer = (state = initialState, action: QueueAction) => {
       return {
         ...state,
         queues: action.payload,
+      };
+    case SET_QUEUES_ABSENT:
+      return {
+        ...state,
+        queuesAbsent: action.payload,
+      };
+    case SET_QUEUES_FINISHED:
+      return {
+        ...state,
+        queuesFinished: action.payload,
+      };
+    case SET_QUEUES_PROCESSING:
+      return {
+        ...state,
+        queuesProcessing: action.payload,
       };
     case SET_LOADING:
       return {
