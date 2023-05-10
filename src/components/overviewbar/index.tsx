@@ -41,8 +41,6 @@ const OverviewBar = () => {
   const { devices, devicesActive, devicesInactive } = useSelector(
     (state: RootState) => state.device
   );
-  const queueDispatch =
-    useDispatch<ThunkDispatch<RootState, null, QueueAction>>();
   const serviceDispatch =
     useDispatch<ThunkDispatch<RootState, null, ServiceAction>>();
   const deviceDispatch =
@@ -93,16 +91,13 @@ const OverviewBar = () => {
   ]);
 
   useEffect(() => {
-    queueDispatch(getQuantityQueuesAbsent());
-    queueDispatch(getQuantityQueuesProcessing());
-    queueDispatch(getQuantityQueuesFinished());
-    queueDispatch(getQueues());
     serviceDispatch(getServices());
     serviceDispatch(getQuantityServicesActive());
     serviceDispatch(getQuantityServicesInactive());
     deviceDispatch(getDevices());
     deviceDispatch(getQuantityDevicesActive());
     deviceDispatch(getQuantityDevicesInactive());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

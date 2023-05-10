@@ -26,15 +26,15 @@
   user-select: none;
 }
 
-.ant-menu-submenu-arrow {
-  display: none;
-}
-
 .menu-icon {
   height: 20px;
   width: 20px;
   font-size: 20px !important;
   vertical-align: -0.25em !important;
+}
+
+.ant-menu-submenu-arrow {
+  display: none;
 }
 
 .ant-menu-light {

@@ -3,32 +3,14 @@ import "../Dashboard.css";
 import { DropDownStatistical } from "../../../components/dropdown";
 import { Area } from "@ant-design/plots";
 import { currentMonth, currentYear } from "../Current";
-import { RootState } from "../../../core/store";
-import { useDispatch, useSelector } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
-import { ThunkDispatch } from "redux-thunk";
-import { QueueAction } from "../../../core/store/action-type/queue.type";
-import Queue from "../../queue";
-import dayjs from "dayjs";
-import { getQueues } from "../../../core/store/actions/queueActions";
-
-interface IDayData {
-  day: string;
-  value: number;
-}
 
 const Days = () => {
-  const { queues } = useSelector((state: RootState) => state.queue);
-  const queueDispatch =
-    useDispatch<ThunkDispatch<RootState, null, QueueAction>>();
-
-  const [dataDay, setDataDay] = useState<IDayData[]>([]);
-  // const dataDay = [
-  //   { day: "01", value: 2900 },
-  //   { day: "13", value: 3400 },
-  //   { day: "19", value: 4300 },
-  //   { day: "31", value: 3600 },
-  // ];
+  const dataDay = [
+    { day: "01", value: 2900 },
+    { day: "13", value: 3400 },
+    { day: "19", value: 4300 },
+    { day: "31", value: 3600 },
+  ];
 
   const config = {
     data: dataDay,
@@ -50,33 +32,6 @@ const Days = () => {
     },
     smooth: true,
   };
-
-  const getQueueCountByDay = useCallback(() => {
-    if (queues) {
-      const queueCountByDay = queues.reduce((acc: any, queue: any) => {
-        const queueDate = dayjs(queue.createAt).format("DD");
-        if (!acc[queueDate]) {
-          acc[queueDate] = 0;
-        }
-        acc[queueDate]++;
-        return acc;
-      }, {});
-
-      const queueCountArray = Object.keys(queueCountByDay).map((day) => {
-        return {
-          day,
-          value: queueCountByDay[day],
-        };
-      });
-      setDataDay(queueCountArray);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    queueDispatch(getQueues());
-    getQueueCountByDay();
-  }, [getQueueCountByDay, queueDispatch]);
 
   return (
     <div className="dashboard-statistical pink-shadow bg-white">

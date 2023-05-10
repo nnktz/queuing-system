@@ -21,7 +21,6 @@ const TopBar = () => {
   const login = sessionStorage.getItem(USER);
 
   useEffect(() => {
-    authDispatch(setLoading(true));
     authDispatch(getUser());
     if (!login) {
       if (window.location.pathname !== "/cap-so/danh-sach/cap-so-moi") {
@@ -34,8 +33,6 @@ const TopBar = () => {
       navigate("dashboard/ngay");
       return;
     }
-
-    authDispatch(setLoading(false));
   }, [authDispatch, navigate, login]);
 
   return (

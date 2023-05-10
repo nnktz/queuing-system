@@ -44,6 +44,7 @@ const Dashboard = () => {
     queueDispatch(getQuantityQueuesProcessing());
     queueDispatch(getQuantityQueuesFinished());
     queueDispatch(getQueues());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, navigate]);
 
   return (
